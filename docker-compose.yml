@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+    chillax:
+        container_name: chillax
+        hostname: chillax
+        image: directus/directus:10.11.0
+        # ports:
+        #     - 8055:8055
+        volumes:
+            - ./uploads:/directus/uploads
+            # If you want to load extensions from the host
+            - ./extensions:/directus/extensions
+        # Environment variables can also be defined in a file (for example `.env`):
+        env_file:
+            - chillax.env
+        networks:
+            - nginx-network
+
+networks:
+    nginx-network:
+        name: nginx-network
+        external: true
