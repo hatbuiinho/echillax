@@ -1,0 +1,23 @@
+.nav {
+  &__parent {
+    color: red;
+
+    &:hover {
+      .nav__child {
+        display: block;
+      }
+    }
+  }
+
+  &__parent_icon {
+    transition: all ease-in-out 250ms;
+    .nav__parent:hover & {
+      transform:  rotate(-180deg);
+    }
+
+  }
+
+  &__child {
+    display: none;
+  }
+}

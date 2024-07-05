@@ -1,0 +1,23 @@
+.embla {
+  display: flex;
+
+  &__viewport {
+    overflow: hidden;
+  }
+
+  &__container {
+    display: flex;
+  }
+
+  &__slide {
+    min-width: 0;
+  }
+
+  &__prev {
+
+  }
+
+  &__next {
+
+  }
+}

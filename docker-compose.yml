@@ -4,8 +4,8 @@ services:
         container_name: chillax
         hostname: chillax
         image: directus/directus:10.11.0
-        # ports:
-        #     - 8055:8055
+        ports:
+            - 8055:8055
         volumes:
             - ./uploads:/directus/uploads
             # If you want to load extensions from the host
