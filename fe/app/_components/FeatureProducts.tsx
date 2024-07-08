@@ -2,7 +2,6 @@ import Image from "next/image";
 import { EmblaCarousel, Slide } from "@/components/ui/carousel/EmblaCarousel";
 import { featureProductConfig } from "@/config/featureProductConfig";
 import { useFeatureProducts } from "@/stores/featureProductStore";
-import { ChevronLeftIcon, ChevronRightIcon } from "@/components/icons";
 
 const items = featureProductConfig.map((product) => ({
   image: product.logo,
