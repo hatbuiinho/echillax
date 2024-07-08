@@ -1,39 +1,3 @@
-import { MemberFormValue } from "@/config/memberFormConfig";
-import { Members } from "@/types/directusType";
-
-export const memberFormToEntity = (memberForm: MemberFormValue) => {
-  const {
-    LocationId,
-    FullName,
-    ReligiousName,
-    PhoneNumber,
-    Gender,
-    PermanentWardId,
-    TemporaryWardId,
-    Work,
-    Referrencer,
-    CtnId,
-  } = memberForm;
-  const { year, month, day } = memberForm.DateOfBirth || {};
-  return {
-    LocationId: +LocationId,
-    FullName,
-    ReligiousName,
-    PhoneNumber,
-    Gender: +Gender,
-    TemporaryWardId: +TemporaryWardId,
-    PermanentWardId: +PermanentWardId,
-    Work,
-    Referrencer,
-    DateOfBirth: calendarToDateString({ year, month, day }),
-    OrgType: 0,
-    UFullName: removeVietnameseDiacriticsAndSpace(FullName),
-    CreatedAt: new Date().toISOString(),
-    Exps: 0,
-    CtnId,
-  } as Members;
-};
-
 function removeVietnameseDiacriticsAndSpace(str: string) {
   return str
     .normalize("NFD") // Decompose into base characters and diacritics

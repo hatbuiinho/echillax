@@ -49,6 +49,7 @@ const NutritionalSolutions = () => {
       <div className="flex flex-col gap-5 lg:gap-10">
         {nutionalSolutionConfig.map((nutionalSolutions) => (
           <NutritionalSolution
+            key={nutionalSolutions.title}
             title={nutionalSolutions.title}
             solutions={nutionalSolutions.solutions}
           />

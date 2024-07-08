@@ -51,7 +51,7 @@ const ProductArticle = () => {
     { link: lazada, title: "Mua tại Lazada" },
     { link: sendo, title: "Mua tại Sendo" },
   ];
-  const ingredientButtons = [
+  const ingredientButtons: { title: string; image?: string; code: string }[] = [
     {
       title: "Thành phần chính",
       image: main_ingredient,
@@ -119,6 +119,7 @@ const ProductArticle = () => {
         <div className="grid grid-cols-2 gap-1 md:grid-cols-4 md:gap-7">
           {shops.map((shop) => (
             <Button
+              key={shop.link}
               as={Link}
               color="primary"
               className="bg-primary text-white"
@@ -136,15 +137,16 @@ const ProductArticle = () => {
           <p className="mb-3 text-justify text-sm md:text-center ">
             {uses_summary}
           </p>
-          <EmblaCarousel
+          {/* <EmblaCarousel
             numberOfItemInSlide={1}
             slides={product_useses ?? []}
             hasArrows
             itemRender={(
               productUses: ProductArticleDto["product_useses"][],
             ) => {
-              return productUses.map((uses) => (
+              return productUses.map((uses, index) => (
                 <div
+                  key={index}
                   className={clsx(
                     "flex shrink-0 grow-0 basis-full select-none flex-col gap-2 px-2 ",
                     "md:basis-1/2 md:px-4 lg:basis-1/4",
@@ -156,13 +158,14 @@ const ProductArticle = () => {
                       src={getFileLinkFromDirectus({
                         id: uses?.image?.toString() ?? "",
                       })}
+                      loading="lazy"
                     />
                   </div>
                   <div className="text-justify text-sm ">{uses?.uses_text}</div>
                 </div>
               ));
             }}
-          />
+          /> */}
 
           <div className="main-uses-image mt-3">
             <img
@@ -171,6 +174,7 @@ const ProductArticle = () => {
               })}
               alt="main-photo"
               className="h-full w-auto select-none rounded-lg"
+              loading="lazy"
             />
           </div>
         </div>
@@ -184,6 +188,7 @@ const ProductArticle = () => {
               })}
               alt="main-photo"
               className="h-full w-auto select-none rounded-lg"
+              loading="lazy"
             />
           </div>
           <div className="col-span-2">
@@ -207,6 +212,7 @@ const ProductArticle = () => {
           <div className="grid grid-cols-3 justify-center gap-2 text-sm ">
             {ingredientButtons.map((ingredient) => (
               <div
+                key={ingredient.code}
                 onClick={() => {
                   setSelectedIngredient(ingredient);
                 }}
@@ -226,6 +232,7 @@ const ProductArticle = () => {
           <div className="h-[26rem] md:h-[35rem]">
             {ingredientButtons.map((ingredient) => (
               <div
+                key={ingredient.code}
                 className={clsx(
                   {
                     "opacity-0": ingredient.code !== selectedIngredient.code,
@@ -291,11 +298,11 @@ const ProductArticle = () => {
             {`Các mẹ nói gì về sữa ${productName}`}
           </h2>
 
-          <EmblaCarousel
+          {/* <EmblaCarousel
             slides={testimonials ?? []}
             itemRender={(testimonials: Testimonials[]) =>
               testimonials.map((testimonial) => (
-                <div className="basis-1/3 px-2 pt-10">
+                <div key={testimonial.id} className="basis-1/3 px-2 pt-10">
                   <div className="relative h-full overflow-visible rounded-xl bg-white p-3 pt-0 text-primary">
                     <Avatar
                       radius="full"
@@ -315,7 +322,7 @@ const ProductArticle = () => {
                 </div>
               ))
             }
-          />
+          /> */}
         </div>
       </section>
     )

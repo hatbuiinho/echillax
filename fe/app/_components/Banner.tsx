@@ -25,7 +25,12 @@ const Banner = () => {
       itemRender={(slides) => (
         <div className="shrink-0 grow-0 basis-full">
           {slides.map((slide) => (
-            <Image src={slide.image} className="w-full" alt="banner" />
+            <Image
+              key={slide.code}
+              src={slide.image}
+              className="w-full"
+              alt="banner"
+            />
           ))}
         </div>
       )}
