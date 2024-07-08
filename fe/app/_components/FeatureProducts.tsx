@@ -25,7 +25,7 @@ const FeatureProducts = () => {
               }}
               className="shrink-0 grow-0 basis-1/4 cursor-pointer"
             >
-              <Image src={slide.image} alt="brand" />
+              <Image src={slide.image ?? ""} alt="brand" />
             </div>
           ));
         }}

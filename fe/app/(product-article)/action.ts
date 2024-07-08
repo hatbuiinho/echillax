@@ -1,19 +1,63 @@
 "use server";
 import { directusClient } from "@/lib/directus";
-import { Product, ProductArticle, Testimonials } from "@/types/directusType";
+import {
+  Product,
+  ProductArticle,
+  ProductQna,
+  ProductUses,
+  Testimonials,
+} from "@/types/directusType";
 import { readItems } from "@directus/sdk";
 
 export type ProductArticleDto = Partial<ProductArticle> & {
-  testimonials: Pick<Testimonials, "avatar" | "name" | "message">[];
-  product_id: { name: string };
+  testimonials?: (Pick<Testimonials, "avatar" | "name" | "message"> & {
+    image?: string;
+  })[];
+  product_id: Pick<Product, "name" | "image">;
+  product_useses: Pick<ProductUses, "image" | "uses_text"> | null;
+  product_qnas: Pick<ProductQna, "question" | "answer" | "image_answer"> | null;
 };
 
+/*
+product_id,
+    consumption_age,
+    main_video_link,
+    shopee,
+    lazada,
+    sendo,
+    facebook,
+    uses_summary,
+    product_useses,
+    main_uses_image,
+    user_manual,
+    main_ingredient,
+    vitamin_ingredient,
+    mineral_ingredient,
+    product_qnas,
+    testimonials,
+*/
 export const getProductArticleBySlug = async (slug: string) => {
   return directusClient.request(
     readItems("product_article", {
       fields: [
-        "*", //TODO: select neccessary field instead
-        { product_id: ["name"], testimonials: ["avatar", "name", "message"] },
+        "consumption_age",
+        "main_video_link",
+        "shopee",
+        "lazada",
+        "sendo",
+        "facebook",
+        "uses_summary",
+        "main_uses_image",
+        "user_manual",
+        "main_ingredient",
+        "vitamin_ingredient",
+        "mineral_ingredient",
+        {
+          product_id: ["name", "image", "id"],
+          testimonials: ["avatar", "name", "message", "id"],
+          product_useses: ["image", "uses_text", "id"],
+          product_qnas: ["question", "answer", "image_answer", "id"],
+        },
       ],
       filter: {
         slug: {

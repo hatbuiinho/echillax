@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import "./carousel.scss";
 import { StaticImageData } from "next/image";
@@ -19,15 +19,15 @@ type Props = {
 };
 
 export type Slide = {
-  image: string | StaticImageData;
+  image?: string | StaticImageData;
   code?: any;
 };
 
 export function EmblaCarousel({
   slides,
   itemRender,
-  prevButton = () => <ChevronLeftIcon size={50} className="text-primary" />,
-  nextButton = () => <ChevronRightIcon size={50} className="text-primary" />,
+  prevButton,
+  nextButton,
   loop,
   slidesToScroll = "auto",
   containerClass,
@@ -53,6 +53,22 @@ export function EmblaCarousel({
     setFinalSlides(formattedSlides);
   }, [numberOfItemInSlide]);
 
+  const [isMobile, setIsMobile] = useState(true);
+
+  useLayoutEffect(() => {
+    function updateSize() {
+      if (window.matchMedia("only screen and (min-width: 480px)").matches) {
+        setIsMobile(true);
+      }
+      if (window.matchMedia("only screen and (min-width: 992px)").matches) {
+        setIsMobile(false);
+      }
+    }
+    window.addEventListener("resize", updateSize);
+    updateSize();
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
   const {
     onNextButtonClick,
     onPrevButtonClick,
@@ -62,13 +78,20 @@ export function EmblaCarousel({
 
   return (
     <div className="embla">
-      {hasArrows && prevButton && (
+      {hasArrows && (
         <button
           disabled={prevBtnDisabled}
           className={clsx("embla__prev", { invisible: prevBtnDisabled })}
           onClick={onPrevButtonClick}
         >
-          {prevButton()}
+          {prevButton ? (
+            prevButton()
+          ) : (
+            <ChevronLeftIcon
+              size={isMobile ? 30 : 50}
+              className="text-primary"
+            />
+          )}
         </button>
       )}
 
@@ -80,13 +103,20 @@ export function EmblaCarousel({
         </div>
       </div>
 
-      {hasArrows && nextButton && (
+      {hasArrows && (
         <button
           disabled={nextBtnDisabled}
           className={clsx("embla__next", { invisible: nextBtnDisabled })}
           onClick={onNextButtonClick}
         >
-          {nextButton()}
+          {nextButton ? (
+            nextButton()
+          ) : (
+            <ChevronRightIcon
+              size={isMobile ? 40 : 50}
+              className="text-primary"
+            />
+          )}
         </button>
       )}
     </div>

@@ -9,7 +9,16 @@ export type ProductNameAndSlug = {
 const getBySlug = async (slug: string) => {
   const promise = getProductArticleBySlug(slug).then((data) => {
     if (data.length) {
-      return data[0];
+      const product = data[0];
+      const embedYoutubeLinkParts = product.main_video_link?.split("/");
+      const youtubeVideoId =
+        embedYoutubeLinkParts?.[(embedYoutubeLinkParts?.length ?? 1) - 1];
+      product.main_video_link = `https://www.youtube.com/embed/${youtubeVideoId}`;
+      const tests = product.testimonials?.map((test) => ({
+        ...test,
+        image: test.avatar,
+      }));
+      return { ...product, testimonials: tests };
     }
     return undefined;
   });

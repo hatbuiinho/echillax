@@ -14,7 +14,14 @@ import { CheveronIcon, SearchIcon } from "../../icons";
 import Brand from "../../ui/brand";
 import { navbarData } from "./data";
 import { useParams } from "next/navigation";
-import { Listbox, ListboxItem, cn } from "@nextui-org/react";
+import {
+  Listbox,
+  ListboxItem,
+  NavbarMenu,
+  NavbarMenuItem,
+  cn,
+  NavbarMenuToggle,
+} from "@nextui-org/react";
 import navbar from "./navbar.module.scss";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -28,6 +35,8 @@ export const Navbar = () => {
   const [productSlugList, setProductSlugList] = useState<ProductNameAndSlug[]>(
     [],
   );
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     ProductArticleService.getFeatureSlugList().then((data) =>
@@ -56,17 +65,40 @@ export const Navbar = () => {
     />
   );
 
+  const menuItems = [
+    "Profile",
+    "Dashboard",
+    "Activity",
+    "Analytics",
+    "System",
+    "Deployments",
+    "My Settings",
+    "Team Settings",
+    "Help & Feedback",
+    "Log Out",
+  ];
+
   return (
     <NextUINavbar
       maxWidth="xl"
       position="sticky"
       isBordered
       className=" justify-center bg-amber-50"
+      isMenuOpen={isMenuOpen}
+      onMenuOpenChange={setIsMenuOpen}
     >
       <div className="container mx-auto flex items-center justify-center">
-        <NavbarBrand className="flex-grow-0 basis-28">
+        <NavbarContent className="sm:hidden" justify="start">
+          <NavbarMenuToggle
+            className="p-5"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          />
+        </NavbarContent>
+
+        <NavbarBrand className="absolute left-[1.5rem] top-[4rem] h-[2.5rem] flex-grow-0 basis-28 md:static md:top-0 md:h-[5rem]">
           <Brand />
         </NavbarBrand>
+
         <NavbarContent className="flex-grow-1 gap-0">
           <div className="hidden h-[var(--navbar-height)] gap-0 md:flex">
             {navbarData(productSlugList).map((item) => (
@@ -138,6 +170,27 @@ export const Navbar = () => {
           </NavbarItem>
         </NavbarContent>
       </div>
+
+      <NavbarMenu>
+        {menuItems.map((item, index) => (
+          <NavbarMenuItem key={`${item}-${index}`}>
+            <Link
+              className="w-full"
+              color={
+                index === 2
+                  ? "warning"
+                  : index === menuItems.length - 1
+                    ? "danger"
+                    : "foreground"
+              }
+              href="#"
+              size="lg"
+            >
+              {item}
+            </Link>
+          </NavbarMenuItem>
+        ))}
+      </NavbarMenu>
     </NextUINavbar>
   );
 };

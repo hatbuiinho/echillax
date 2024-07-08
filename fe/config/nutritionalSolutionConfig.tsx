@@ -4,7 +4,7 @@ import babySolution1 from "@/assets/image/solutions/baby/x1.“MẸO BỎ TÚI�
 import babySolution2 from "@/assets/image/solutions/baby/x2.5 BÍ QUYẾT CHO BÉ MỘT CHIẾC “BỤNG KHỎE”.jpg";
 import babySolution3 from "@/assets/image/solutions/baby/x3.7 THỰC PHẨM GIÀU CANXI CHO TRẺ CHIỀU CAO VƯỢT TRỘI.jpg";
 import babySolution4 from "@/assets/image/solutions/baby/x4.9 CÁCH TĂNG CHIỀU CAO CHO TRẺ SƠ SINH.jpg";
-import babySolution5 from "@/assets/image/solutions/baby/x5.BÉ KHÔNG CHỊU BÚ MẸ PHẢI LÀM SAO.jpg";
+// import babySolution5 from "@/assets/image/solutions/baby/x5.BÉ KHÔNG CHỊU BÚ MẸ PHẢI LÀM SAO.jpg";
 import babySolution6 from "@/assets/image/solutions/baby/x6.BỆNH CHÀM SỮA Ở TRẺ VÀ PHƯƠNG PHÁP ĐIỀU TRỊ.jpg";
 import babySolution7 from "@/assets/image/solutions/baby/x7.BÍ QUYẾT ĐỂ BÉ NGỦ XUYÊN ĐÊM - MẸ “NHÀN TÊNH”.jpg";
 import babySolution8 from "@/assets/image/solutions/baby/x8.C N BẰNG HỆ VI SINH ĐƯỜNG RUỘT CHO TRẺ NHƯ THẾ NÀO.jpg";
@@ -53,9 +53,9 @@ export const nutionalSolutionConfig: NutritionalSolution[] = [
       {
         image: babySolution1,
       },
-      {
-        image: babySolution5,
-      },
+      // {
+      //   image: babySolution5,
+      // },
       {
         image: babySolution6,
       },
