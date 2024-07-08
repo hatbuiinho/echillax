@@ -137,7 +137,7 @@ const ProductArticle = () => {
           <p className="mb-3 text-justify text-sm md:text-center ">
             {uses_summary}
           </p>
-          {/* <EmblaCarousel
+          <EmblaCarousel
             numberOfItemInSlide={1}
             slides={product_useses ?? []}
             hasArrows
@@ -165,7 +165,7 @@ const ProductArticle = () => {
                 </div>
               ));
             }}
-          /> */}
+          />
 
           <div className="main-uses-image mt-3">
             <img
@@ -298,7 +298,7 @@ const ProductArticle = () => {
             {`Các mẹ nói gì về sữa ${productName}`}
           </h2>
 
-          {/* <EmblaCarousel
+          <EmblaCarousel
             slides={testimonials ?? []}
             itemRender={(testimonials: Testimonials[]) =>
               testimonials.map((testimonial) => (
@@ -322,7 +322,7 @@ const ProductArticle = () => {
                 </div>
               ))
             }
-          /> */}
+          />
         </div>
       </section>
     )
