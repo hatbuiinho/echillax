@@ -3,12 +3,14 @@ import useEmblaCarousel from "embla-carousel-react";
 import Image, { StaticImageData } from "next/image";
 import React, { Fragment, useEffect, useLayoutEffect, useState } from "react";
 import "./carousel.scss";
-import { usePrevNextButtons } from "./usePreNextButton";
+import { usePrevNextButtons } from "../../../hooks/usePreNextButton";
 
 import arrowLeft from "@/assets/image/misc/arrow-left.png";
 import arrowRight from "@/assets/image/misc/arrow-right.png";
 
 import AutoPlay from "embla-carousel-autoplay";
+import { useDotButton } from "@/hooks/useDotButtons";
+import { useCarouselState } from "@/stores/useCarouselState";
 
 type Props = {
   slides: Slide[];
@@ -22,11 +24,14 @@ type Props = {
   hasArrows?: boolean;
   autoPlay?: boolean;
   delay?: number;
+  carouselKey: string;
+  initSlideIndex?: number;
 };
 
 export type Slide = {
   image?: string | StaticImageData;
   code?: any;
+  index?: number;
 };
 
 export function EmblaCarousel({
@@ -41,6 +46,8 @@ export function EmblaCarousel({
   hasArrows = false,
   autoPlay,
   delay,
+  carouselKey,
+  initSlideIndex = 0,
 }: Props) {
   const [finalSlides, setFinalSlides] = useState<Slide[][]>([]);
 
@@ -51,6 +58,32 @@ export function EmblaCarousel({
     },
     [AutoPlay({ playOnInit: autoPlay, delay: delay ?? 5000 })],
   );
+
+  const {
+    onNextButtonClick,
+    onPrevButtonClick,
+    nextBtnDisabled,
+    prevBtnDisabled,
+  } = usePrevNextButtons(emblaApi);
+
+  const { selectSlide, setSlides, [carouselKey]: state } = useCarouselState();
+
+  const { selectedIndex, scrollSnaps, onDotButtonClick } =
+    useDotButton(emblaApi);
+
+  useEffect(() => {
+    console.log({ carouselKey, state });
+  }, [state]);
+
+  useEffect(() => {
+    selectSlide(carouselKey, selectedIndex);
+  }, [selectedIndex]);
+
+  useEffect(() => {
+    if (slides?.length) {
+      setSlides(carouselKey, slides);
+    }
+  }, [slides]);
 
   useEffect(() => {
     const formattedSlides = [];
@@ -64,28 +97,9 @@ export function EmblaCarousel({
     setFinalSlides(formattedSlides);
   }, [numberOfItemInSlide]);
 
-  const [isMobile, setIsMobile] = useState(true);
-
-  useLayoutEffect(() => {
-    function updateSize() {
-      if (window.matchMedia("only screen and (min-width: 480px)").matches) {
-        setIsMobile(true);
-      }
-      if (window.matchMedia("only screen and (min-width: 992px)").matches) {
-        setIsMobile(false);
-      }
-    }
-    window.addEventListener("resize", updateSize);
-    updateSize();
-    return () => window.removeEventListener("resize", updateSize);
-  }, []);
-
-  const {
-    onNextButtonClick,
-    onPrevButtonClick,
-    nextBtnDisabled,
-    prevBtnDisabled,
-  } = usePrevNextButtons(emblaApi);
+  useEffect(() => {
+    emblaApi?.scrollTo(initSlideIndex);
+  }, [initSlideIndex]);
 
   return (
     <div className="embla">
@@ -98,10 +112,6 @@ export function EmblaCarousel({
           {prevButton ? (
             prevButton()
           ) : (
-            // <ChevronLeftIcon
-            //   size={isMobile ? 30 : 50}
-            //   className="text-primary"
-            // />
             <div className="w-16 p-2">
               <Image className="h-auto w-full" src={arrowLeft} alt="previous" />
             </div>
@@ -126,11 +136,6 @@ export function EmblaCarousel({
           {nextButton ? (
             nextButton()
           ) : (
-            // <ChevronRightIcon
-            //   size={isMobile ? 40 : 50}
-            //   className="text-primary"
-            // />
-
             <div className="w-16 p-2">
               <Image
                 className="h-auto w-full"

@@ -1,4 +1,4 @@
-import NextImage from "@/components/ui/NextImage";
+import NextImage from "@/components/ui/nextImage";
 import { EmblaCarousel } from "@/components/ui/carousel/EmblaCarousel";
 import OutlinedLetter from "@/components/ui/outlinedLetter";
 import { fontBoosterBlack } from "@/config/fonts/fonts";
@@ -35,7 +35,7 @@ const NutritionalSolution = ({ title, solutions, category }: Props) => {
         innerStrokeWidth={0}
         outterStroke={sm ? "4px white" : "6px white"}
         className={clsx(
-          "pb-2 text-center text-lg font-extrabold uppercase text-primary md:tracking-wider lg:pb-5 lg:text-4xl",
+          "pb-2 text-center text-lg font-extrabold uppercase text-primary md:text-4xl md:tracking-wider lg:pb-5",
           fontBoosterBlack.className,
         )}
       >

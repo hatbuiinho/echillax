@@ -1,5 +1,5 @@
 "use client";
-import NextImage from "@/components/ui/NextImage";
+import NextImage from "@/components/ui/nextImage";
 import { fontNunito } from "@/config/fonts/fonts";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { SolutionBlogDto } from "./action";

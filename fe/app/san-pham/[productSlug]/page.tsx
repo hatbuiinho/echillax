@@ -13,7 +13,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import NextImage from "@/components/ui/NextImage";
+import NextImage from "@/components/ui/nextImage";
 import { ProductArticleDto } from "../action";
 import ProductArticleService from "../services";
 
@@ -136,6 +136,7 @@ const ProductArticle = () => {
             {uses_summary}
           </p>
           <EmblaCarousel
+            carouselKey="productUses"
             numberOfItemInSlide={1}
             slides={product_useses ?? []}
             hasArrows
@@ -283,6 +284,7 @@ const ProductArticle = () => {
           </h2>
 
           <EmblaCarousel
+            carouselKey="testimonial"
             hasArrows
             slides={testimonials ?? []}
             itemRender={(testimonials: Testimonials[]) =>
