@@ -9,6 +9,12 @@ const nextConfig = {
         port: "",
         pathname: "/assets/**",
       },
+      {
+        protocol: "https",
+        hostname: "chillax.vn",
+        port: "",
+        pathname: "/admin/assets/**",
+      },
     ],
   },
   sassOptions: {

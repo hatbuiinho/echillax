@@ -72,10 +72,6 @@ export function EmblaCarousel({
     useDotButton(emblaApi);
 
   useEffect(() => {
-    console.log({ carouselKey, state });
-  }, [state]);
-
-  useEffect(() => {
     selectSlide(carouselKey, selectedIndex);
   }, [selectedIndex]);
 

@@ -37,7 +37,7 @@ const FeatureProducts = () => {
       <EmblaCarousel
         hasArrows
         slides={brands}
-        initSlideIndex={detailState?.selectedIndex ?? 0}
+        // initSlideIndex={detailState?.selectedIndex ?? 0}
         numberOfItemInSlide={1}
         carouselKey={featureProductKey}
         itemRender={(slides) => {
