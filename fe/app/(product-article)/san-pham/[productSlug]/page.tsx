@@ -13,8 +13,8 @@ import clsx from "clsx";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ProductArticleDto } from "../action";
-import ProductArticleService from "../services";
+import { ProductArticleDto } from "../../action";
+import ProductArticleService from "../../services";
 import NextImage from "@/components/ui/NextImage";
 
 const ProductArticle = () => {

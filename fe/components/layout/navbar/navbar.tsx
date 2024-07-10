@@ -115,7 +115,7 @@ export const Navbar = () => {
                       aria-label="Example with disabled actions"
                       disabledKeys={["edit", "delete"]}
                       onAction={(key) => {
-                        router.push(key.toString() ?? "/");
+                        router.replace(`/san-pham/${key.toString()}` ?? "/");
                       }}
                       className="mt-2 rounded-md bg-white"
                     >
