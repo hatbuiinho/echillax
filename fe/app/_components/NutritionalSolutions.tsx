@@ -21,41 +21,39 @@ const NutritionalSolutions = () => {
     });
   }, []);
 
-  return (
-    blogCategories && (
-      <div>
-        <div className="mb-5 flex items-center gap-2 pl-2 lg:mb-10">
-          <EmailIcon className="text-primary" size={sm ? 25 : 45} />
-          <OutlinedLetter
-            className={clsx(
-              fontBoosterBlack.className,
-              "pt-2 text-lg uppercase  tracking-widest text-primary lg:text-4xl",
-            )}
-            innerStrokeColor={"white"}
-            innerStrokeWidth={1}
-            outterStroke={
-              sm
-                ? `5px ${theme.color.secondary}`
-                : `9px ${theme.color.secondary}`
-            }
-          >
-            Giải Pháp Dinh Dưỡng
-          </OutlinedLetter>
-        </div>
-        <div className="flex flex-col gap-5 lg:gap-10">
-          {blogCategories.map((category) => {
-            return (
-              <NutritionalSolution
-                key={category.id}
-                title={category.name ?? ""}
-                solutions={category.blogs ?? []}
-                category={category.slug}
-              />
-            );
-          })}
-        </div>
+  return blogCategories ? (
+    <div>
+      <div className="mb-5 flex items-center gap-2 pl-2 lg:mb-10">
+        <EmailIcon className="text-primary" size={sm ? 25 : 45} />
+        <OutlinedLetter
+          className={clsx(
+            fontBoosterBlack.className,
+            "pt-2 text-lg uppercase  tracking-widest text-primary lg:text-4xl",
+          )}
+          innerStrokeColor={"white"}
+          innerStrokeWidth={1}
+          outterStroke={
+            sm ? `5px ${theme.color.secondary}` : `9px ${theme.color.secondary}`
+          }
+        >
+          Giải Pháp Dinh Dưỡng
+        </OutlinedLetter>
       </div>
-    )
+      <div className="flex flex-col gap-5 lg:gap-10">
+        {blogCategories.map((category) => {
+          return (
+            <NutritionalSolution
+              key={category.id}
+              title={category.name ?? ""}
+              solutions={category.blogs ?? []}
+              category={category.slug}
+            />
+          );
+        })}
+      </div>
+    </div>
+  ) : (
+    <></>
   );
 };
 
