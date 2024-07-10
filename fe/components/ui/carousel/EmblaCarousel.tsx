@@ -98,7 +98,7 @@ export function EmblaCarousel({
   }, [numberOfItemInSlide]);
 
   useEffect(() => {
-    emblaApi?.scrollTo(initSlideIndex);
+    emblaApi?.scrollTo(initSlideIndex, true);
   }, [initSlideIndex]);
 
   return (

@@ -76,7 +76,12 @@ const FeatureProducts = () => {
         numberOfItemInSlide={1}
         itemRender={(_details) =>
           _details.map((detail: Slide) => (
-            <div className={clsx("shrink-0 grow-0 basis-full")}>
+            <div
+              className={clsx("shrink-0 grow-0 basis-full duration-700", {
+                "opacity-100": productIndex === detail.index,
+                "opacity-50": productIndex != detail.index,
+              })}
+            >
               <NextImage src={detail.image} alt={selectedProductCode} />
             </div>
           ))
