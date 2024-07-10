@@ -12,7 +12,7 @@ import {
 
 import ProductArticleService, {
   ProductNameAndSlug,
-} from "@/app/(product-article)/services";
+} from "@/app/san-pham/services";
 import {
   Listbox,
   ListboxItem,
@@ -112,8 +112,9 @@ export const Navbar = () => {
                 {!!item.children?.length && (
                   <div className={cn(navbar.nav__child, "absolute top-full")}>
                     <Listbox
-                      aria-label="Example with disabled actions"
-                      disabledKeys={["edit", "delete"]}
+                      itemClasses={{
+                        base: ["data-[hover=true]:bg-secondary-100"],
+                      }}
                       onAction={(key) => {
                         router.replace(`/san-pham/${key.toString()}` ?? "/");
                       }}

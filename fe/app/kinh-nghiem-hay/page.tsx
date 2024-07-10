@@ -1,26 +1,25 @@
 "use client";
 import NextImage from "@/components/ui/NextImage";
 import { fontNunito } from "@/config/fonts/fonts";
-import { useParams } from "next/navigation";
 import { useEffect, useLayoutEffect, useState } from "react";
-import { SolutionBlogDto } from "../action";
-import ProductBlogService from "../services";
-import "../style.scss";
+import { SolutionBlogDto } from "./action";
+import ProductBlogService from "./services";
+import "./style.scss";
 import clsx from "clsx";
+import { useSearchParams } from "next/navigation";
 
 const Blog = () => {
-  const { slug } = useParams();
+  const searchParams = useSearchParams();
   const [solutionBlog, setSolutionBlog] = useState<SolutionBlogDto>();
 
   useEffect(() => {
-    console.log(slug);
-    if (slug.length == 2) {
-      const blogSlug = slug[1];
+    const blogSlug = searchParams.get("blog");
+    if (blogSlug) {
       ProductBlogService.getBySlug(blogSlug).then((data) => {
         return setSolutionBlog(data);
       });
     }
-  }, [slug]);
+  }, [searchParams]);
 
   useLayoutEffect(() => {
     const tables = document.querySelectorAll("table");
@@ -30,7 +29,7 @@ const Blog = () => {
   }, []);
   return (
     solutionBlog && (
-      <div className="blog px-3">
+      <div className="blog px-3 md:px-7">
         {/* title */}
         <div className="my-12 grid items-center md:grid-cols-2">
           <div className="">

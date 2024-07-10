@@ -13,9 +13,9 @@ import clsx from "clsx";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ProductArticleDto } from "../../action";
-import ProductArticleService from "../../services";
 import NextImage from "@/components/ui/NextImage";
+import { ProductArticleDto } from "../action";
+import ProductArticleService from "../services";
 
 const ProductArticle = () => {
   const { productSlug } = useParams();

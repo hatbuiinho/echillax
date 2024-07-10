@@ -1,4 +1,4 @@
-"use server";
+// "use server";
 import { StatusEnum } from "@/enums/status";
 import { directusClient } from "@/lib/directus";
 import { SolutionBlog, SolutionCategory } from "@/types/directusType";

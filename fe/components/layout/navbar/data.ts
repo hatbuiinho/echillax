@@ -1,4 +1,4 @@
-import { ProductNameAndSlug } from "@/app/(product-article)/services";
+import { ProductNameAndSlug } from "@/app/san-pham/services";
 
 type NavbarChild = {
   title: string;
