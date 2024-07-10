@@ -4,7 +4,6 @@ export async function asyncWithTryCatch<T>(promise: Promise<T>) {
     result = await promise;
   } catch (error) {
     console.log("ERROR: ", error);
-    // alert("ERROR:" + JSON.stringify(error, null, 2));
   }
   return result;
 }

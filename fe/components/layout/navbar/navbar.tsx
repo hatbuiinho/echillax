@@ -10,24 +10,23 @@ import {
   Navbar as NextUINavbar,
 } from "@nextui-org/navbar";
 
-import { CheveronIcon, SearchIcon } from "../../icons";
-import Brand from "../../ui/brand";
-import { navbarData } from "./data";
-import { useParams } from "next/navigation";
+import ProductArticleService, {
+  ProductNameAndSlug,
+} from "@/app/(product-article)/services";
 import {
   Listbox,
   ListboxItem,
   NavbarMenu,
   NavbarMenuItem,
-  cn,
   NavbarMenuToggle,
+  cn,
 } from "@nextui-org/react";
-import navbar from "./navbar.module.scss";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import ProductArticleService, {
-  ProductNameAndSlug,
-} from "@/app/(product-article)/services";
+import { CheveronIcon, SearchIcon } from "../../icons";
+import Brand from "../../ui/brand";
+import { navbarData } from "./data";
+import navbar from "./navbar.module.scss";
 
 export const Navbar = () => {
   const { slug } = useParams();
@@ -65,19 +64,6 @@ export const Navbar = () => {
     />
   );
 
-  const menuItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
-  ];
-
   return (
     <NextUINavbar
       maxWidth="xl"
@@ -88,7 +74,7 @@ export const Navbar = () => {
       onMenuOpenChange={setIsMenuOpen}
     >
       <div className="container mx-auto flex items-center justify-center">
-        <NavbarContent className="sm:hidden" justify="start">
+        <NavbarContent className="md:hidden" justify="start">
           <NavbarMenuToggle
             className="p-5"
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -172,24 +158,15 @@ export const Navbar = () => {
       </div>
 
       <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              className="w-full"
-              color={
-                index === 2
-                  ? "warning"
-                  : index === menuItems.length - 1
-                    ? "danger"
-                    : "foreground"
-              }
-              href="#"
-              size="lg"
-            >
-              {item}
-            </Link>
-          </NavbarMenuItem>
-        ))}
+        <div className="pt-12">
+          {navbarData(productSlugList).map((item, index) => (
+            <NavbarMenuItem key={`${item}-${index}`} className="p-2">
+              <Link className="w-full" href={item.slug} size="lg">
+                {item.title}
+              </Link>
+            </NavbarMenuItem>
+          ))}
+        </div>
       </NavbarMenu>
     </NextUINavbar>
   );

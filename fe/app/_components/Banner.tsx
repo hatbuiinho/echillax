@@ -20,8 +20,9 @@ const Banner = () => {
 
   return (
     <EmblaCarousel
-      slides={items}
       loop
+      autoPlay
+      slides={items}
       itemRender={(slides) => (
         <div className="shrink-0 grow-0 basis-full">
           {slides.map((slide) => (

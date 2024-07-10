@@ -1,10 +1,14 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
-import useEmblaCarousel from "embla-carousel-react";
-import "./carousel.scss";
-import { StaticImageData } from "next/image";
-import { usePrevNextButtons } from "./usePreNextButton";
 import clsx from "clsx";
-import { ChevronLeftIcon, ChevronRightIcon } from "@/components/icons";
+import useEmblaCarousel from "embla-carousel-react";
+import Image, { StaticImageData } from "next/image";
+import React, { Fragment, useEffect, useLayoutEffect, useState } from "react";
+import "./carousel.scss";
+import { usePrevNextButtons } from "./usePreNextButton";
+
+import arrowLeft from "@/assets/image/misc/arrow-left.png";
+import arrowRight from "@/assets/image/misc/arrow-right.png";
+
+import AutoPlay from "embla-carousel-autoplay";
 
 type Props = {
   slides: Slide[];
@@ -16,6 +20,8 @@ type Props = {
   containerClass?: string;
   numberOfItemInSlide?: number;
   hasArrows?: boolean;
+  autoPlay?: boolean;
+  delay?: number;
 };
 
 export type Slide = {
@@ -33,13 +39,18 @@ export function EmblaCarousel({
   containerClass,
   numberOfItemInSlide = 1,
   hasArrows = false,
+  autoPlay,
+  delay,
 }: Props) {
   const [finalSlides, setFinalSlides] = useState<Slide[][]>([]);
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop,
-    slidesToScroll,
-  });
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      loop,
+      slidesToScroll,
+    },
+    [AutoPlay({ playOnInit: autoPlay, delay: delay ?? 5000 })],
+  );
 
   useEffect(() => {
     const formattedSlides = [];
@@ -87,18 +98,21 @@ export function EmblaCarousel({
           {prevButton ? (
             prevButton()
           ) : (
-            <ChevronLeftIcon
-              size={isMobile ? 30 : 50}
-              className="text-primary"
-            />
+            // <ChevronLeftIcon
+            //   size={isMobile ? 30 : 50}
+            //   className="text-primary"
+            // />
+            <div className="w-16 p-2">
+              <Image className="h-auto w-full" src={arrowLeft} alt="previous" />
+            </div>
           )}
         </button>
       )}
 
       <div className="embla__viewport flex-shrink" ref={emblaRef}>
         <div className={clsx("embla__container", containerClass)}>
-          {finalSlides.map((_slides) => (
-            <>{itemRender?.(_slides)}</>
+          {finalSlides.map((_slides, index) => (
+            <Fragment key={index}>{itemRender?.(_slides)}</Fragment>
           ))}
         </div>
       </div>
@@ -112,10 +126,18 @@ export function EmblaCarousel({
           {nextButton ? (
             nextButton()
           ) : (
-            <ChevronRightIcon
-              size={isMobile ? 40 : 50}
-              className="text-primary"
-            />
+            // <ChevronRightIcon
+            //   size={isMobile ? 40 : 50}
+            //   className="text-primary"
+            // />
+
+            <div className="w-16 p-2">
+              <Image
+                className="h-auto w-full"
+                src={arrowRight}
+                alt="previous"
+              />
+            </div>
           )}
         </button>
       )}

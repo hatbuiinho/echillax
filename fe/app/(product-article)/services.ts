@@ -26,7 +26,7 @@ const getBySlug = async (slug: string) => {
   return asyncWithTryCatch(promise);
 };
 
-const getFeatureSlugList = async () => {
+const getFeatureList = async () => {
   const fetcher = async () => {
     const res = await getFeatureProductSlugList();
     return res.map(
@@ -40,5 +40,5 @@ const getFeatureSlugList = async () => {
   return asyncWithTryCatch(fetcher());
 };
 
-const ProductArticleService = { getBySlug, getFeatureSlugList };
+const ProductArticleService = { getBySlug, getFeatureSlugList: getFeatureList };
 export default ProductArticleService;

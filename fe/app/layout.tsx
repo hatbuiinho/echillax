@@ -5,8 +5,11 @@ import "@/styles/globals.css";
 import clsx from "clsx";
 import { Metadata } from "next";
 import { Providers } from "./providers";
-import { fontBoosterThin } from "@/config/fonts/fonts";
+import { fontBoosterBlack } from "@/config/fonts/fonts";
+import aboutChillaxFooter from "@/assets/image/about-chillax/about-chillax-middle.png";
+
 import "./app.css";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: {
@@ -36,16 +39,25 @@ export default function RootLayout({
       <body
         className={clsx(
           "min-h-screen  bg-slate-50 antialiased",
-          fontBoosterThin.className,
+          fontBoosterBlack.className,
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
-          <div className="bg-main relative flex flex-col">
+          <div className="bg-main relative flex min-h-screen flex-col justify-between">
             <Navbar />
             {/* page */}
-            <main className="bg-main">
+            <main className="bg-main flex flex-col justify-between">
               {/* <main className="container mx-auto max-w-7xl flex-grow"> */}
               {children}
+              <div className="w-full">
+                <Image
+                  className="h-auto w-full"
+                  src={aboutChillaxFooter}
+                  alt="about-chillax-header"
+                  width={999}
+                  height={999}
+                />
+              </div>
             </main>
             {/* Footer */}
             {/* <footer className="flex w-full items-center justify-center py-3">

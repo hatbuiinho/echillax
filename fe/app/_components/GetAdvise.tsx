@@ -18,7 +18,7 @@ const GetAdvise = () => {
         </div>
         <div className="get-advise-form mb-20 flex min-h-96 flex-col">
           <div className="text-md mb-3 flex  lg:justify-start ">
-            <fieldset className="w-[300px] rounded-xl border-1 border-primary-500 uppercase text-primary lg:w-[400px] lg:justify-start lg:text-xl">
+            <fieldset className="w-[300px] rounded-xl border-1 border-primary-500 uppercase text-primary sm:w-[400px] lg:justify-start lg:text-xl">
               <legend
                 className={clsx(
                   "ml-2 p-2 pb-0 font-bold leading-3 lg:ml-8 lg:leading-5",
@@ -38,7 +38,7 @@ const GetAdvise = () => {
               </a>
             </fieldset>
           </div>
-          <div className="w-[300px] lg:w-[400px]">
+          <div className="w-[300px] sm:w-[400px]">
             <GetAdviseForm />
           </div>
         </div>

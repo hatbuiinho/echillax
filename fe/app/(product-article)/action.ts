@@ -18,24 +18,6 @@ export type ProductArticleDto = Partial<ProductArticle> & {
   product_qnas: Pick<ProductQna, "question" | "answer" | "image_answer"> | null;
 };
 
-/*
-product_id,
-    consumption_age,
-    main_video_link,
-    shopee,
-    lazada,
-    sendo,
-    facebook,
-    uses_summary,
-    product_useses,
-    main_uses_image,
-    user_manual,
-    main_ingredient,
-    vitamin_ingredient,
-    mineral_ingredient,
-    product_qnas,
-    testimonials,
-*/
 export const getProductArticleBySlug = async (slug: string) => {
   return directusClient.request(
     readItems("product_article", {

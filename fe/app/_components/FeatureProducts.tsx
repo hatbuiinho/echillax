@@ -22,7 +22,7 @@ const FeatureProducts = () => {
               onClick={() => {
                 selectProduct(slide.code);
               }}
-              className="shrink-0 grow-0 basis-1/4 cursor-pointer"
+              className="shrink-0 grow-0  basis-1/2 cursor-pointer md:basis-1/3 lg:basis-1/4"
             >
               <Image src={slide.image ?? ""} alt="brand" />
             </div>

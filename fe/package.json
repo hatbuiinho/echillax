@@ -21,6 +21,7 @@
 		"@types/react-dom": "18.2.7",
 		"autoprefixer": "10.4.19",
 		"clsx": "^2.0.0",
+		"embla-carousel-autoplay": "^8.1.6",
 		"embla-carousel-react": "^8.1.5",
 		"eslint": "8.48.0",
 		"eslint-config-next": "14.2.1",
@@ -34,16 +35,16 @@
 		"primereact": "^10.6.6",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
+		"sharp": "^0.33.4",
 		"sonner": "^1.4.41",
+		"styled-components": "^6.1.11",
 		"swiper": "^11.1.4",
 		"swr": "^2.2.5",
 		"tailwind-variants": "^0.1.20",
 		"tailwindcss": "3.4.3",
 		"typescript": "5.0.4",
 		"zod": "^3.22.5",
-		"zustand": "^4.5.2",
-		"sharp": "^0.33.4",
-		"styled-components": "^6.1.11"
+		"zustand": "^4.5.2"
 	},
 	"devDependencies": {
 		"prettier": "^3.2.5",

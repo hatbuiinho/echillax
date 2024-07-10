@@ -460,25 +460,32 @@ export type ProductUses = {
 };
 
 export type SolutionBlog = {
+  category_id?: number | SolutionCategory;
+  content?: string;
   date_created?: string;
   date_updated?: string;
   id: number;
+  image?: string;
+  introduce?: string;
   slug?: string;
   sort?: number;
-  status: string;
+  status?: string;
+  title?: string;
   user_created?: string | DirectusUsers;
   user_updated?: string | DirectusUsers;
 };
 
 export type SolutionCategory = {
+  blogs: SolutionBlog[];
   date_created?: string;
   date_updated?: string;
   id: number;
-  name?: string;
+  name: string;
   sort?: number;
-  status: string;
+  status?: string;
   user_created?: string | DirectusUsers;
   user_updated?: string | DirectusUsers;
+  slug: string;
 };
 
 export type Testimonials = {

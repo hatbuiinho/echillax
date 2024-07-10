@@ -40,7 +40,7 @@ const GetAdviseForm: React.FC = () => {
 
   return (
     <div className="mb-5 flex w-full">
-      <div className="w-full rounded-lg bg-white p-4">
+      <div className="w-full rounded-3xl  bg-white p-6">
         <form
           className={clsx(
             "relative z-10 flex flex-col gap-1",
