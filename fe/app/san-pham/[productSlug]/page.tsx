@@ -10,12 +10,11 @@ import {
   Link,
 } from "@nextui-org/react";
 import clsx from "clsx";
-import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import NextImage from "@/components/ui/nextImage";
 import { ProductArticleDto } from "../action";
 import ProductArticleService from "../services";
+import NextImage from "@/components/ui/nextImage";
 
 const ProductArticle = () => {
   const { productSlug } = useParams();

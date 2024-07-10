@@ -1,10 +1,8 @@
-import Image from "next/image";
 import { EmblaCarousel, Slide } from "@/components/ui/carousel/EmblaCarousel";
-import { featureProductConfig } from "@/config/featureProductConfig";
-import { useFeatureProducts } from "@/stores/featureProductStore";
-import clsx from "clsx";
 import NextImage from "@/components/ui/nextImage";
+import { featureProductConfig } from "@/config/featureProductConfig";
 import { CarouselState, useCarouselState } from "@/stores/useCarouselState";
+import clsx from "clsx";
 import { useEffect, useState } from "react";
 
 const brands = featureProductConfig.map((product) => ({
@@ -23,7 +21,6 @@ const featureDetailKey = "featureDetails";
 const featureProductKey = "featureProduct";
 
 const FeatureProducts = () => {
-  const { selectProduct, selectedProductCode } = useFeatureProducts();
   const detailState = useCarouselState()[featureDetailKey] as CarouselState;
   const [productIndex, setProductIndex] = useState(0);
   useEffect(() => {
@@ -77,12 +74,13 @@ const FeatureProducts = () => {
         itemRender={(_details) =>
           _details.map((detail: Slide) => (
             <div
+              key={detail.index}
               className={clsx("shrink-0 grow-0 basis-full duration-700", {
                 "opacity-100": productIndex === detail.index,
                 "opacity-50": productIndex != detail.index,
               })}
             >
-              <NextImage src={detail.image} alt={selectedProductCode} />
+              <NextImage src={detail.image} alt={detail.code} />
             </div>
           ))
         }

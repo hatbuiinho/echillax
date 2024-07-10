@@ -43,6 +43,7 @@ const NutritionalSolution = ({ title, solutions, category }: Props) => {
       </OutlinedLetter>
 
       <EmblaCarousel
+        carouselKey="solutionBlogs"
         hasArrows
         slides={solutions}
         numberOfItemInSlide={numberOfItemInSlide}
