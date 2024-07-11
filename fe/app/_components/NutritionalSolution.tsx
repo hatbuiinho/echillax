@@ -60,9 +60,7 @@ const NutritionalSolution = ({ title, solutions, category }: Props) => {
                       <div
                         className="cursor-pointer p-2"
                         onClick={() => {
-                          router.push(
-                            `/kinh-nghiem-hay?category=${category}&blog=${solution.slug}`,
-                          );
+                          router.push(`/kinh-nghiem-hay/${solution.slug}`);
                         }}
                       >
                         <NextImage

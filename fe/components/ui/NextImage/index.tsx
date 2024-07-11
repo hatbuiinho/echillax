@@ -1,3 +1,4 @@
+"use client";
 import { getFileLinkFromDirectus } from "@/utils/directus";
 import Image, { StaticImageData } from "next/image";
 type Props = {

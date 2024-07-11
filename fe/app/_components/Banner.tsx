@@ -22,7 +22,8 @@ const Banner = () => {
     <EmblaCarousel
       carouselKey="banners"
       loop
-      // autoPlay
+      autoPlay
+      delay={3000}
       slides={items}
       itemRender={(slides) => (
         <div className="shrink-0 grow-0 basis-full">

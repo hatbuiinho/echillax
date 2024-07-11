@@ -2,24 +2,24 @@
 import NextImage from "@/components/ui/nextImage";
 import { fontNunito } from "@/config/fonts/fonts";
 import clsx from "clsx";
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
-import { SolutionBlogDto } from "./action";
-import ProductBlogService from "./services";
-import "./style.scss";
+import { SolutionBlogDto } from "../action";
+import ProductBlogService from "../services";
+import "../style.scss";
 
 const Blog = () => {
   const searchParams = useSearchParams();
+  const { slug } = useParams();
   const [solutionBlog, setSolutionBlog] = useState<SolutionBlogDto>();
 
   useEffect(() => {
-    const blogSlug = searchParams.get("blog");
-    if (blogSlug) {
-      ProductBlogService.getBySlug(blogSlug).then((data) => {
+    if (slug) {
+      ProductBlogService.getBySlug(slug as string).then((data) => {
         return setSolutionBlog(data);
       });
     }
-  }, [searchParams]);
+  }, [slug]);
 
   return solutionBlog ? (
     <div className="blog px-3 md:px-7">
