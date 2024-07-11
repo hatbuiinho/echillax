@@ -1,4 +1,4 @@
-import NextImage from "@/components/ui/nextImage";
+import NextImage from "@/components/ui/nextImage/NextImage";
 import { EmblaCarousel } from "@/components/ui/carousel/EmblaCarousel";
 import OutlinedLetter from "@/components/ui/outlinedLetter";
 import { fontBoosterBlack } from "@/config/fonts/fonts";

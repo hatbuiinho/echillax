@@ -14,7 +14,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ProductArticleDto } from "../action";
 import ProductArticleService from "../services";
-import NextImage from "@/components/ui/nextImage";
+import NextImage from "@/components/ui/nextImage/NextImage";
 
 const ProductArticle = () => {
   const { productSlug } = useParams();

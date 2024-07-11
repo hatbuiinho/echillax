@@ -1,5 +1,5 @@
 import { EmblaCarousel, Slide } from "@/components/ui/carousel/EmblaCarousel";
-import NextImage from "@/components/ui/nextImage";
+import NextImage from "@/components/ui/nextImage/NextImage";
 import { featureProductConfig } from "@/config/featureProductConfig";
 import { CarouselState, useCarouselState } from "@/stores/useCarouselState";
 import clsx from "clsx";
