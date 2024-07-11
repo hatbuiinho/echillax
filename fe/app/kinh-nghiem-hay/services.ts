@@ -1,10 +1,5 @@
 import { asyncWithTryCatch } from "@/utils/http";
-import {
-  BlogCategoryDto,
-  SolutionBlogDto,
-  getBlogBySlug,
-  getBlogList,
-} from "./action";
+import { BlogCategoryDto, getBlogBySlug, getBlogList } from "./action";
 
 const getBySlug = async (slug: string) => {
   const promise = getBlogBySlug(slug).then((data) => {
