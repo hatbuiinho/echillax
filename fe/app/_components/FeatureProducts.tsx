@@ -47,9 +47,10 @@ const FeatureProducts = () => {
               className={clsx(
                 "relative flex h-16 shrink-0 grow-0 basis-1/2 cursor-pointer justify-center pb-1 md:h-32 md:basis-1/3 lg:basis-1/4 xl:basis-1/5",
 
-                " before::content-[''] before:absolute before:bottom-0 before:left-1/2 before:ml-0 before:h-1 before:w-0 before:bg-primary before:duration-300",
+                " before::content-[''] before:absolute before:bottom-0 before:left-1/2 before:h-1 before:w-0 before:bg-primary before:duration-300",
+                { "before:ml-0": productIndex !== slide.index },
                 {
-                  "before:-ml-16 before:w-32 before:md:-ml-20 before:md:w-40":
+                  "before:-ml-8  before:w-16 md:before:-ml-20 before:md:w-40":
                     productIndex === slide.index,
                 },
               )}

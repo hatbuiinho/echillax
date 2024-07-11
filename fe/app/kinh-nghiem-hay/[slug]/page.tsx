@@ -9,7 +9,6 @@ import "../style.scss";
 import NextImage from "@/components/ui/nextImage/NextImage";
 
 const Blog = () => {
-  const searchParams = useSearchParams();
   const { slug } = useParams();
   const [solutionBlog, setSolutionBlog] = useState<SolutionBlogDto>();
 
