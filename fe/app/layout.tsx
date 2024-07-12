@@ -1,4 +1,4 @@
-import { Navbar } from "@/components/layout/navbar/navbar";
+import { Navbar } from "@/components/layout/navbar/Navbar";
 // import { fontNunito } from "@/config/fonts";
 import { siteConfig } from "@/config/site";
 import "@/styles/globals.css";
@@ -34,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="vi" suppressHydrationWarning>
       <head />
       <body
         className={clsx(

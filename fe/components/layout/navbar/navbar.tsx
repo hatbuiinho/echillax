@@ -2,7 +2,7 @@
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import { Kbd } from "@nextui-org/kbd";
-import { Link } from "@nextui-org/link";
+import Link from "next/link";
 import {
   NavbarBrand,
   NavbarContent,
@@ -14,6 +14,8 @@ import ProductArticleService, {
   ProductNameAndSlug,
 } from "@/app/san-pham/services";
 import {
+  Accordion,
+  AccordionItem,
   Listbox,
   ListboxItem,
   NavbarMenu,
@@ -21,15 +23,16 @@ import {
   NavbarMenuToggle,
   cn,
 } from "@nextui-org/react";
-import { useParams, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { CheveronIcon, SearchIcon } from "../../icons";
 import Brand from "../../ui/brand";
 import { navbarData } from "./data";
 import navbar from "./navbar.module.scss";
+import clsx from "clsx";
 
 export const Navbar = () => {
-  const { slug } = useParams();
+  const pathName = usePathname();
   const router = useRouter();
   const [productSlugList, setProductSlugList] = useState<ProductNameAndSlug[]>(
     [],
@@ -73,7 +76,7 @@ export const Navbar = () => {
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
     >
-      <div className="container mx-auto flex items-center justify-center">
+      <div className="container mx-auto flex items-center justify-center text-primary">
         <NavbarContent className="md:hidden" justify="start">
           <NavbarMenuToggle
             className="p-5"
@@ -87,51 +90,66 @@ export const Navbar = () => {
 
         <NavbarContent className="flex-grow-1 gap-0">
           <div className="hidden h-[var(--navbar-height)] gap-0 md:flex">
-            {navbarData(productSlugList).map((item) => (
-              <NavbarItem
-                as={Link}
-                href={item.slug}
-                key={item.title}
-                isActive={item.slug === `/${slug}`}
-                className={cn(
-                  navbar.nav__parent,
-                  "relative flex h-full items-center px-2 hover:bg-amber-100 hover:opacity-100 data-[active=true]:bg-amber-100",
-                )}
-              >
-                <div className="font-bold">
-                  <span
-                    className={cn({ "flex gap-2 px-2": item.children?.length })}
-                  >
-                    {item.title}{" "}
-                    {!!item.children?.length && (
-                      <CheveronIcon className={navbar.nav__parent_icon} />
-                    )}
-                  </span>
-                </div>
-
-                {!!item.children?.length && (
-                  <div className={cn(navbar.nav__child, "absolute top-full")}>
-                    <Listbox
-                      itemClasses={{
-                        base: ["data-[hover=true]:bg-secondary-100"],
-                      }}
-                      onAction={(key) => {
-                        router.replace(`/san-pham/${key.toString()}` ?? "/");
-                      }}
-                      className="mt-2 rounded-md bg-white"
-                    >
-                      {item.children.map((child) => {
-                        return (
-                          <ListboxItem key={child.slug}>
-                            {child.title}
-                          </ListboxItem>
-                        );
+            {navbarData(productSlugList).map((item) => {
+              const isActive = pathName.includes(item.slug ?? "");
+              return (
+                <NavbarItem
+                  as={item.children?.length ? "a" : Link}
+                  href={item.children?.length ? undefined : item.slug}
+                  key={item.slug}
+                  isActive={isActive}
+                  className={cn(
+                    navbar.nav__parent,
+                    "relative flex h-full items-center px-2 hover:bg-amber-100 hover:opacity-100 data-[active=true]:bg-amber-100",
+                  )}
+                >
+                  <div className="font-bold">
+                    <span
+                      className={cn({
+                        "flex gap-2 px-2": item.children?.length,
                       })}
-                    </Listbox>
+                    >
+                      {item.title}{" "}
+                      {!!item.children?.length && (
+                        <CheveronIcon className={navbar.nav__parent_icon} />
+                      )}
+                    </span>
                   </div>
-                )}
-              </NavbarItem>
-            ))}
+
+                  {!!item.children?.length && (
+                    <div className={cn(navbar.nav__child, "absolute top-full")}>
+                      <Listbox
+                        itemClasses={{
+                          base: [
+                            "data-[hover=true]:bg-secondary-100 data-[hover=true]:text-primary",
+                          ],
+                        }}
+                        onAction={(key) => {
+                          router.push(`/san-pham/${key.toString()}` ?? "/");
+                        }}
+                        className="mt-2 rounded-md bg-white"
+                      >
+                        {item.children.map((child) => {
+                          const isSubItemActive = pathName.includes(child.slug);
+
+                          return (
+                            <ListboxItem key={child.slug}>
+                              <div
+                                className={clsx({
+                                  "text-secondary": isSubItemActive,
+                                })}
+                              >
+                                {child.title}
+                              </div>
+                            </ListboxItem>
+                          );
+                        })}
+                      </Listbox>
+                    </div>
+                  )}
+                </NavbarItem>
+              );
+            })}
           </div>
         </NavbarContent>
         <NavbarContent justify="end">
@@ -159,12 +177,36 @@ export const Navbar = () => {
       </div>
 
       <NavbarMenu>
-        <div className="pt-12">
+        <div className="pt-12 text-primary">
           {navbarData(productSlugList).map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`} className="p-2">
-              <Link className="w-full" href={item.slug} size="lg">
-                {item.title}
-              </Link>
+              {!item.children?.length ? (
+                <Link className="w-full" href={item.slug ?? ""}>
+                  {item.title}
+                </Link>
+              ) : (
+                <Accordion
+                  itemClasses={{
+                    base: "text-primary",
+                  }}
+                  className="px-0 text-primary"
+                  selectedKeys={[]}
+                >
+                  <AccordionItem
+                    key={item.slug}
+                    aria-label={item.title}
+                    title={item.title}
+                  >
+                    {item.children.map((child) => (
+                      <div className="pl-2">
+                        <Link href={`/san-pham/${child.slug}`}>
+                          {child.title}
+                        </Link>
+                      </div>
+                    ))}
+                  </AccordionItem>
+                </Accordion>
+              )}
             </NavbarMenuItem>
           ))}
         </div>

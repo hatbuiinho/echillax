@@ -21,6 +21,7 @@ export const navbarData: (productList: ProductNameAndSlug[]) => Navbar[] = (
     },
     {
       title: "Sản phẩm",
+      slug: "san-pham",
       children: products,
     },
     { title: "Đăng ký BS tư vấn", slug: "/dang-ky-bac-si-tu-van" },
