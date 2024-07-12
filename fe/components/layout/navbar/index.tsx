@@ -179,7 +179,13 @@ export const Navbar = () => {
       <NavbarMenu>
         <div className="pt-12 text-primary">
           {navbarData(productSlugList).map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`} className="p-2">
+            <NavbarMenuItem
+              key={`${item}-${index}`}
+              className="p-2"
+              onClick={() => {
+                setIsMenuOpen(false);
+              }}
+            >
               {!item.children?.length ? (
                 <Link className="w-full" href={item.slug ?? ""}>
                   {item.title}
@@ -190,7 +196,7 @@ export const Navbar = () => {
                     base: "text-primary",
                   }}
                   className="px-0 text-primary"
-                  selectedKeys={[]}
+                  // selectedKeys={[]}
                 >
                   <AccordionItem
                     key={item.slug}
@@ -198,7 +204,13 @@ export const Navbar = () => {
                     title={item.title}
                   >
                     {item.children.map((child) => (
-                      <div key={child.slug} className="pl-2">
+                      <div
+                        onClick={() => {
+                          setIsMenuOpen(false);
+                        }}
+                        key={child.slug}
+                        className="pl-2"
+                      >
                         <Link href={`/san-pham/${child.slug}`}>
                           {child.title}
                         </Link>
