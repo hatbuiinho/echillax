@@ -1,3 +1,3 @@
 extensions/*
 uploads
-*.env
+*.local

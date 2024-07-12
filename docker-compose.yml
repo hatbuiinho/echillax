@@ -12,20 +12,22 @@ services:
             - ./extensions:/directus/extensions
         # Environment variables can also be defined in a file (for example `.env`):
         env_file:
-            - chillax.env
+            - chillax.env.local
         networks:
             - nginx-network
 
     chillax-fe:
         container_name: chillax-fe
         hostname: chillax-fe
-        image: chillax-fe
+        image: chillax-fe:${FE_VERSION}
         # ports: 
             # - 3000:3000
         depends_on: 
             - chillax
         networks:
             - nginx-network
+        env_file:
+            - ./.env
 
 networks:
     nginx-network:
