@@ -1,4 +1,4 @@
-import { Navbar } from "@/components/layout/navbar/Navbar";
+import { Navbar } from "@/components/layout/navbar";
 // import { fontNunito } from "@/config/fonts";
 import { siteConfig } from "@/config/site";
 import "@/styles/globals.css";
