@@ -1,12 +1,12 @@
 "use client";
+import NextImage from "@/components/ui/nextImage/NextImage";
 import { fontNunito } from "@/config/fonts/fonts";
 import clsx from "clsx";
-import { useParams, useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import { SolutionBlogDto } from "../action";
 import ProductBlogService from "../services";
 import "../style.scss";
-import NextImage from "@/components/ui/nextImage/NextImage";
 
 const Blog = () => {
   const { slug } = useParams();
@@ -43,12 +43,4 @@ const Blog = () => {
   );
 };
 
-const BlogExport = () => {
-  return (
-    <Suspense>
-      <Blog />
-    </Suspense>
-  );
-};
-
-export default BlogExport;
+export default Blog;
