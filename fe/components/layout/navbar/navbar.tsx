@@ -198,7 +198,7 @@ export const Navbar = () => {
                     title={item.title}
                   >
                     {item.children.map((child) => (
-                      <div className="pl-2">
+                      <div key={child.slug} className="pl-2">
                         <Link href={`/san-pham/${child.slug}`}>
                           {child.title}
                         </Link>
