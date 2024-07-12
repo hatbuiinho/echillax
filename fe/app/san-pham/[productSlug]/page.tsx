@@ -129,7 +129,7 @@ const ProductArticle = () => {
         </div>
 
         {/* Uses */}
-        <div className="uses mx-auto">
+        <div className="uses ">
           <h2 className="text-center text-xl lg:text-2xl">{`Công dụng của sữa ${productName}`}</h2>
           <p className="mb-3 text-justify text-sm md:text-center ">
             {uses_summary}

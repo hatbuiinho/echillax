@@ -38,6 +38,10 @@ export const Navbar = () => {
     [],
   );
 
+  useEffect(() => {
+    console.log(pathName, "pathName");
+  }, [pathName]);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -196,26 +200,37 @@ export const Navbar = () => {
                     base: "text-primary",
                   }}
                   className="px-0 text-primary"
-                  // selectedKeys={[]}
+                  defaultExpandedKeys={
+                    pathName.includes("/san-pham") ? ["/san-pham"] : []
+                  }
                 >
                   <AccordionItem
-                    key={item.slug}
+                    key={"/san-pham"}
                     aria-label={item.title}
                     title={item.title}
+                    classNames={{
+                      title: "text-primary",
+                      trigger: "py-0",
+                    }}
                   >
-                    {item.children.map((child) => (
-                      <div
-                        onClick={() => {
-                          setIsMenuOpen(false);
-                        }}
-                        key={child.slug}
-                        className="pl-2"
-                      >
-                        <Link href={`/san-pham/${child.slug}`}>
-                          {child.title}
-                        </Link>
-                      </div>
-                    ))}
+                    {item.children.map((child) => {
+                      const isSubItemActive = pathName.includes(child.slug);
+                      return (
+                        <div key={`/san-pham/${child.slug}`} className="pl-2">
+                          <div
+                            className={clsx("cursor-pointer", {
+                              "text-secondary": isSubItemActive,
+                            })}
+                            onClick={() => {
+                              router.push(`/san-pham/${child.slug}`);
+                              setIsMenuOpen(false);
+                            }}
+                          >
+                            {child.title}
+                          </div>
+                        </div>
+                      );
+                    })}
                   </AccordionItem>
                 </Accordion>
               )}
