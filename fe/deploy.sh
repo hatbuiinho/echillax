@@ -1,20 +1,20 @@
 #!/bin/bash
-source .env
+source ../.env
 OLD_VERSION=$FE_VERSION
 echo "> UNTAG OLD IMAGE $OLD_VERSION" &&
 
     # Pull source code
     echo "> PULL SOURCE CODE" &&
     git pull &&
-    source .env &&
+    source ../.env &&
     NEW_VERSION=$FE_VERSION &&
     if [ "$NEW_VERSION" != "$OLD_VERSION" ]; then
-        sed -i~ s/^FE_VERSION.*/FE_VERSION=${NEW_VERSION}/ ./fe/.env.local
+        sed -i~ s/^FE_VERSION.*/FE_VERSION=${NEW_VERSION}/ ./.env.local
         docker rmi chillax-fe:${FE_VERSION} -f &&
             echo "> BUILD FE VERSION $FE_VERSION" &&
-            docker build ./fe -t chillax-fe:${FE_VERSION} &&
+            docker build . -t chillax-fe:${FE_VERSION} &&
             # Run container
-            echo "> RUN CONTAINER" &&
+            echo "> RUN CONTAINER" && cd .. &&
             docker compose down &&
             docker compose up -d --remove-orphans &&
             # Remove unuse image
