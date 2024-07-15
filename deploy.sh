@@ -1,16 +1,9 @@
 #!/bin/bash
-source .env
-OLD_VERSION=$FE_VERSION
-echo "> UNTAG OLD IMAGE $OLD_VERSION" &&
+echo "UNTAG CHILLAX $FE_VERSION" &&
+docker rmi chillax-fe:${FE_VERSION} -f && source .env &&
 
-    # Pull source code
-    echo "> PULL SOURCE CODE" &&
-    git pull &&
-    source ../.env &&
     NEW_VERSION=$FE_VERSION &&
-    if [ "$NEW_VERSION" != "$OLD_VERSION" ]; then
-        sed -i~ s/^FE_VERSION.*/FE_VERSION=${NEW_VERSION}/ ./.env.local
-        docker rmi chillax-fe:${FE_VERSION} -f &&
+        sed -i~ s/^FE_VERSION.*/FE_VERSION=${NEW_VERSION}/ ./.env.local &&
             echo "> BUILD FE VERSION $FE_VERSION" &&
             docker build ./fe -t chillax-fe:${FE_VERSION} &&
             # Run container
@@ -21,8 +14,6 @@ echo "> UNTAG OLD IMAGE $OLD_VERSION" &&
             echo "> REMOVE UNUSE IMAGE" &&
             runningImages=$(docker ps --format {{.Image}}) &&
             docker rmi $(docker images --format {{.Repository}}:{{.Tag}} | grep -v "$runningImages")
-    else
-        echo "Unchange version $FE_VERSION"
-    fi
+
 
 rm ./fe/.env.local~
