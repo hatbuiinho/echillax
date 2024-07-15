@@ -70,6 +70,7 @@ const FeatureProducts = () => {
         carouselKey={featureDetailKey}
         slides={details}
         loop
+        autoPlay
         initSlideIndex={productIndex}
         numberOfItemInSlide={1}
         itemRender={(_details) =>
