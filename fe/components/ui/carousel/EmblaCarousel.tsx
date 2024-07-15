@@ -1,20 +1,20 @@
 import clsx from "clsx";
 import useEmblaCarousel from "embla-carousel-react";
 import Image, { StaticImageData } from "next/image";
-import React, { Fragment, useEffect, useLayoutEffect, useState } from "react";
-import "./carousel.scss";
+import React, { Fragment, useEffect, useState } from "react";
 import { usePrevNextButtons } from "../../../hooks/usePreNextButton";
+import "./carousel.scss";
 
 import arrowLeft from "@/assets/image/misc/arrow-left.png";
 import arrowRight from "@/assets/image/misc/arrow-right.png";
 
-import AutoPlay from "embla-carousel-autoplay";
 import { useDotButton } from "@/hooks/useDotButtons";
 import { useCarouselState } from "@/stores/useCarouselState";
+import AutoPlay from "embla-carousel-autoplay";
 
 type Props = {
-  slides: Slide[];
-  itemRender?: (slide: (Slide & any)[]) => React.ReactNode;
+  slides: any[];
+  itemRender?: (slide: any[]) => React.ReactNode;
   prevButton?: () => React.ReactNode;
   nextButton?: () => React.ReactNode;
   loop?: boolean;
@@ -49,7 +49,7 @@ export function EmblaCarousel({
   carouselKey,
   initSlideIndex = 0,
 }: Props) {
-  const [finalSlides, setFinalSlides] = useState<Slide[][]>([]);
+  const [finalSlides, setFinalSlides] = useState<any[][]>([]);
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {

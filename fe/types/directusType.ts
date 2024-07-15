@@ -473,6 +473,7 @@ export type SolutionBlog = {
   title?: string;
   user_created?: string | DirectusUsers;
   user_updated?: string | DirectusUsers;
+  thumbnail: string;
 };
 
 export type SolutionCategory = {

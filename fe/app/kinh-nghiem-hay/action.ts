@@ -12,7 +12,7 @@ export type SolutionBlogDto = Pick<
 };
 
 export type BlogCategoryDto = Pick<SolutionCategory, "id" | "name" | "slug"> & {
-  blogs: Pick<SolutionBlog, "id" | "slug" | "image">[] | null;
+  blogs: Pick<SolutionBlog, "id" | "slug" | "thumbnail">[] | null;
 };
 
 export const getBlogBySlug = async (slug: string) => {
@@ -47,7 +47,7 @@ export const getBlogList = async () => {
         "name",
         "slug",
         "status",
-        { blogs: ["image", "slug", "id"] },
+        { blogs: ["thumbnail", "slug", "id"] },
       ],
       filter: {
         status: {

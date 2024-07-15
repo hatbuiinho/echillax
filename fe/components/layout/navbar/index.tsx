@@ -38,10 +38,6 @@ export const Navbar = () => {
     [],
   );
 
-  useEffect(() => {
-    console.log(pathName, "pathName");
-  }, [pathName]);
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -50,26 +46,26 @@ export const Navbar = () => {
     );
   }, []);
 
-  const searchInput = (
-    <Input
-      aria-label="Search"
-      classNames={{
-        inputWrapper: "bg-default-100",
-        input: "text-sm",
-      }}
-      endContent={
-        <Kbd className="hidden lg:inline-block" keys={["command"]}>
-          K
-        </Kbd>
-      }
-      labelPlacement="outside"
-      placeholder="Search..."
-      startContent={
-        <SearchIcon className="pointer-events-none flex-shrink-0 text-base text-default-400" />
-      }
-      type="search"
-    />
-  );
+  // const searchInput = (
+  //   <Input
+  //     aria-label="Search"
+  //     classNames={{
+  //       inputWrapper: "bg-default-100",
+  //       input: "text-sm",
+  //     }}
+  //     endContent={
+  //       <Kbd className="hidden lg:inline-block" keys={["command"]}>
+  //         K
+  //       </Kbd>
+  //     }
+  //     labelPlacement="outside"
+  //     placeholder="Search..."
+  //     startContent={
+  //       <SearchIcon className="pointer-events-none flex-shrink-0 text-base text-default-400" />
+  //     }
+  //     type="search"
+  //   />
+  // );
 
   return (
     <NextUINavbar
@@ -93,7 +89,7 @@ export const Navbar = () => {
         </NavbarBrand>
 
         <NavbarContent className="flex-grow-1 gap-0">
-          <div className="hidden h-[var(--navbar-height)] gap-0 md:flex">
+          <div className="hidden h-[var(--navbar-height)] gap-1 md:flex">
             {navbarData(productSlugList).map((item) => {
               const isActive = pathName.includes(item.slug ?? "");
               return (
@@ -104,7 +100,7 @@ export const Navbar = () => {
                   isActive={isActive}
                   className={cn(
                     navbar.nav__parent,
-                    "relative flex h-full items-center px-2 hover:bg-amber-100 hover:opacity-100 data-[active=true]:bg-amber-100",
+                    "relative flex h-full items-center rounded-md px-2 hover:bg-secondary-100 hover:opacity-100 data-[active=true]:bg-secondary-100",
                   )}
                 >
                   <div className="font-bold">

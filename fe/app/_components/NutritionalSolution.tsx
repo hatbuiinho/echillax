@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 
 type Props = {
   title: string;
-  solutions: SolutionCard[];
+  solutions: any[];
   category: string;
 };
 
@@ -52,7 +52,7 @@ const NutritionalSolution = ({ title, solutions, category }: Props) => {
             <div className="flex shrink-0 grow-0 basis-full flex-col sm:basis-1/2 lg:basis-1/3">
               {slides.map(
                 (
-                  solution: Pick<SolutionBlog, "id" | "image" | "slug">,
+                  solution: Pick<SolutionBlog, "id" | "thumbnail" | "slug">,
                   index,
                 ) => {
                   return (
@@ -65,7 +65,7 @@ const NutritionalSolution = ({ title, solutions, category }: Props) => {
                       >
                         <NextImage
                           className="rounded-lg"
-                          imageId={solution.image?.toString()}
+                          imageId={solution.thumbnail?.toString()}
                           alt={"Giải pháp"}
                         ></NextImage>
                       </div>
