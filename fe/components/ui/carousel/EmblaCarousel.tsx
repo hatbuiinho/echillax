@@ -56,7 +56,13 @@ export function EmblaCarousel({
       loop,
       slidesToScroll,
     },
-    [AutoPlay({ playOnInit: autoPlay, delay: delay ?? 5000 })],
+    [
+      AutoPlay({
+        playOnInit: autoPlay,
+        delay: delay ?? 5000,
+        active: true,
+      }),
+    ],
   );
 
   const {
