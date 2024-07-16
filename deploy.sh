@@ -1,8 +1,8 @@
 #!/bin/bash
-echo "UNTAG CHILLAX $FE_VERSION" &&
-    docker rmi chillax-fe:${FE_VERSION} -f && source .env &&
+source .env &&
+    echo "UNTAG CHILLAX $FE_VERSION" &&
     NEW_VERSION=$FE_VERSION &&
-    sed -i~ s/^FE_VERSION.*/FE_VERSION=${NEW_VERSION}/ ./.env.local &&
+    sed -i~ s/^FE_VERSION.*/FE_VERSION=${NEW_VERSION}/ ./fe/.env.local &&
     echo "> BUILD FE VERSION $FE_VERSION" &&
     docker build ./fe -t chillax-fe:${FE_VERSION} &&
     # Run container
