@@ -147,7 +147,9 @@ const ProductArticle = () => {
                   key={index}
                   className={clsx(
                     "flex shrink-0 grow-0 basis-full select-none flex-col gap-2 px-2 ",
-                    "md:basis-1/2 md:px-4 lg:basis-1/4",
+                    "md:basis-1/2 md:px-4",
+                    { "lg:basis-1/3": product_useses?.length === 3 },
+                    { "lg:basis-1/4": (product_useses?.length ?? 0) > 3 },
                   )}
                 >
                   <div className="flex h-32 justify-center">
