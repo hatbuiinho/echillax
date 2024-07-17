@@ -21,9 +21,9 @@ services:
         hostname: chillax-fe
         image: chillax-fe:${FE_VERSION}
         # ports: 
-            # - 3000:3000
-        depends_on: 
-            - chillax
+        # - 3000:3000
+        # depends_on:
+        #     - chillax
         networks:
             - nginx-network
         env_file:
