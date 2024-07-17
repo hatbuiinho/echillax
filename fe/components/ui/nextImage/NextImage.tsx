@@ -1,5 +1,6 @@
 "use client";
 import { getFileLinkFromDirectus } from "@/utils/directus";
+import clsx from "clsx";
 import Image, { StaticImageData } from "next/image";
 type Props = {
   className?: string;
@@ -10,7 +11,10 @@ type Props = {
 const NextImage = ({ className, imageId, alt, src }: Props) => {
   return (
     <Image
-      className={className ?? "h-auto w-full"}
+      className={clsx(
+        "opacity-0 duration-[1.5s]",
+        className ?? "h-auto w-full",
+      )}
       src={
         imageId
           ? getFileLinkFromDirectus({
@@ -21,6 +25,9 @@ const NextImage = ({ className, imageId, alt, src }: Props) => {
       alt={alt ?? "image"}
       width={999}
       height={999}
+      onLoadingComplete={(image) => {
+        image.classList.remove("opacity-0");
+      }}
     />
   );
 };
