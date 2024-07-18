@@ -3,6 +3,9 @@ import { Metadata } from "next";
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_METADATA_BASE ?? "https://chillax.vn",
+  ),
   title: {
     default: "Sữa Chillax",
     template: `%s - Chillax`,
@@ -23,7 +26,7 @@ export const siteConfig: Metadata = {
     description:
       "Chillax - Người bạn đồng hành cùng mẹ trong sự phát triển toàn diện của trẻ",
     countryName: "Việt Nam",
-    images: ["https://chillax.vn/logo.jpg", "/logo.jpg"],
+    images: ["/logo.jpg"],
     url: "https://chillax.vn",
     siteName: "Sữa Chillax",
   },
