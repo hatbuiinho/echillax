@@ -11,9 +11,9 @@ export const siteConfig: Metadata = {
     "Chillax - Người bạn đồng hành cùng mẹ trong sự phát triển toàn diện của trẻ",
 
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/favicon.ico",
+    icon: "/logo.jpg",
+    shortcut: "/logo.jpg",
+    apple: "/logo.jpg",
   },
   applicationName: "Chillax",
   keywords: ["chillax", "BA Gold", "sữa cho trẻ biếng ăn"],
@@ -23,7 +23,7 @@ export const siteConfig: Metadata = {
     description:
       "Chillax - Người bạn đồng hành cùng mẹ trong sự phát triển toàn diện của trẻ",
     countryName: "Việt Nam",
-    images: [{ url: "/favicon.ico" }],
+    images: ["https://chillax.vn/logo.jpg", "/logo.jpg"],
     url: "https://chillax.vn",
     siteName: "Sữa Chillax",
   },
