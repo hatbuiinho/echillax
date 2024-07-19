@@ -13,10 +13,6 @@ const OutlinedLetter = styled.p<OutlinedLetterProps>`
   font-size: ${({ fontSize }) => fontSize};
   font-style: normal;
   font-weight: ${({ fontWeight }) => fontWeight ?? 600};
-  margin-block-start: 0px;
-  margin-block-end: 0px;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
   color: ${({ color }) => color};
   text-shadow: ${({ innerStrokeColor, innerStrokeWidth }) =>
     "-" +
