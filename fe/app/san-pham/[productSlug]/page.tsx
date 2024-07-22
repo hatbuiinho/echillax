@@ -87,7 +87,7 @@ const ProductArticle = () => {
               />
             </div>
           </div>
-          <div className="text-2xl md:text-2xl">{`Sản phẩm sữa ${productName}`}</div>
+          <div className="text-2xl md:text-2xl">{productName}</div>
         </div>
 
         {/* feature */}
