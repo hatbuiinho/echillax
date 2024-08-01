@@ -1,13 +1,11 @@
 "use client";
 import { Button } from "@nextui-org/button";
-import { Input } from "@nextui-org/input";
-import { Kbd } from "@nextui-org/kbd";
 import Link from "next/link";
 import {
+  Navbar as NextUINavbar,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  Navbar as NextUINavbar,
 } from "@nextui-org/navbar";
 
 import ProductArticleService, {
@@ -16,16 +14,16 @@ import ProductArticleService, {
 import {
   Accordion,
   AccordionItem,
+  cn,
   Listbox,
   ListboxItem,
   NavbarMenu,
   NavbarMenuItem,
   NavbarMenuToggle,
-  cn,
 } from "@nextui-org/react";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { CheveronIcon, SearchIcon } from "../../icons";
+import { CheveronIcon } from "../../icons";
 import Brand from "../../ui/brand";
 import { navbarData } from "./data";
 import navbar from "./navbar.module.scss";
@@ -35,14 +33,14 @@ export const Navbar = () => {
   const pathName = usePathname();
   const router = useRouter();
   const [productSlugList, setProductSlugList] = useState<ProductNameAndSlug[]>(
-    [],
+    []
   );
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     ProductArticleService.getFeatureSlugList().then((data) =>
-      setProductSlugList(data ?? []),
+      setProductSlugList(data ?? [])
     );
   }, []);
 
@@ -100,7 +98,7 @@ export const Navbar = () => {
                   isActive={isActive}
                   className={cn(
                     navbar.nav__parent,
-                    "relative flex h-full items-center rounded-md px-2 hover:bg-secondary-100 hover:opacity-100 data-[active=true]:bg-secondary-100",
+                    "relative flex h-full items-center rounded-md px-2 hover:bg-secondary-100 hover:opacity-100 data-[active=true]:bg-secondary-100"
                   )}
                 >
                   <div className="font-bold">
@@ -212,19 +210,23 @@ export const Navbar = () => {
                     {item.children.map((child) => {
                       const isSubItemActive = pathName.includes(child.slug);
                       return (
-                        <div key={`/san-pham/${child.slug}`} className="pl-2">
+                        <Link
+                          href={`/san-pham/${child.slug}`}
+                          key={`/san-pham/${child.slug}`}
+                          className="block py-2 pl-2"
+                        >
                           <div
                             className={clsx("cursor-pointer", {
                               "text-secondary": isSubItemActive,
                             })}
-                            onClick={() => {
-                              router.push(`/san-pham/${child.slug}`);
-                              setIsMenuOpen(false);
-                            }}
+                            // onClick={() => {
+                            //   router.push(`/san-pham/${child.slug}`);
+                            //   setIsMenuOpen(false);
+                            // }}
                           >
                             {child.title}
                           </div>
-                        </div>
+                        </Link>
                       );
                     })}
                   </AccordionItem>

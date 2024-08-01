@@ -20,21 +20,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="vi" suppressHydrationWarning>
-      <head />
+      <head></head>
       <body
         className={clsx(
           "min-h-screen  bg-slate-50 antialiased",
-          fontBoosterBlack.className,
+          fontBoosterBlack.className
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
-          <div className="bg-main relative flex min-h-screen flex-col justify-between">
+          <div className="bg-main relative flex min-h-[100dvh] flex-col justify-between">
             <Navbar />
             {/* page */}
-            <main className="bg-main flex flex-col justify-between">
+            <main className="bg-main flex grow flex-col justify-between">
               {/* <main className="container mx-auto max-w-7xl flex-grow"> */}
               {children}
-              <div className="w-full">
+              <div className=" w-full md:-mt-3 lg:-mt-8 xl:-mt-12">
                 <Image
                   className="h-auto w-full"
                   src={aboutChillaxFooter}
