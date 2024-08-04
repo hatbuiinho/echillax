@@ -28,6 +28,7 @@ type Props = {
   delay?: number;
   carouselKey: string;
   initSlideIndex?: number;
+  className?: string;
 };
 
 export type Slide = {
@@ -50,6 +51,7 @@ export function EmblaCarousel({
   delay,
   carouselKey,
   initSlideIndex = 0,
+  className,
 }: Props) {
   const [finalSlides, setFinalSlides] = useState<any[][]>([]);
 
@@ -105,7 +107,7 @@ export function EmblaCarousel({
   }, [initSlideIndex]);
 
   return (
-    <div className="embla">
+    <div className={clsx("embla", className)}>
       {hasArrows && (
         <button
           disabled={prevBtnDisabled}
