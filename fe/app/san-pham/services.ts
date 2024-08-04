@@ -1,3 +1,5 @@
+"use server";
+
 import { asyncWithTryCatch } from "@/utils/http";
 import { getFeatureProductSlugList, getProductArticleBySlug } from "./action";
 
@@ -6,7 +8,7 @@ export type ProductNameAndSlug = {
   slug: string;
 };
 
-const getBySlug = async (slug: string) => {
+export const getBySlug = async (slug: string) => {
   const promise = getProductArticleBySlug(slug).then((data) => {
     if (data.length) {
       const product = data[0];
@@ -26,7 +28,7 @@ const getBySlug = async (slug: string) => {
   return asyncWithTryCatch(promise);
 };
 
-const getFeatureList = async () => {
+export const getFeatureList = async () => {
   const fetcher = async () => {
     const res = await getFeatureProductSlugList();
     return res.map(
@@ -34,11 +36,8 @@ const getFeatureList = async () => {
         ({
           slug: data.slug,
           productName: data.product_id?.name,
-        }) as ProductNameAndSlug,
+        }) as ProductNameAndSlug
     );
   };
   return asyncWithTryCatch(fetcher());
 };
-
-const ProductArticleService = { getBySlug, getFeatureSlugList: getFeatureList };
-export default ProductArticleService;

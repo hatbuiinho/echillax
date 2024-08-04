@@ -1,16 +1,26 @@
-import { EmblaCarousel } from "@/components/ui/carousel/EmblaCarousel";
-import { Button, Link } from "@nextui-org/react";
+import React from "react";
+import { getBySlug } from "@/app/san-pham/services";
 import clsx from "clsx";
 import NextImage from "@/components/ui/nextImage/NextImage";
-import { getBySlug } from "@/app/san-pham/services";
-import TestimonialItem from "@/app/san-pham/_components/TestimonialItem";
-import ProductUsesItem from "@/app/san-pham/_components/ProductUsesItem";
-import QnaAnswers from "@/app/san-pham/_components/QnaAnswers";
+import {
+  Accordion,
+  AccordionItem,
+  Avatar,
+  Button,
+  Link,
+} from "@nextui-org/react";
+import { EmblaCarousel } from "@/components/ui/carousel/EmblaCarousel";
+import { ProductArticleDto } from "@/app/san-pham/action";
+import { Testimonials } from "@/types/directusType";
+import { getFileLinkFromDirectus } from "@/utils/directus";
 import Ingredient from "@/app/san-pham/_components/Ingredient";
 
-const ProductArticle = async ({ params }: any) => {
-  const { productSlug } = params;
-  const productArticle = await getBySlug(productSlug as string);
+type Props = {
+  slug: string;
+};
+
+const ProductArticle = async ({ slug }: Props) => {
+  const productArticle = await getBySlug(slug);
 
   const {
     product_id,
@@ -108,7 +118,29 @@ const ProductArticle = async ({ params }: any) => {
             numberOfItemInSlide={1}
             slides={product_useses ?? []}
             hasArrows
-            itemRender={ProductUsesItem}
+            itemRender={(
+              productUses: ProductArticleDto["product_useses"][]
+            ) => {
+              return productUses.map((uses, index) => (
+                <div
+                  key={index}
+                  className={clsx(
+                    "flex shrink-0 grow-0 basis-full select-none flex-col gap-2 px-2 ",
+                    "md:basis-1/2 md:px-4",
+                    { "lg:basis-1/3": product_useses?.length === 3 },
+                    { "lg:basis-1/4": (product_useses?.length ?? 0) > 3 }
+                  )}
+                >
+                  <div className="flex h-32 justify-center">
+                    <NextImage
+                      className="h-full w-auto"
+                      imageId={uses?.image?.toString()}
+                    />
+                  </div>
+                  <div className="text-justify text-sm ">{uses?.uses_text}</div>
+                </div>
+              ));
+            }}
           />
 
           <div className="main-uses-image mt-3 flex justify-center">
@@ -144,8 +176,8 @@ const ProductArticle = async ({ params }: any) => {
         {/* Ingredient */}
         <Ingredient
           mainIngredient={main_ingredient}
-          mineralIngredient={mineral_ingredient}
           vitaminIngredient={vitamin_ingredient}
+          mineralIngredient={mineral_ingredient}
           productName={productName}
         />
         {/* QnAs */}
@@ -155,8 +187,32 @@ const ProductArticle = async ({ params }: any) => {
               {`Các câu hỏi thường gặp về ${productName}`}
             </h2>
 
-            {/*  Answers */}
-            <QnaAnswers productQnas={product_qnas ?? []} />
+            <Accordion defaultExpandedKeys={[]}>
+              {(product_qnas ?? [])?.map((qna) => (
+                <AccordionItem
+                  key={qna.id}
+                  aria-label="Accordion 1"
+                  subtitle=""
+                  title={
+                    <p className="text-medium text-primary">
+                      {qna.question ?? ""}
+                    </p>
+                  }
+                >
+                  {qna.answer ? (
+                    <p className="text-sm text-secondary">{qna.answer}</p>
+                  ) : (
+                    <div className="flex justify-center">
+                      <NextImage
+                        imageId={qna.image_answer?.toString()}
+                        alt="qna-photo"
+                        className="h-full w-auto select-none rounded-lg"
+                      />
+                    </div>
+                  )}
+                </AccordionItem>
+              ))}
+            </Accordion>
           </div>
         </div>
 
@@ -170,12 +226,35 @@ const ProductArticle = async ({ params }: any) => {
             carouselKey="testimonial"
             hasArrows
             slides={testimonials ?? []}
-            itemRender={TestimonialItem}
+            itemRender={(testimonials: Testimonials[]) =>
+              testimonials.map((testimonial) => (
+                <div
+                  key={testimonial.id}
+                  className="shrink-0 grow-0 basis-full px-2 pt-10 sm:basis-1/2 md:basis-1/3"
+                >
+                  <div className="relative h-full overflow-visible rounded-xl bg-white p-3 pt-0 text-primary">
+                    <Avatar
+                      radius="full"
+                      size="lg"
+                      src={getFileLinkFromDirectus({
+                        id: testimonial.avatar?.toString() ?? "",
+                      })}
+                      className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2"
+                    />
+                    <div className="mb-3 w-full pt-9 text-center">
+                      {testimonial.name}
+                    </div>
+                    <div>
+                      <div className="text-sm">{testimonial.message}</div>
+                    </div>
+                  </div>
+                </div>
+              ))
+            }
           />
         </div>
       </section>
     )
   );
 };
-
 export default ProductArticle;

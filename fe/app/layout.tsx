@@ -36,6 +36,9 @@ export default function RootLayout({
             <main className="bg-main flex grow flex-col justify-between">
               {/* <main className="container mx-auto max-w-7xl flex-grow"> */}
               {children}
+            </main>
+            {/* Footer */}
+            <footer>
               <div className=" w-full md:-mt-3 lg:-mt-8 xl:-mt-12">
                 <Image
                   className="h-auto w-full"
@@ -45,8 +48,8 @@ export default function RootLayout({
                   height={999}
                 />
               </div>
-            </main>
-            {/* Footer */}
+            </footer>
+
             {/* <footer className="flex w-full items-center justify-center py-3">
               <Link
                 isExternal
