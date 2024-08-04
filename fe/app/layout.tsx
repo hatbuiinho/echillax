@@ -10,6 +10,7 @@ import aboutChillaxFooter from "@/assets/image/about-chillax/about-chillax-middl
 
 import "./app.css";
 import Image from "next/image";
+import JustForSEO from "@/app/_components/JustForSEO";
 
 export const metadata: Metadata = siteConfig;
 
@@ -29,6 +30,7 @@ export default function RootLayout({
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
           <div className="bg-main relative flex min-h-[100dvh] flex-col justify-between">
+            <JustForSEO />
             <Navbar />
             {/* page */}
             <main className="bg-main flex grow flex-col justify-between">
