@@ -219,10 +219,9 @@ export const Navbar = () => {
                             className={clsx("cursor-pointer", {
                               "text-secondary": isSubItemActive,
                             })}
-                            // onClick={() => {
-                            //   router.push(`/san-pham/${child.slug}`);
-                            //   setIsMenuOpen(false);
-                            // }}
+                            onClick={() => {
+                              setIsMenuOpen(false);
+                            }}
                           >
                             {child.title}
                           </div>
