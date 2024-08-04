@@ -1,6 +1,6 @@
 import React from "react";
 import NextImage from "@/components/ui/nextImage/NextImage";
-import comingSoon from "@/assets/image/comming-soon/cs.png";
+import comingSoon from "@/assets/image/coming-soon/cs.png";
 
 const ComingSoon = () => {
   return (
