@@ -5,9 +5,9 @@ import { theme } from "@/config/themeConfig";
 import useResponsive from "@/hooks/useResponsive";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
-import { BlogCategoryDto } from "../kinh-nghiem-hay/action";
-import ProductBlogService from "../kinh-nghiem-hay/services";
 import NutritionalSolution from "./NutritionalSolution";
+import { BlogCategoryDto } from "@/app/(home)/kinh-nghiem-hay/action";
+import ProductBlogService from "@/app/(home)/kinh-nghiem-hay/services";
 
 const NutritionalSolutions = () => {
   const { sm } = useResponsive();

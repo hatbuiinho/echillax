@@ -24,15 +24,15 @@ const Page = async ({ params }: { params: Params }) => {
     social_shares,
   } = product_id || {};
   return (
-    <div>
+    <div className="flex flex-col gap-5">
       {/* banner */}
       <NextImage imageId={banner?.toString()} alt={title} />
       {/* title */}
-      <div className="p-2 text-center text-lg font-bold uppercase text-primary">
+      <div className="p-2 text-center text-xl font-bold uppercase text-primary">
         {title}
       </div>
 
-      <div className="bg-contain px-5">
+      <div className="flex flex-col gap-8 bg-contain px-5">
         {/* product image */}
         <div className="flex w-full justify-center">
           <div className="w-52">
@@ -41,12 +41,32 @@ const Page = async ({ params }: { params: Params }) => {
         </div>
 
         {/*  advantage summary */}
-        <div className="text-justify text-sm">{advantage_summary}</div>
+        <div className="text-justify text-sm text-primary">
+          {advantage_summary}
+        </div>
 
         {/*  advantages */}
-        {advantages?.map((advantage) => (
-          <div key={advantage.id}>{advantage.description}</div>
-        ))}
+        <div className="flex flex-col gap-3">
+          {advantages?.map((advantage) => (
+            <div
+              key={advantage.id}
+              className="flex items-center rounded-lg border border-gray-100 bg-secondary-100 p-2 pl-0"
+            >
+              <div className="mx-2 block w-16 shrink-0 ">
+                <NextImage imageId={advantage.image} />
+              </div>
+              <div className="text-justify text-xs">
+                {advantage.description}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="flex flex-col px-5">
+        <div className="p-2 text-center text-xl font-bold uppercase text-primary">
+          Giải pháp gốc rễ giúp con phát triển toàn diện
+        </div>
       </div>
     </div>
   );

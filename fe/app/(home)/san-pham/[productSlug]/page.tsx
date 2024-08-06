@@ -2,11 +2,11 @@ import { EmblaCarousel } from "@/components/ui/carousel/EmblaCarousel";
 import { Button, Link } from "@nextui-org/react";
 import clsx from "clsx";
 import NextImage from "@/components/ui/nextImage/NextImage";
-import { getBySlug } from "@/app/san-pham/services";
-import TestimonialItem from "@/app/san-pham/_components/TestimonialItem";
-import ProductUsesItem from "@/app/san-pham/_components/ProductUsesItem";
-import QnaAnswers from "@/app/san-pham/_components/QnaAnswers";
-import Ingredient from "@/app/san-pham/_components/Ingredient";
+import ProductUsesItem from "@/app/(home)/san-pham/_components/ProductUsesItem";
+import Ingredient from "@/app/(home)/san-pham/_components/Ingredient";
+import QnaAnswers from "@/app/(home)/san-pham/_components/QnaAnswers";
+import TestimonialItem from "@/app/(home)/san-pham/_components/TestimonialItem";
+import { getBySlug } from "@/app/(home)/san-pham/services";
 
 const ProductArticle = async ({ params }: any) => {
   const { productSlug } = params;

@@ -1,10 +1,10 @@
 import { Navbar } from "@/components/layout/navbar";
-// import { fontNunito } from "@/config/fonts";
+import { headers } from "next/headers";
 import { siteConfig } from "@/config/site";
 import "@/styles/globals.css";
 import clsx from "clsx";
 import { Metadata } from "next";
-import { Providers } from "./providers";
+import { Providers } from "../providers";
 import { fontBoosterBlack } from "@/config/fonts/fonts";
 import aboutChillaxFooter from "@/assets/image/about-chillax/about-chillax-middle.png";
 
@@ -13,12 +13,20 @@ import Image from "next/image";
 import JustForSEO from "@/app/_components/JustForSEO";
 
 export const metadata: Metadata = siteConfig;
-
-export default function RootLayout({
+/*
+* {
   children,
+
 }: {
   children: React.ReactNode;
-}) {
+}
+* */
+export default function RootLayout(props: any) {
+  const heads = headers();
+
+  const pathname = heads.get("referer");
+  const hideNavbarRoutes = ["landing-page"];
+  const hideNavbar = hideNavbarRoutes.some((item) => pathname?.includes(item));
   return (
     <html lang="vi" suppressHydrationWarning>
       <head></head>
@@ -31,11 +39,12 @@ export default function RootLayout({
         <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
           <div className="bg-main relative flex min-h-[100dvh] flex-col justify-between">
             <JustForSEO />
-            <Navbar />
+            {!hideNavbar && <Navbar />}
+
             {/* page */}
             <main className="bg-main flex grow flex-col justify-between">
               {/* <main className="container mx-auto max-w-7xl flex-grow"> */}
-              {children}
+              {props.children}
             </main>
             {/* Footer */}
             <footer>
@@ -49,6 +58,7 @@ export default function RootLayout({
                 />
               </div>
             </footer>
+            <div className="">{pathname}</div>
 
             {/* <footer className="flex w-full items-center justify-center py-3">
               <Link

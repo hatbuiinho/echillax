@@ -1,9 +1,9 @@
 "use client";
 
-import Banner from "./_components/Banner";
-import FeatureProducts from "./_components/FeatureProducts";
-import GetAdvise from "./_components/GetAdvise";
-import NutritionalSolutions from "./_components/NutritionalSolutions";
+import Banner from "@/app/_components/Banner";
+import FeatureProducts from "@/app/_components/FeatureProducts";
+import NutritionalSolutions from "@/app/_components/NutritionalSolutions";
+import GetAdvise from "@/app/_components/GetAdvise";
 
 export default function Home() {
   return (

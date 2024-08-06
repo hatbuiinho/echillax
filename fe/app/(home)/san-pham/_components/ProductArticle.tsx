@@ -1,5 +1,4 @@
 import React from "react";
-import { getBySlug } from "@/app/san-pham/services";
 import clsx from "clsx";
 import NextImage from "@/components/ui/nextImage/NextImage";
 import {
@@ -10,10 +9,11 @@ import {
   Link,
 } from "@nextui-org/react";
 import { EmblaCarousel } from "@/components/ui/carousel/EmblaCarousel";
-import { ProductArticleDto } from "@/app/san-pham/action";
 import { Testimonials } from "@/types/directusType";
 import { getFileLinkFromDirectus } from "@/utils/directus";
-import Ingredient from "@/app/san-pham/_components/Ingredient";
+import { getBySlug } from "@/app/(home)/san-pham/services";
+import { ProductArticleDto } from "@/app/(home)/san-pham/action";
+import Ingredient from "@/app/(home)/san-pham/_components/Ingredient";
 
 type Props = {
   slug: string;

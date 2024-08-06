@@ -5,8 +5,6 @@ import history_2019 from "@/assets/image/history/2019.jpg";
 import history_2022 from "@/assets/image/history/2022.jpg";
 
 import aboutChillaxHeader from "@/assets/image/about-chillax/about-chillax-header.png";
-import aboutChillaxMiddle from "@/assets/image/about-chillax/about-chillax-middle.png";
-import aboutChillaxFooter from "@/assets/image/about-chillax/about-chillax-footer.png";
 
 import OutlinedLetter from "@/components/ui/outlinedLetter";
 import { theme } from "@/config/themeConfig";
@@ -63,7 +61,7 @@ const Timeline = () => {
             innerStrokeWidth={0}
             outterStroke={sm ? "3px white" : "4px white"}
             className={clsx(
-              "text-center text-medium font-extrabold uppercase text-primary md:tracking-wider lg:text-xl",
+              "text-center text-medium font-extrabold uppercase text-primary md:tracking-wider lg:text-xl"
             )}
           >
             {item.title}
@@ -103,7 +101,7 @@ const Timeline = () => {
                 >
                   <OutlinedLetter
                     className={clsx(
-                      "pt-2 text-3xl uppercase  tracking-widest text-primary md:pt-1 lg:text-4xl",
+                      "pt-2 text-3xl uppercase  tracking-widest text-primary md:pt-1 lg:text-4xl"
                     )}
                     innerStrokeColor={"white"}
                     innerStrokeWidth={1}

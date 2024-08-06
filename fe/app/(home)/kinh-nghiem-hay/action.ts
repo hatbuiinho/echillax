@@ -35,7 +35,7 @@ export const getBlogBySlug = async (slug: string) => {
           _eq: StatusEnum.published.toString(),
         },
       },
-    }),
+    })
   );
 };
 
@@ -59,6 +59,6 @@ export const getBlogList = async () => {
           },
         },
       },
-    }),
+    })
   );
 };

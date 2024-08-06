@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import GetAdvise from "../_components/GetAdvise";
+import GetAdvise from "@/app/_components/GetAdvise";
 
 const Page = () => {
   return (

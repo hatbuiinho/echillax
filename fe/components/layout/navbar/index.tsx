@@ -25,7 +25,10 @@ import Brand from "../../ui/brand";
 import { navbarData } from "./data";
 import navbar from "./navbar.module.scss";
 import clsx from "clsx";
-import { getFeatureList, ProductNameAndSlug } from "@/app/san-pham/services";
+import {
+  getFeatureList,
+  ProductNameAndSlug,
+} from "@/app/(home)/san-pham/services";
 
 export const Navbar = () => {
   const pathName = usePathname();

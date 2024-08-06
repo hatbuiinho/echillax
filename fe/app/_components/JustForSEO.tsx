@@ -1,5 +1,5 @@
 import React from "react";
-import { getFeatureList } from "@/app/san-pham/services";
+import { getFeatureList } from "@/app/(home)/san-pham/services";
 
 const JustForSEO = async () => {
   const featureProductSLugList = (await getFeatureList()) ?? [];

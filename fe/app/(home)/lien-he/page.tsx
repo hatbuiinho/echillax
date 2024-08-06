@@ -18,12 +18,12 @@ const ContactUs = () => {
           "relative mx-4 mt-32 max-w-6xl rounded-xl bg-primary p-3 md:mx-auto md:mt-64 md:max-w-3xl lg:mt-20 lg:p-5",
           "before:absolute before:bottom-0 before:right-40 before:w-0 before:translate-y-full before:content-['']",
           "md:before:right-64 lg:before:right-16",
-          "before:border-l-[5rem] before:border-r-0 before:border-t-[3rem] before:border-b-transparent before:border-l-transparent before:border-t-primary",
+          "before:border-l-[5rem] before:border-r-0 before:border-t-[3rem] before:border-b-transparent before:border-l-transparent before:border-t-primary"
         )}
       >
         <OutlinedLetter
           className={clsx(
-            "mb-3 text-center text-medium uppercase tracking-widest text-primary md:text-[1.5rem] md:leading-[54px] lg:text-4xl lg:leading-[56px]",
+            "mb-3 text-center text-medium uppercase tracking-widest text-primary md:text-[1.5rem] md:leading-[54px] lg:text-4xl lg:leading-[56px]"
           )}
           innerStrokeColor={"white"}
           innerStrokeWidth={2}
@@ -49,7 +49,7 @@ const ContactUs = () => {
       <div
         className={clsx(
           "absolute bottom-0 right-5 flex w-40 sm:bottom-5  lg:bottom-10 xl:right-40",
-          "md:w-72 ",
+          "md:w-72 "
         )}
       >
         <div className="relative flex w-full">

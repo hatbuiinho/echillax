@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { ProductArticleDto } from "@/app/san-pham/action";
 import clsx from "clsx";
 import NextImage from "@/components/ui/nextImage/NextImage";
+import { ProductArticleDto } from "@/app/(home)/san-pham/action";
 
 const ProductUsesItem = (
   productUses: ProductArticleDto["product_useses"][]
