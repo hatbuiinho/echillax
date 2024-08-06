@@ -2,7 +2,6 @@ import NextImage from "@/components/ui/nextImage/NextImage";
 import { EmblaCarousel } from "@/components/ui/carousel/EmblaCarousel";
 import OutlinedLetter from "@/components/ui/outlinedLetter";
 import { fontBoosterBlack } from "@/config/fonts/fonts";
-import { SolutionCard } from "@/config/nutritionalSolutionConfig";
 import useResponsive from "@/hooks/useResponsive";
 import { SolutionBlog } from "@/types/directusType";
 import clsx from "clsx";
@@ -12,10 +11,9 @@ import { useEffect, useState } from "react";
 type Props = {
   title: string;
   solutions: any[];
-  category: string;
 };
 
-const NutritionalSolution = ({ title, solutions, category }: Props) => {
+const NutritionalSolution = ({ title, solutions }: Props) => {
   const [numberOfItemInSlide, setNumberOfItemInSlide] = useState(1);
   const { sm } = useResponsive();
   const router = useRouter();
@@ -36,7 +34,7 @@ const NutritionalSolution = ({ title, solutions, category }: Props) => {
         outterStroke={sm ? "4px white" : "6px white"}
         className={clsx(
           "pb-2 text-center text-lg font-extrabold uppercase text-primary md:text-4xl md:tracking-wider lg:pb-5",
-          fontBoosterBlack.className,
+          fontBoosterBlack.className
         )}
       >
         {title}
@@ -53,7 +51,7 @@ const NutritionalSolution = ({ title, solutions, category }: Props) => {
               {slides.map(
                 (
                   solution: Pick<SolutionBlog, "id" | "thumbnail" | "slug">,
-                  index,
+                  index
                 ) => {
                   return (
                     <div key={index}>
@@ -71,7 +69,7 @@ const NutritionalSolution = ({ title, solutions, category }: Props) => {
                       </div>
                     </div>
                   );
-                },
+                }
               )}
             </div>
           );

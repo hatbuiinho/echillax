@@ -1,14 +1,3 @@
-export type Category = {
-  date_created?: string;
-  date_updated?: string;
-  description?: string;
-  id: number;
-  name?: string;
-  status: string;
-  user_created?: string | DirectusUsers;
-  user_updated?: string | DirectusUsers;
-};
-
 export type DirectusActivity = {
   action: string;
   collection: string;
@@ -377,8 +366,25 @@ export type DirectusWebhooks = {
   was_active_before_deprecation: boolean;
 };
 
+export type LandingPage = {
+  advantage_summary?: string;
+  banner?: string | DirectusFiles;
+  date_created?: string;
+  date_updated?: string;
+  doctor_name?: string;
+  doctor_review?: string;
+  id: number;
+  title?: string;
+  product_id?: number | Product;
+  status: string;
+  user_created?: string | DirectusUsers;
+  user_updated?: string | DirectusUsers;
+};
+
 export type Product = {
-  category_id?: number | Category;
+  advantages: any[] | ProductAdvantage[];
+  benefits: any[] | ProductBenefit[];
+  category_id?: number | ProductCategory;
   date_created?: string;
   date_updated?: string;
   description?: string;
@@ -388,9 +394,24 @@ export type Product = {
   name?: string;
   price?: number;
   slug?: string;
-  status?: string;
+  social_shares: any[] | ProductSocialShare[];
+  status: string;
   stock?: number;
-  thumbnails?: any[] | ProductFiles[];
+  testimonials: any[] | Testimonials[];
+  thumbnails: any[] | ProductFiles[];
+  user_created?: string | DirectusUsers;
+  user_updated?: string | DirectusUsers;
+};
+
+export type ProductAdvantage = {
+  date_created?: string;
+  date_updated?: string;
+  description?: string;
+  id: number;
+  image?: string;
+  product_id: number | Product;
+  sort?: number;
+  status: string;
   user_created?: string | DirectusUsers;
   user_updated?: string | DirectusUsers;
 };
@@ -409,21 +430,45 @@ export type ProductArticle = {
   main_video_link?: string;
   mineral_ingredient?: string;
   product_id?: number | Product;
-  product_qnas?: ProductQna[] | null;
-  product_useses?: ProductUses[] | null;
+  product_qnas?: any[] | ProductQna[] | null;
+  product_useses?: any[] | ProductUses[] | null;
   sendo?: string;
   shop: string;
   shopee?: string;
   slug?: string;
   sort?: number;
   status: string;
-  testimonials: Testimonials[];
+  testimonials: any[] | Testimonials[];
   user_created?: string | DirectusUsers;
   user_manual?: string;
   user_updated?: string | DirectusUsers;
   uses: string;
   uses_summary?: string;
   vitamin_ingredient?: string;
+};
+
+export type ProductBenefit = {
+  date_created?: string;
+  date_updated?: string;
+  description?: string;
+  id: number;
+  image?: string;
+  product_id?: number | Product;
+  sort?: number;
+  status: string;
+  user_created?: string | DirectusUsers;
+  user_updated?: string | DirectusUsers;
+};
+
+export type ProductCategory = {
+  date_created?: string;
+  date_updated?: string;
+  id: number;
+  name?: string;
+  products: any[] | Product[];
+  sort?: number;
+  user_created?: string | DirectusUsers;
+  user_updated?: string | DirectusUsers;
 };
 
 export type ProductFiles = {
@@ -443,6 +488,21 @@ export type ProductQna = {
   question?: string;
   sort?: number;
   status?: string;
+  user_created?: string | DirectusUsers;
+  user_updated?: string | DirectusUsers;
+};
+
+export type ProductSocialShare = {
+  avatar?: string;
+  date_created?: string;
+  date_updated?: string;
+  id: number;
+  image?: string;
+  link?: string;
+  product_id?: number | Product;
+  sort?: number;
+  status: string;
+  title?: string;
   user_created?: string | DirectusUsers;
   user_updated?: string | DirectusUsers;
 };
@@ -469,24 +529,24 @@ export type SolutionBlog = {
   introduce?: string;
   slug?: string;
   sort?: number;
-  status?: string;
+  status: string;
+  thumbnail?: string;
   title?: string;
   user_created?: string | DirectusUsers;
   user_updated?: string | DirectusUsers;
-  thumbnail: string;
 };
 
 export type SolutionCategory = {
-  blogs: SolutionBlog[];
+  blogs: any[] | SolutionBlog[];
   date_created?: string;
   date_updated?: string;
   id: number;
-  name: string;
+  name?: string;
+  slug?: string;
   sort?: number;
-  status?: string;
+  status: string;
   user_created?: string | DirectusUsers;
   user_updated?: string | DirectusUsers;
-  slug: string;
 };
 
 export type Testimonials = {
@@ -497,14 +557,15 @@ export type Testimonials = {
   message?: string;
   name?: string;
   product_article_id?: number | ProductArticle;
+  product_id?: number | Product;
+  screen_shot?: string;
   sort?: number;
-  status?: string;
+  status: string;
   user_created?: string | DirectusUsers;
   user_updated?: string | DirectusUsers;
 };
 
 export type CustomDirectusTypes = {
-  category: Category[];
   directus_activity: DirectusActivity[];
   directus_collections: DirectusCollections[];
   directus_dashboards: DirectusDashboards[];
@@ -529,10 +590,15 @@ export type CustomDirectusTypes = {
   directus_users: DirectusUsers[];
   directus_versions: DirectusVersions[];
   directus_webhooks: DirectusWebhooks[];
+  landing_page: LandingPage[];
   product: Product[];
+  product_advantage: ProductAdvantage[];
   product_article: ProductArticle[];
+  product_benefit: ProductBenefit[];
+  product_category: ProductCategory[];
   product_files: ProductFiles[];
   product_qna: ProductQna[];
+  product_social_share: ProductSocialShare[];
   product_uses: ProductUses[];
   solution_blog: SolutionBlog[];
   solution_category: SolutionCategory[];

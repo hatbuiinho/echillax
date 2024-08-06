@@ -35,7 +35,7 @@ export const getFeatureList = async () => {
       (data) =>
         ({
           slug: data.slug,
-          productName: data.product_id?.name,
+          productName: data?.name,
         }) as ProductNameAndSlug
     );
   };

@@ -28,7 +28,7 @@ const NutritionalSolutions = () => {
         <OutlinedLetter
           className={clsx(
             fontBoosterBlack.className,
-            "pt-2 text-lg uppercase  tracking-widest text-primary md:text-4xl",
+            "pt-2 text-lg uppercase  tracking-widest text-primary md:text-4xl"
           )}
           innerStrokeColor={"white"}
           innerStrokeWidth={1}
@@ -46,7 +46,6 @@ const NutritionalSolutions = () => {
               key={category.id}
               title={category.name ?? ""}
               solutions={category.blogs ?? []}
-              category={category.slug}
             />
           );
         })}

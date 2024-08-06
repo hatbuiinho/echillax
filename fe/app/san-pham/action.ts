@@ -42,25 +42,25 @@ export const getProductArticleBySlug = async (slug: string) => {
         },
       ],
       filter: {
-        slug: {
-          _eq: slug,
+        product_id: {
+          slug: {
+            _eq: slug,
+          },
         },
       },
-    }),
+    })
   );
 };
 
 export const getFeatureProductSlugList = () => {
   return directusClient.request(
-    readItems("product_article", {
-      fields: ["slug", { product_id: ["name"] }],
+    readItems("product", {
+      fields: ["slug", "name"],
       filter: {
-        product_id: {
-          is_feature: {
-            _eq: true,
-          },
+        is_feature: {
+          _eq: true,
         },
       },
-    }),
+    })
   );
 };

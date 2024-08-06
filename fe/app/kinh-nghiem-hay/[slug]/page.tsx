@@ -25,7 +25,7 @@ const Blog = () => {
       {/* title */}
       <div className="my-12 grid items-center md:grid-cols-2">
         <div className="">
-          <NextImage imageId={solutionBlog?.image} />
+          <NextImage imageId={solutionBlog?.image as string} />
         </div>
         <div className="px-5 py-2 md:px-7 lg:px-10">
           <h2 className="mb-2 text-2xl text-primary">{solutionBlog.title}</h2>
