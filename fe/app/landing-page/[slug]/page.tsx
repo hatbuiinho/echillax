@@ -70,12 +70,12 @@ const Page = async ({ params }: { params: Params }) => {
               viewport={{ once: true, amount: 0.1 }}
               className="flex items-center rounded-lg border border-gray-100 bg-secondary-100 p-2 pl-0"
             >
-              <MotionDiv className="mx-2 block w-16 shrink-0 ">
+              <div className="mx-2 block w-16 shrink-0 ">
                 <NextImage imageId={advantage.image} />
-              </MotionDiv>
-              <div className="text-justify text-sm">
-                {advantage.description}
               </div>
+              <MotionDiv className="text-justify text-sm">
+                {advantage.description}
+              </MotionDiv>
             </MotionDiv>
           ))}
         </div>
