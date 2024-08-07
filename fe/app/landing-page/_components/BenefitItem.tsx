@@ -23,11 +23,13 @@ const BenefitItem = (
           )}
           key={benefit.id}
         >
-          <div className="absolute -left-10 w-20 shrink-0">
-            <NextImage imageId={benefit.image} />
+          <div className="relative -left-10 -mr-10 shrink-0">
+            <div className="w-16">
+              <NextImage imageId={benefit.image} />
+            </div>
           </div>
           <div
-            className="ml-10 text-xs"
+            className="text-sm"
             dangerouslySetInnerHTML={{ __html: benefit.description ?? "" }}
           />
         </MotionDiv>

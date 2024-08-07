@@ -1,5 +1,4 @@
 import { Navbar } from "@/components/layout/navbar";
-import { headers } from "next/headers";
 import { siteConfig } from "@/config/site";
 import "@/styles/globals.css";
 import clsx from "clsx";
@@ -13,20 +12,8 @@ import Image from "next/image";
 import JustForSEO from "@/app/_components/JustForSEO";
 
 export const metadata: Metadata = siteConfig;
-/*
-* {
-  children,
 
-}: {
-  children: React.ReactNode;
-}
-* */
 export default function RootLayout(props: any) {
-  const heads = headers();
-
-  const pathname = heads.get("referer");
-  const hideNavbarRoutes = ["landing-page"];
-  const hideNavbar = hideNavbarRoutes.some((item) => pathname?.includes(item));
   return (
     <html lang="vi" suppressHydrationWarning>
       <head></head>
@@ -39,10 +26,10 @@ export default function RootLayout(props: any) {
         <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
           <div className="bg-main relative flex min-h-[100dvh] flex-col justify-between">
             <JustForSEO />
-            {!hideNavbar && <Navbar />}
+            <Navbar />
 
             {/* page */}
-            <main className="bg-main flex grow flex-col justify-between">
+            <main className=" flex grow flex-col justify-between">
               {/* <main className="container mx-auto max-w-7xl flex-grow"> */}
               {props.children}
             </main>
@@ -58,19 +45,6 @@ export default function RootLayout(props: any) {
                 />
               </div>
             </footer>
-            <div className="">{pathname}</div>
-
-            {/* <footer className="flex w-full items-center justify-center py-3">
-              <Link
-                isExternal
-                className="flex items-center gap-1 text-current"
-                href="https://nextui-docs-v2.vercel.app?utm_source=next-app-template"
-                title="nextui.org homepage"
-              >
-                <span className="text-default-600">Powered by</span>
-                <p className="text-primary">NextUI</p>
-              </Link>
-            </footer> */}
           </div>
         </Providers>
       </body>
