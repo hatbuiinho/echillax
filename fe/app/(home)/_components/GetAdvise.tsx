@@ -1,5 +1,4 @@
 import DOCTOR from "@/assets/image/get-advise/doctor.png";
-import { fontBoosterBlack } from "@/config/fonts/fonts";
 import clsx from "clsx";
 import Image from "next/image";
 import GetAdviseForm from "./GetAdviseForm";
@@ -11,7 +10,7 @@ const GetAdvise = () => {
         <div
           className={clsx(
             "relative left-10 hidden h-full  items-end justify-end md:flex",
-            "h-[400px] md:h-[500px] lg:h-[600px]",
+            "h-[400px] md:h-[500px] lg:h-[600px]"
           )}
         >
           <Image className="h-full w-auto" src={DOCTOR} alt="" />
@@ -23,12 +22,12 @@ const GetAdvise = () => {
                 "w-[300px] sm:w-[350px] md:w-[400px] md:justify-start",
                 "rounded-xl border-1 border-primary-500",
                 "text-sm md:text-xl",
-                "uppercase text-primary",
+                "uppercase text-primary"
               )}
             >
               <legend
                 className={clsx(
-                  "ml-8 p-2 pb-0 font-bold leading-3 md:ml-8  lg:leading-5",
+                  "ml-8 p-2 pb-0 font-bold leading-3 md:ml-8  lg:leading-5"
                 )}
               >
                 Nhận tư vấn từ BS dinh dưỡng

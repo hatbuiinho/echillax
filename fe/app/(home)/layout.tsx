@@ -9,7 +9,7 @@ import aboutChillaxFooter from "@/assets/image/about-chillax/about-chillax-middl
 
 import "./app.css";
 import Image from "next/image";
-import JustForSEO from "@/app/_components/JustForSEO";
+import JustForSEO from "@/app/(home)/_components/JustForSEO";
 
 export const metadata: Metadata = siteConfig;
 

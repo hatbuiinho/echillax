@@ -7,7 +7,7 @@ import { fontBoosterBlack } from "@/config/fonts/fonts";
 import aboutChillaxFooter from "@/assets/image/about-chillax/about-chillax-middle.png";
 
 import Image from "next/image";
-import JustForSEO from "@/app/_components/JustForSEO";
+import JustForSEO from "@/app/(home)/_components/JustForSEO";
 import { Providers } from "@/app/providers";
 
 export const metadata: Metadata = siteConfig;
