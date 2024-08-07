@@ -1,3 +1,5 @@
+"use server";
+
 export async function asyncWithTryCatch<T>(promise: Promise<T>) {
   let result;
   try {

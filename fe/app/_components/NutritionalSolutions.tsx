@@ -5,9 +5,9 @@ import { theme } from "@/config/themeConfig";
 import useResponsive from "@/hooks/useResponsive";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
-import { BlogCategoryDto } from "../kinh-nghiem-hay/action";
-import ProductBlogService from "../kinh-nghiem-hay/services";
 import NutritionalSolution from "./NutritionalSolution";
+import { BlogCategoryDto } from "@/app/(home)/kinh-nghiem-hay/action";
+import ProductBlogService from "@/app/(home)/kinh-nghiem-hay/services";
 
 const NutritionalSolutions = () => {
   const { sm } = useResponsive();
@@ -28,7 +28,7 @@ const NutritionalSolutions = () => {
         <OutlinedLetter
           className={clsx(
             fontBoosterBlack.className,
-            "pt-2 text-lg uppercase  tracking-widest text-primary md:text-4xl",
+            "pt-2 text-lg uppercase  tracking-widest text-primary md:text-4xl"
           )}
           innerStrokeColor={"white"}
           innerStrokeWidth={1}
@@ -46,7 +46,6 @@ const NutritionalSolutions = () => {
               key={category.id}
               title={category.name ?? ""}
               solutions={category.blogs ?? []}
-              category={category.slug}
             />
           );
         })}

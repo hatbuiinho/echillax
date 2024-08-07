@@ -1,3 +1,4 @@
+"use client";
 import { EmblaCarousel, Slide } from "@/components/ui/carousel/EmblaCarousel";
 import NextImage from "@/components/ui/nextImage/NextImage";
 import { featureProductConfig } from "@/config/featureProductConfig";
@@ -52,7 +53,7 @@ const FeatureProducts = () => {
                 {
                   "before:-ml-8  before:w-16 md:before:-ml-20 before:md:w-40":
                     productIndex === slide.index,
-                },
+                }
               )}
             >
               <NextImage

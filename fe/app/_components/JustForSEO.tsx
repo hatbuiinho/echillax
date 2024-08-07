@@ -1,9 +1,8 @@
 import React from "react";
-import ProductArticleService from "@/app/san-pham/services";
+import { getFeatureList } from "@/app/(home)/san-pham/services";
 
 const JustForSEO = async () => {
-  const featureProductSLugList =
-    (await ProductArticleService.getFeatureSlugList()) ?? [];
+  const featureProductSLugList = (await getFeatureList()) ?? [];
 
   return (
     <div className="hidden">

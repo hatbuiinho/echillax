@@ -1,4 +1,4 @@
-import { ProductNameAndSlug } from "@/app/san-pham/services";
+import { ProductNameAndSlug } from "@/app/(home)/san-pham/services";
 
 type NavbarChild = {
   title: string;
@@ -8,7 +8,7 @@ type Navbar = Partial<NavbarChild> & {
   children?: NavbarChild[];
 };
 export const navbarData: (productList: ProductNameAndSlug[]) => Navbar[] = (
-  productList,
+  productList
 ) => {
   const products = productList.map((product) => ({
     slug: product.slug,

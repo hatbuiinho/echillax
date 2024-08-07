@@ -1,8 +1,10 @@
+"use client";
+
 import clsx from "clsx";
 import useEmblaCarousel from "embla-carousel-react";
 import Image, { StaticImageData } from "next/image";
 import React, { Fragment, useEffect, useState } from "react";
-import { usePrevNextButtons } from "../../../hooks/usePreNextButton";
+import { usePrevNextButtons } from "@/hooks/usePreNextButton";
 import "./carousel.scss";
 
 import arrowLeft from "@/assets/image/misc/arrow-left.png";
@@ -26,6 +28,7 @@ type Props = {
   delay?: number;
   carouselKey: string;
   initSlideIndex?: number;
+  className?: string;
 };
 
 export type Slide = {
@@ -48,6 +51,7 @@ export function EmblaCarousel({
   delay,
   carouselKey,
   initSlideIndex = 0,
+  className,
 }: Props) {
   const [finalSlides, setFinalSlides] = useState<any[][]>([]);
 
@@ -62,7 +66,7 @@ export function EmblaCarousel({
         delay: delay ?? 5000,
         active: true,
       }),
-    ],
+    ]
   );
 
   const {
@@ -72,10 +76,9 @@ export function EmblaCarousel({
     prevBtnDisabled,
   } = usePrevNextButtons(emblaApi);
 
-  const { selectSlide, setSlides, [carouselKey]: state } = useCarouselState();
+  const { selectSlide, setSlides } = useCarouselState();
 
-  const { selectedIndex, scrollSnaps, onDotButtonClick } =
-    useDotButton(emblaApi);
+  const { selectedIndex } = useDotButton(emblaApi);
 
   useEffect(() => {
     selectSlide(carouselKey, selectedIndex);
@@ -92,7 +95,7 @@ export function EmblaCarousel({
     for (let i = 0; i < slides.length / numberOfItemInSlide; i++) {
       const slide = slides.slice(
         i * numberOfItemInSlide,
-        i * numberOfItemInSlide + numberOfItemInSlide,
+        i * numberOfItemInSlide + numberOfItemInSlide
       );
       formattedSlides.push(slide);
     }
@@ -104,7 +107,7 @@ export function EmblaCarousel({
   }, [initSlideIndex]);
 
   return (
-    <div className="embla">
+    <div className={clsx("embla", className)}>
       {hasArrows && (
         <button
           disabled={prevBtnDisabled}

@@ -8,9 +8,6 @@ import {
   NavbarItem,
 } from "@nextui-org/navbar";
 
-import ProductArticleService, {
-  ProductNameAndSlug,
-} from "@/app/san-pham/services";
 import {
   Accordion,
   AccordionItem,
@@ -28,6 +25,10 @@ import Brand from "../../ui/brand";
 import { navbarData } from "./data";
 import navbar from "./navbar.module.scss";
 import clsx from "clsx";
+import {
+  getFeatureList,
+  ProductNameAndSlug,
+} from "@/app/(home)/san-pham/services";
 
 export const Navbar = () => {
   const pathName = usePathname();
@@ -39,9 +40,7 @@ export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    ProductArticleService.getFeatureSlugList().then((data) =>
-      setProductSlugList(data ?? [])
-    );
+    getFeatureList().then((data) => setProductSlugList(data ?? []));
   }, []);
 
   // const searchInput = (

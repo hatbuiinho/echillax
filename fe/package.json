@@ -4,6 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "next dev --port 3000",
+		"devs": "NODE_OPTIONS='--inspect' next dev",
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint"
@@ -26,7 +27,7 @@
 		"eslint": "8.48.0",
 		"eslint-config-next": "14.2.1",
 		"formik": "^2.4.5",
-		"framer-motion": "^11.1.1",
+		"framer-motion": "^11.3.21",
 		"intl-messageformat": "^10.5.0",
 		"next": "^14.2.3",
 		"next-themes": "^0.2.1",
