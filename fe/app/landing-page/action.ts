@@ -13,6 +13,11 @@ export const getLandingPageBySlug = async (slug: string) => {
         "banner",
         "doctor_name",
         "doctor_review",
+        "benefit_title",
+        "origin_title",
+        "origin_image",
+        "origin_description",
+        "quality_description",
         {
           // banner: ["id"],
           product_id: [

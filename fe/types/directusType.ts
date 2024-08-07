@@ -369,14 +369,25 @@ export type DirectusWebhooks = {
 export type LandingPage = {
   advantage_summary?: string;
   banner?: string | DirectusFiles;
+  benefit_area: string;
+  benefit_image?: string | DirectusFiles;
+  benefit_title?: string;
   date_created?: string;
   date_updated?: string;
   doctor_name?: string;
   doctor_review?: string;
+  doctor_review_area: string;
+  doctor_review_image?: string;
   id: number;
-  title?: string;
+  official_check_title?: string;
+  origin_and_quality_area: string;
+  origin_description?: string;
+  origin_image?: string;
+  origin_title?: string;
   product_id?: number | Product;
+  quality_description?: string;
   status: string;
+  title?: string;
   user_created?: string | DirectusUsers;
   user_updated?: string | DirectusUsers;
 };
