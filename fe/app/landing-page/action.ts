@@ -24,9 +24,9 @@ export const getLandingPageBySlug = async (slug: string) => {
             "id",
             "image",
             {
-              advantages: ["id", "image", "description"],
+              advantages: ["id", "image", "description", "sort"],
               testimonials: ["id", "screen_shot"],
-              benefits: ["id", "image", "description"],
+              benefits: ["id", "image", "description", "sort"],
               social_shares: ["id", "avatar", "title", "link"],
             },
           ],

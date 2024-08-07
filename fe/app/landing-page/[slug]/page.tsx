@@ -5,7 +5,10 @@ import NextImage from "@/components/ui/nextImage/NextImage";
 import MotionDiv from "@/components/ui/motion/MotionDiv";
 import { EmblaCarousel } from "@/components/ui/carousel/EmblaCarousel";
 import BenefitItem from "@/app/landing-page/_components/BenefitItem";
-import Certificates from "@/app/landing-page/_components/Certificates";
+import QualityCertificates from "@/app/landing-page/_components/QualityCertificates";
+import Partners from "@/app/landing-page/_components/Partners";
+import PerformanceCerts from "@/app/landing-page/_components/PerformanceCerts";
+import DoctorReview from "@/app/landing-page/_components/DoctorReview";
 
 const Page = async ({ params }: { params: Params }) => {
   const { slug } = params;
@@ -32,6 +35,10 @@ const Page = async ({ params }: { params: Params }) => {
     benefits,
     social_shares,
   } = product_id || {};
+  const sortedBenefits = (benefits ?? []).sort((b1, b2) => b1.sort - b2.sort);
+  const sortedAdvantages = (advantages ?? []).sort(
+    (a1, a2) => a1.sort - a2.sort
+  );
   return (
     <div className="flex flex-col gap-5">
       {/* banner */}
@@ -56,7 +63,7 @@ const Page = async ({ params }: { params: Params }) => {
 
         {/*  advantages */}
         <div className="flex flex-col gap-3">
-          {advantages?.map((advantage, index) => (
+          {sortedAdvantages?.map((advantage, index) => (
             <MotionDiv
               key={advantage.id}
               transition={{ duration: (index + 1) * 0.75 }}
@@ -66,7 +73,7 @@ const Page = async ({ params }: { params: Params }) => {
               <MotionDiv className="mx-2 block w-16 shrink-0 ">
                 <NextImage imageId={advantage.image} />
               </MotionDiv>
-              <div className="text-justify text-xs">
+              <div className="text-justify text-sm">
                 {advantage.description}
               </div>
             </MotionDiv>
@@ -81,17 +88,17 @@ const Page = async ({ params }: { params: Params }) => {
         </MotionDiv>
         <EmblaCarousel
           numberOfItemInSlide={3}
-          slides={benefits ?? []}
+          slides={sortedBenefits}
           carouselKey="benefit_carousel"
           itemRender={BenefitItem}
         />
       </div>
 
       {/*  Origin and quality */}
-      <MotionDiv className="p-2 text-center text-xl font-bold uppercase text-primary">
-        {origin_title}
-      </MotionDiv>
       <div className="flex flex-col px-5">
+        <MotionDiv className="p-2 text-center text-xl font-bold uppercase text-primary">
+          {origin_title}
+        </MotionDiv>
         <MotionDiv className="flex flex-col rounded-b-xl bg-secondary-100">
           <NextImage imageId={origin_image} />
           <div
@@ -101,8 +108,8 @@ const Page = async ({ params }: { params: Params }) => {
         </MotionDiv>
       </div>
 
-      {/*  Certificates */}
-      <Certificates />
+      {/*  QualityCertificates */}
+      <QualityCertificates />
 
       <MotionDiv className=" px-5">
         <div
@@ -110,6 +117,24 @@ const Page = async ({ params }: { params: Params }) => {
           dangerouslySetInnerHTML={{ __html: quality_description ?? "" }}
         />
       </MotionDiv>
+
+      {/*  Partner */}
+      <div className="flex flex-col gap-2 px-5">
+        <MotionDiv className="p-2 text-center text-xl font-bold uppercase text-primary">
+          Đối tác
+        </MotionDiv>
+        <Partners />
+      </div>
+
+      {/* Performance certificate */}
+      <div className="flex flex-col gap-2 px-5">
+        <PerformanceCerts />
+      </div>
+
+      {/* Doctor review */}
+      <div className="flex flex-col gap-2 px-5">
+        <DoctorReview />
+      </div>
     </div>
   );
 };

@@ -1,7 +1,5 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
-import { Input, Textarea, Button, Spacer } from "@nextui-org/react";
-import DOCTOR from "@/assets/image/get-advise/doctor.png";
-import Image from "next/image";
+import React, { ChangeEvent, FormEvent, useState } from "react";
+import { Button, Input, Spacer, Textarea } from "@nextui-org/react";
 import clsx from "clsx";
 import { fontBoosterBlack } from "@/config/fonts/fonts";
 
@@ -23,7 +21,7 @@ const GetAdviseForm: React.FC = () => {
   });
 
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setFormData({
@@ -44,7 +42,7 @@ const GetAdviseForm: React.FC = () => {
         <form
           className={clsx(
             "relative z-10 flex flex-col gap-1",
-            fontBoosterBlack.className,
+            fontBoosterBlack.className
           )}
           onSubmit={handleSubmit}
         >

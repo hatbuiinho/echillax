@@ -11,4 +11,4 @@ export const directusClient = createDirectus<CustomDirectusTypes>(
         "unknown"
     )
   )
-  .with(rest({ onRequest: (options) => ({ ...options, cache: "no-cache" }) }));
+  .with(rest({ onRequest: (options) => ({ ...options, cache: "no-store" }) }));
