@@ -10,7 +10,7 @@ const BenefitItem = (
   benefits: Pick<ProductBenefit, "id" | "image" | "description">[]
 ) => {
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex shrink-0 grow-0 basis-full flex-col gap-3">
       {benefits.map((benefit, index) => (
         <MotionDiv
           transition={{ duration: (index + 1) * 0.75 }}

@@ -1,9 +1,13 @@
+"use client";
 import DOCTOR from "@/assets/image/get-advise/doctor.png";
 import clsx from "clsx";
 import Image from "next/image";
 import GetAdviseForm from "./GetAdviseForm";
+import { usePreference } from "@/stores/usePreference";
 
-const GetAdvise = () => {
+const GetAdvise = ({ mobile = false }: { mobile?: boolean }) => {
+  const { landline_number, mobile_phone_number } = usePreference();
+  const contact = mobile ? mobile_phone_number : landline_number;
   return (
     <div className="relative">
       <div className="grid items-end justify-center md:grid-cols-2">
@@ -33,10 +37,10 @@ const GetAdvise = () => {
                 Nhận tư vấn từ BS dinh dưỡng
               </legend>
               <a
-                href="tel:02465638688"
+                href={`tel:${contact}`}
                 className={clsx("block text-center text-2xl md:text-3xl")}
               >
-                0246.563.8688
+                {contact ?? "Chillax"}
               </a>
             </fieldset>
           </div>

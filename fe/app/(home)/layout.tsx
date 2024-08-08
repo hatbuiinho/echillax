@@ -10,6 +10,7 @@ import aboutChillaxFooter from "@/assets/image/about-chillax/about-chillax-middl
 import "./app.css";
 import Image from "next/image";
 import JustForSEO from "@/app/(home)/_components/JustForSEO";
+import Footer from "@/components/layout/footer/footer";
 
 export const metadata: Metadata = siteConfig;
 
@@ -45,6 +46,7 @@ export default function RootLayout(props: any) {
                 />
               </div>
             </footer>
+            <Footer />
           </div>
         </Providers>
       </body>

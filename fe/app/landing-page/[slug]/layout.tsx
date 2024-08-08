@@ -4,11 +4,9 @@ import "@/styles/globals.css";
 import clsx from "clsx";
 import { Metadata } from "next";
 import { fontBoosterBlack } from "@/config/fonts/fonts";
-import aboutChillaxFooter from "@/assets/image/about-chillax/about-chillax-middle.png";
-
-import Image from "next/image";
 import JustForSEO from "@/app/(home)/_components/JustForSEO";
 import { Providers } from "@/app/providers";
+import Footer from "@/components/layout/footer/footer";
 
 export const metadata: Metadata = siteConfig;
 
@@ -36,17 +34,7 @@ export default function RootLayout({
               {children}
             </main>
             {/* Footer */}
-            <footer>
-              <div className=" w-full md:-mt-3 lg:-mt-8 xl:-mt-12">
-                <Image
-                  className="h-auto w-full"
-                  src={aboutChillaxFooter}
-                  alt="about-chillax-header"
-                  width={999}
-                  height={999}
-                />
-              </div>
-            </footer>
+            <Footer />
           </div>
         </Providers>
       </body>

@@ -4,7 +4,7 @@ import MotionDiv from "@/components/ui/motion/MotionDiv";
 import clsx from "clsx";
 import NextImage from "@/components/ui/nextImage/NextImage";
 
-const CertItem = ({
+const QualityCertItem = ({
   certs,
   selectCert,
 }: {
@@ -34,4 +34,4 @@ const CertItem = ({
     </MotionDiv>
   ));
 };
-export default CertItem;
+export default QualityCertItem;
