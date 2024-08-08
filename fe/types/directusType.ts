@@ -576,6 +576,19 @@ export type Testimonials = {
   user_updated?: string | DirectusUsers;
 };
 
+export type Preference = {
+  address?: string | null;
+  company_name?: string | null;
+  date_created?: string | null;
+  date_updated?: string | null;
+  factory?: string | null;
+  id: number;
+  landline_number?: string | null;
+  mobile_phone_number?: string | null;
+  user_created?: string | DirectusUsers | null;
+  user_updated?: string | DirectusUsers | null;
+};
+
 export type CustomDirectusTypes = {
   directus_activity: DirectusActivity[];
   directus_collections: DirectusCollections[];
@@ -614,4 +627,5 @@ export type CustomDirectusTypes = {
   solution_blog: SolutionBlog[];
   solution_category: SolutionCategory[];
   testimonials: Testimonials[];
+  preference: Preference;
 };

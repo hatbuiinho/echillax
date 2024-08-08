@@ -64,7 +64,7 @@ export function EmblaCarousel({
       AutoPlay({
         playOnInit: autoPlay,
         delay: delay ?? 5000,
-        active: true,
+        active: autoPlay,
       }),
     ]
   );

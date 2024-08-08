@@ -9,6 +9,7 @@ import QualityCertificates from "@/app/landing-page/_components/QualityCertifica
 import Partners from "@/app/landing-page/_components/Partners";
 import PerformanceCerts from "@/app/landing-page/_components/PerformanceCerts";
 import DoctorReview from "@/app/landing-page/_components/DoctorReview";
+import GetAdvise from "@/app/(home)/_components/GetAdvise";
 
 const Page = async ({ params }: { params: Params }) => {
   const { slug } = params;
@@ -134,6 +135,10 @@ const Page = async ({ params }: { params: Params }) => {
       {/* Doctor review */}
       <div className="flex flex-col gap-2 px-5">
         <DoctorReview />
+      </div>
+
+      <div className="flex flex-col gap-2 bg-gray-200 px-5 pt-5">
+        <GetAdvise mobile />
       </div>
     </div>
   );
