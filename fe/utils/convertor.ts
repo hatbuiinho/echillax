@@ -25,3 +25,10 @@ function calendarToDateString({
   const formattedDay = day < 10 ? `0${day}` : day;
   return `${year}-${formattedMonth}-${formattedDay}`;
 }
+
+export const toEmbedYoutubeLink = (normalLink?: string) => {
+  const embedYoutubeLinkParts = normalLink?.split("/");
+  const youtubeVideoId =
+    embedYoutubeLinkParts?.[(embedYoutubeLinkParts?.length ?? 1) - 1];
+  return `https://www.youtube.com/embed/${youtubeVideoId}`;
+};

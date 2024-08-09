@@ -1,3 +1,53 @@
+export type CommonLandingPage = {
+  benefit_title?: string | null;
+  company_images: any[] | CommonLandingPageFiles1[];
+  date_created?: string | null;
+  date_updated?: string | null;
+  id: number;
+  official_check_link?: string | null;
+  official_check_title?: string | null;
+  origin_quality_title?: string | null;
+  partner_logos: any[] | CommonLandingPageFiles4[];
+  partner_title?: string | null;
+  performance_certificates: any[] | CommonLandingPageFiles[];
+  quality_certificates: any[] | CommonLandingPageFiles2[];
+  social_share_title?: string | null;
+  testimonial_title?: string | null;
+  title: string;
+  user_created?: string | DirectusUsers | null;
+  user_updated?: string | DirectusUsers | null;
+};
+
+export type CommonLandingPageFiles = {
+  common_landing_page_id?: number | CommonLandingPage | null;
+  directus_files_id?: string | DirectusFiles | null;
+  id: number;
+};
+
+export type CommonLandingPageFiles1 = {
+  common_landing_page_id?: number | CommonLandingPage | null;
+  directus_files_id?: string | DirectusFiles | null;
+  id: number;
+};
+
+export type CommonLandingPageFiles2 = {
+  common_landing_page_id?: number | CommonLandingPage | null;
+  directus_files_id?: string | DirectusFiles | null;
+  id: number;
+};
+
+export type CommonLandingPageFiles3 = {
+  common_landing_page_id?: number | CommonLandingPage | null;
+  directus_files_id?: string | DirectusFiles | null;
+  id: number;
+};
+
+export type CommonLandingPageFiles4 = {
+  common_landing_page_id?: number | CommonLandingPage | null;
+  directus_files_id?: string | DirectusFiles | null;
+  id: number;
+};
+
 export type DirectusActivity = {
   action: string;
   collection: string;
@@ -590,6 +640,11 @@ export type Preference = {
 };
 
 export type CustomDirectusTypes = {
+  common_landing_page: CommonLandingPage;
+  common_landing_page_files: CommonLandingPageFiles[];
+  common_landing_page_files_1: CommonLandingPageFiles1[];
+  common_landing_page_files_2: CommonLandingPageFiles2[];
+  common_landing_page_files_3: CommonLandingPageFiles3[];
   directus_activity: DirectusActivity[];
   directus_collections: DirectusCollections[];
   directus_dashboards: DirectusDashboards[];

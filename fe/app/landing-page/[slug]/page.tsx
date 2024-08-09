@@ -1,6 +1,6 @@
 import React from "react";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
-import { getLandingPageBySlug } from "@/app/landing-page/action";
+
 import NextImage from "@/components/ui/nextImage/NextImage";
 import MotionDiv from "@/components/ui/motion/MotionDiv";
 import { EmblaCarousel } from "@/components/ui/carousel/EmblaCarousel";
@@ -10,10 +10,22 @@ import Partners from "@/app/landing-page/_components/Partners";
 import PerformanceCerts from "@/app/landing-page/_components/PerformanceCerts";
 import DoctorReview from "@/app/landing-page/_components/DoctorReview";
 import GetAdvise from "@/app/(home)/_components/GetAdvise";
+import {
+  getCommonLandingPage,
+  getLandingPageBySlug,
+} from "@/app/landing-page/services";
+import SectionTitle from "@/app/landing-page/_components/SectionTitle";
+import clsx from "clsx";
+import { fontBaloo } from "@/config/fonts/fonts";
+import SectionWrapper from "@/app/landing-page/_components/SectionWrapper";
+import SocialShares from "@/app/landing-page/_components/SocialShares";
 
 const Page = async ({ params }: { params: Params }) => {
   const { slug } = params;
-  const landingPages = await getLandingPageBySlug(slug);
+  const [landingPages, commonLandingPage] = await Promise.all([
+    getLandingPageBySlug(slug),
+    getCommonLandingPage(),
+  ]);
   const data = landingPages[0];
   const {
     banner,
@@ -22,12 +34,24 @@ const Page = async ({ params }: { params: Params }) => {
     doctor_name,
     doctor_review,
     product_id,
-    benefit_title,
     origin_image,
-    origin_title,
     origin_description,
     quality_description,
+    doctor_review_image,
   } = data || {};
+
+  const {
+    benefit_title,
+    social_share_title,
+    partner_title,
+    testimonial_title,
+    quality_certificates,
+    performance_certificates,
+    company_images,
+    partner_logos,
+    official_check_title,
+    origin_quality_title,
+  } = commonLandingPage || {};
   const {
     id,
     image: productImage,
@@ -41,105 +65,138 @@ const Page = async ({ params }: { params: Params }) => {
     (a1, a2) => a1.sort - a2.sort
   );
   return (
-    <div className="flex flex-col gap-5">
+    <div className={clsx(fontBaloo.className, "flex flex-col gap-5")}>
       {/* banner */}
       <NextImage imageId={banner?.toString()} alt={title} />
       {/* title */}
-      <MotionDiv className="p-2 text-center text-xl font-bold uppercase text-primary">
-        {title}
-      </MotionDiv>
-
-      <div className="flex flex-col gap-8 bg-contain px-5">
-        {/* product image */}
-        <div className="flex w-full justify-center">
-          <MotionDiv className="w-52">
-            <NextImage imageId={productImage} alt={title} />
-          </MotionDiv>
-        </div>
-
-        {/*  advantage summary */}
-        <MotionDiv className="text-justify text-sm text-primary">
-          {advantage_summary}
-        </MotionDiv>
-
-        {/*  advantages */}
-        <div className="flex flex-col gap-3">
-          {sortedAdvantages?.map((advantage, index) => (
-            <MotionDiv
-              key={advantage.id}
-              transition={{ duration: (index + 1) * 0.75 }}
-              viewport={{ once: true, amount: 0.1 }}
-              className="flex items-center rounded-lg border border-gray-100 bg-secondary-100 p-2 pl-0"
-            >
-              <div className="mx-2 block w-16 shrink-0 ">
-                <NextImage imageId={advantage.image} />
-              </div>
-              <MotionDiv className="text-justify text-sm">
-                {advantage.description}
-              </MotionDiv>
+      <SectionTitle>{title}</SectionTitle>
+      <SectionWrapper>
+        <div className="flex flex-col gap-8 bg-contain ">
+          {/* product image */}
+          <div className="flex w-full justify-center">
+            <MotionDiv className="w-52">
+              <NextImage imageId={productImage} alt={title} />
             </MotionDiv>
-          ))}
+          </div>
+
+          {/*  advantage summary */}
+          <MotionDiv className="text-justify text-sm text-primary">
+            {advantage_summary}
+          </MotionDiv>
+
+          {/*  advantages */}
+          <div className="flex flex-col gap-3">
+            {sortedAdvantages?.map((advantage, index) => (
+              <MotionDiv
+                key={advantage.id}
+                transition={{ duration: (index + 1) * 0.75 }}
+                viewport={{ once: true, amount: 0.1 }}
+                className="flex items-center rounded-lg border border-gray-100 bg-secondary-100 p-2 pl-0"
+              >
+                <div className="mx-2 block w-16 shrink-0 ">
+                  <NextImage imageId={advantage.image} />
+                </div>
+                <MotionDiv className="text-justify text-sm">
+                  {advantage.description}
+                </MotionDiv>
+              </MotionDiv>
+            ))}
+          </div>
         </div>
-      </div>
+      </SectionWrapper>
 
       {/* Benefits */}
-      <div className="flex flex-col px-5">
-        <MotionDiv className="p-2 text-center text-xl font-bold uppercase text-primary">
-          {benefit_title}
-        </MotionDiv>
-        <EmblaCarousel
-          numberOfItemInSlide={3}
-          slides={sortedBenefits}
-          carouselKey="benefit_carousel"
-          itemRender={BenefitItem}
-        />
-      </div>
+      <SectionWrapper>
+        <div className="flex flex-col ">
+          <SectionTitle>{benefit_title}</SectionTitle>
+          <EmblaCarousel
+            numberOfItemInSlide={3}
+            slides={sortedBenefits}
+            carouselKey="benefit_carousel"
+            itemRender={BenefitItem}
+          />
+        </div>
+      </SectionWrapper>
 
       {/*  Origin and quality */}
-      <div className="flex flex-col px-5">
-        <MotionDiv className="p-2 text-center text-xl font-bold uppercase text-primary">
-          {origin_title}
-        </MotionDiv>
-        <MotionDiv className="flex flex-col rounded-b-xl bg-secondary-100">
-          <NextImage imageId={origin_image} />
-          <div
-            className="p-3 text-sm"
-            dangerouslySetInnerHTML={{ __html: origin_description ?? "" }}
-          />
-        </MotionDiv>
-      </div>
-
+      <SectionWrapper>
+        <div className="flex flex-col ">
+          <SectionTitle>{origin_quality_title}</SectionTitle>
+          <MotionDiv className="flex flex-col rounded-b-xl bg-secondary-100">
+            <NextImage imageId={origin_image} />
+            <div
+              className="p-3 text-sm"
+              dangerouslySetInnerHTML={{ __html: origin_description ?? "" }}
+            />
+          </MotionDiv>
+        </div>
+      </SectionWrapper>
       {/*  QualityCertificates */}
       <QualityCertificates />
 
-      <MotionDiv className=" px-5">
-        <div
-          className="rounded-xl bg-secondary-100 p-3 text-sm"
-          dangerouslySetInnerHTML={{ __html: quality_description ?? "" }}
-        />
-      </MotionDiv>
+      <SectionWrapper>
+        <MotionDiv className=" ">
+          <div
+            className="rounded-xl bg-secondary-100 p-3 text-sm"
+            dangerouslySetInnerHTML={{ __html: quality_description ?? "" }}
+          />
+        </MotionDiv>
+      </SectionWrapper>
 
       {/*  Partner */}
-      <div className="flex flex-col gap-2 px-5">
-        <MotionDiv className="p-2 text-center text-xl font-bold uppercase text-primary">
-          Đối tác
-        </MotionDiv>
-        <Partners />
-      </div>
+      <SectionWrapper>
+        <div className="flex flex-col gap-2 ">
+          <SectionTitle>{partner_title}</SectionTitle>
+          <Partners />
+        </div>
+      </SectionWrapper>
 
       {/* Performance certificate */}
-      <div className="flex flex-col gap-2 px-5">
-        <PerformanceCerts />
-      </div>
+      <SectionWrapper>
+        <div className="flex flex-col gap-2 ">
+          <PerformanceCerts />
+        </div>
+      </SectionWrapper>
+
+      {/*  Official check */}
+      <SectionWrapper className="bg-[url(/images/bg/bg-official-check.png)]">
+        <div className="flex flex-col gap-2 py-5">
+          <SectionTitle>{official_check_title}</SectionTitle>
+          <MotionDiv>
+            <iframe
+              style={{ aspectRatio: "16 / 9" }}
+              className="w-full rounded-xl"
+              src={commonLandingPage.official_check_link ?? ""}
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            ></iframe>
+          </MotionDiv>
+        </div>
+      </SectionWrapper>
 
       {/* Doctor review */}
-      <div className="flex flex-col gap-2 px-5">
-        <DoctorReview />
-      </div>
+      <SectionWrapper className="bg-[url(/images/bg/bg-doctor-review.png)]">
+        <div className="flex flex-col gap-2  py-8">
+          <DoctorReview
+            doctorReview={doctor_review ?? ""}
+            doctorName={doctor_name ?? ""}
+            doctorImage={doctor_review_image ?? ""}
+          />
+        </div>
+      </SectionWrapper>
 
-      <div className="flex flex-col gap-2 bg-gray-200 px-5 pt-5">
-        <GetAdvise mobile />
-      </div>
+      <SectionWrapper className="bg-[url(/images/bg/bg-social.png)] bg-contain">
+        <SectionTitle>{social_share_title}</SectionTitle>
+        <SocialShares items={social_shares || []} />
+      </SectionWrapper>
+
+      <SectionWrapper className="bg-gray-200">
+        <MotionDiv className="flex flex-col gap-2 pt-5">
+          <GetAdvise mobile />
+        </MotionDiv>
+      </SectionWrapper>
     </div>
   );
 };

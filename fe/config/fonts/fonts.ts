@@ -21,6 +21,24 @@ export const fontNunito = Nunito({
 });
 
 export const fontBoosterBlack = localFont({
-  src: "./VLBOOSTERNEXTFY-BLACK.otf",
+  src: "./vlBoosterNextfy/VLBOOSTERNEXTFY-BLACK.otf",
 });
-export const fontBoosterThin = localFont({ src: "./VLBOOSTERNEXTFY-THIN.otf" });
+export const fontBoosterThin = localFont({
+  src: "./vlBoosterNextfy/VLBOOSTERNEXTFY-THIN.otf",
+});
+
+export const fontBalooMd = localFont({
+  src: "./baloo2/Baloo2-Medium.ttf",
+});
+export const fontBalooBold = localFont({
+  src: "./baloo2/Baloo2-Bold.ttf",
+});
+export const fontBaloExtraBold = localFont({
+  src: "./baloo2/Baloo2-ExtraBold.ttf",
+});
+export const fontBaloSemiBold = localFont({
+  src: "./baloo2/Baloo2-SemiBold.ttf",
+});
+export const fontBaloo = localFont({
+  src: "./baloo2/Baloo2-VariableFont_wght.ttf",
+});

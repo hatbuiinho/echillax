@@ -2,6 +2,7 @@
 
 import { asyncWithTryCatch } from "@/utils/http";
 import { getFeatureProductSlugList, getProductArticleBySlug } from "./action";
+import { toEmbedYoutubeLink } from "@/utils/convertor";
 
 export type ProductNameAndSlug = {
   productName: string;
@@ -12,10 +13,8 @@ export const getBySlug = async (slug: string) => {
   const promise = getProductArticleBySlug(slug).then((data) => {
     if (data.length) {
       const product = data[0];
-      const embedYoutubeLinkParts = product.main_video_link?.split("/");
-      const youtubeVideoId =
-        embedYoutubeLinkParts?.[(embedYoutubeLinkParts?.length ?? 1) - 1];
-      product.main_video_link = `https://www.youtube.com/embed/${youtubeVideoId}`;
+      product.main_video_link = toEmbedYoutubeLink(product.main_video_link);
+
       const tests = product.testimonials?.map((test) => ({
         ...test,
         image: test.avatar,
