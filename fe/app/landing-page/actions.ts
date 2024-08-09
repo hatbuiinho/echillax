@@ -1,10 +1,10 @@
 "use server";
 
 import { directusClient } from "@/lib/directus";
-import { readItems } from "@directus/sdk";
+import { readItems, readSingleton } from "@directus/sdk";
 import { StatusEnum } from "@/enums/status";
 
-export const getLandingPageBySlug = async (slug: string) => {
+export const _getLandingPageBySlug = async (slug: string) => {
   return directusClient.request(
     readItems("landing_page", {
       fields: [
@@ -13,6 +13,7 @@ export const getLandingPageBySlug = async (slug: string) => {
         "banner",
         "doctor_name",
         "doctor_review",
+        "doctor_review_image",
         "benefit_title",
         "origin_title",
         "origin_image",
@@ -27,7 +28,7 @@ export const getLandingPageBySlug = async (slug: string) => {
               advantages: ["id", "image", "description", "sort"],
               testimonials: ["id", "screen_shot"],
               benefits: ["id", "image", "description", "sort"],
-              social_shares: ["id", "avatar", "title", "link"],
+              social_shares: ["id", "avatar", "title", "link", "image"],
             },
           ],
         },
@@ -42,6 +43,26 @@ export const getLandingPageBySlug = async (slug: string) => {
           _eq: StatusEnum.published.toString(),
         },
       },
+    })
+  );
+};
+
+export const _getCommonLandingPage = () => {
+  return directusClient.request(
+    readSingleton("common_landing_page", {
+      fields: [
+        "official_check_link",
+        "quality_certificates",
+        "performance_certificates",
+        "company_images",
+        "partner_logos",
+        "benefit_title",
+        "partner_title",
+        "social_share_title",
+        "testimonial_title",
+        "official_check_title",
+        "origin_quality_title",
+      ],
     })
   );
 };
