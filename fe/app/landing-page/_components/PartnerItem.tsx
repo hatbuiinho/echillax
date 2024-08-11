@@ -3,7 +3,7 @@ import React from "react";
 import clsx from "clsx";
 import MotionDiv from "@/components/ui/motion/MotionDiv";
 import NextImage from "@/components/ui/nextImage/NextImage";
-import { Image } from "@/app/landing-page/_components/Partners";
+import { Image } from "@/types";
 
 const PartnerItem = (partners: Image[]) => {
   return partners.map((partnerLogo) =>
