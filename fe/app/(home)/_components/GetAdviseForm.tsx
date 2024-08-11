@@ -34,7 +34,7 @@ const GetAdviseForm: React.FC = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log("Form Data:", formData);
+    // console.log("Form Data:", formData);
     // Handle form submission here (e.g., send data to a server)
   };
 
