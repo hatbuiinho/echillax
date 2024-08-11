@@ -1,6 +1,9 @@
 import * as React from "react";
 import { IconSvgProps } from "@/types";
-import clsx from "clsx";
+import NextImage from "@/components/ui/nextImage/NextImage";
+import goldTriangleRight from "@/assets/image/landing-page/gold-arrow-right.png";
+import goldTriangleLeft from "@/assets/image/landing-page/gold-arrow-left.png";
+import { ImageProps } from "next/image";
 
 export const Logo: React.FC<IconSvgProps> = ({
   size = 36,
@@ -309,5 +312,21 @@ export const ChevronLeftIcon: React.FC<IconSvgProps> = (props) => {
         d="M15.75 19.5 8.25 12l7.5-7.5"
       />
     </svg>
+  );
+};
+
+export const GoldArrowRight = ({ src, ...rest }: Partial<ImageProps>) => {
+  return (
+    <div {...rest}>
+      <NextImage alt="right arrow" src={goldTriangleRight} />
+    </div>
+  );
+};
+
+export const GoldArrowLeft = ({ src, ...rest }: Partial<ImageProps>) => {
+  return (
+    <div {...rest}>
+      <NextImage alt="left arrow" src={goldTriangleLeft} />
+    </div>
   );
 };

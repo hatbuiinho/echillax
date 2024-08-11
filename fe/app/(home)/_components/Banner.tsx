@@ -23,6 +23,7 @@ const Banner = () => {
       carouselKey="banners"
       loop
       autoPlay
+      playOnInit
       delay={3000}
       slides={items}
       itemRender={(slides) => (

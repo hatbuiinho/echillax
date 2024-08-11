@@ -7,7 +7,12 @@ type Props = {
 };
 const SectionWrapper = ({ children, className }: Props) => {
   return (
-    <div className={clsx("bg-cover bg-no-repeat px-8", className)}>
+    <div
+      className={clsx(className, "bg-no-repeat", {
+        "bg-cover": !className?.includes("bg-contain"),
+        "px-8": !className?.includes("px"),
+      })}
+    >
       {children}
     </div>
   );

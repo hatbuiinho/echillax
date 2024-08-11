@@ -5,8 +5,9 @@ import clsx from "clsx";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { SolutionBlogDto } from "../action";
-import ProductBlogService from "../services";
 import "../style.scss";
+import { getBlogBySlug } from "@/app/(home)/kinh-nghiem-hay/services";
+import MotionDiv from "@/components/ui/motion/MotionDiv";
 
 const Blog = () => {
   const { slug } = useParams();
@@ -14,7 +15,7 @@ const Blog = () => {
 
   useEffect(() => {
     if (slug) {
-      ProductBlogService.getBySlug(slug as string).then((data) => {
+      getBlogBySlug(slug as string).then((data) => {
         return setSolutionBlog(data);
       });
     }
@@ -24,9 +25,9 @@ const Blog = () => {
     <div className="blog px-3 md:px-7">
       {/* title */}
       <div className="my-12 grid items-center md:grid-cols-2">
-        <div className="">
+        <MotionDiv className="">
           <NextImage imageId={solutionBlog?.image as string} />
-        </div>
+        </MotionDiv>
         <div className="px-5 py-2 md:px-7 lg:px-10">
           <h2 className="mb-2 text-2xl text-primary">{solutionBlog.title}</h2>
           <p className="text-justify">{solutionBlog.introduce}</p>

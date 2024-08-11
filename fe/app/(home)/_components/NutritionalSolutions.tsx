@@ -1,3 +1,4 @@
+"use client";
 import { EmailIcon } from "@/components/icons";
 import OutlinedLetter from "@/components/ui/outlinedLetter";
 import { fontBoosterBlack } from "@/config/fonts/fonts";
@@ -7,14 +8,14 @@ import clsx from "clsx";
 import { useEffect, useState } from "react";
 import NutritionalSolution from "./NutritionalSolution";
 import { BlogCategoryDto } from "@/app/(home)/kinh-nghiem-hay/action";
-import ProductBlogService from "@/app/(home)/kinh-nghiem-hay/services";
+import { getBlogList } from "@/app/(home)/kinh-nghiem-hay/services";
 
 const NutritionalSolutions = () => {
   const { sm } = useResponsive();
   const [blogCategories, setBlogCategories] = useState<BlogCategoryDto[]>();
 
   useEffect(() => {
-    ProductBlogService.getList().then((data) => {
+    getBlogList().then((data) => {
       const categoryData = data;
       setBlogCategories(categoryData);
       console.log({ categoryData });

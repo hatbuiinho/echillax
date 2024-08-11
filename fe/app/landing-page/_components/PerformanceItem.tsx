@@ -14,7 +14,9 @@ const PerformanceItem = (
     >
       <div className="w-full">
         <NextImage src={cert.image} />
-        <div className="p-2 text-center text-primary">{cert.description}</div>
+        <div className="p-2 text-center font-bold text-primary">
+          {cert.description}
+        </div>
       </div>
     </MotionDiv>
   ));

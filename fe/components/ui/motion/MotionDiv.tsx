@@ -14,9 +14,9 @@ const MotionDiv = (props: Props) => {
       initial="hidden"
       whileInView="visible"
       transition={{
-        delay: 0.2,
+        delay: 0.1,
         ease: "easeInOut",
-        duration: 1,
+        duration: 0.7,
       }}
       viewport={{ amount: 0.2, once: true }}
       className={className}

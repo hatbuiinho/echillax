@@ -1,108 +1,54 @@
-"use client";
 import { Button } from "@nextui-org/button";
 import Link from "next/link";
-import {
-  Navbar as NextUINavbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-} from "@nextui-org/navbar";
+import { NavbarBrand, NavbarContent, NavbarItem } from "@nextui-org/navbar";
 
-import {
-  Accordion,
-  AccordionItem,
-  cn,
-  Listbox,
-  ListboxItem,
-  NavbarMenu,
-  NavbarMenuItem,
-  NavbarMenuToggle,
-} from "@nextui-org/react";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { NavbarMenu } from "@nextui-org/react";
 import { CheveronIcon } from "../../icons";
 import Brand from "../../ui/brand";
 import { navbarData } from "./data";
 import navbar from "./navbar.module.scss";
+import { getFeatureList } from "@/app/(home)/san-pham/services";
+import MenuItem from "@/components/layout/navbar/component/MenuItem";
+import ClientNavbar from "@/components/layout/navbar/component/ClientNavbar";
+import ClientNavbarMenuToggle from "@/components/layout/navbar/component/ClientNavbarMenuToggle";
+import { headers } from "next/headers";
+import ClientIMenuItemDropdown from "@/components/layout/navbar/component/ClientIMenuItemDropdown";
 import clsx from "clsx";
-import {
-  getFeatureList,
-  ProductNameAndSlug,
-} from "@/app/(home)/san-pham/services";
 
-export const Navbar = () => {
-  const pathName = usePathname();
-  const router = useRouter();
-  const [productSlugList, setProductSlugList] = useState<ProductNameAndSlug[]>(
-    []
-  );
+export const Navbar = async () => {
+  const header = headers();
+  const host = header.get("referer");
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  useEffect(() => {
-    getFeatureList().then((data) => setProductSlugList(data ?? []));
-  }, []);
-
-  // const searchInput = (
-  //   <Input
-  //     aria-label="Search"
-  //     classNames={{
-  //       inputWrapper: "bg-default-100",
-  //       input: "text-sm",
-  //     }}
-  //     endContent={
-  //       <Kbd className="hidden lg:inline-block" keys={["command"]}>
-  //         K
-  //       </Kbd>
-  //     }
-  //     labelPlacement="outside"
-  //     placeholder="Search..."
-  //     startContent={
-  //       <SearchIcon className="pointer-events-none flex-shrink-0 text-base text-default-400" />
-  //     }
-  //     type="search"
-  //   />
-  // );
+  const productSlugList = (await getFeatureList()) ?? [];
 
   return (
-    <NextUINavbar
-      maxWidth="xl"
-      position="sticky"
-      isBordered
-      className=" justify-center bg-amber-50"
-      isMenuOpen={isMenuOpen}
-      onMenuOpenChange={setIsMenuOpen}
-    >
+    <ClientNavbar>
       <div className="container mx-auto flex items-center justify-center text-primary">
-        <NavbarContent className="md:hidden" justify="start">
-          <NavbarMenuToggle
-            className="p-5"
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          />
-        </NavbarContent>
+        <ClientNavbarMenuToggle />
 
         <NavbarBrand className="absolute left-[1.5rem] top-[4rem] h-[2.5rem] flex-grow-0 basis-28 md:static md:top-0 md:h-[5rem]">
           <Brand />
         </NavbarBrand>
 
+        {/* Product dropdown */}
         <NavbarContent className="flex-grow-1 gap-0">
           <div className="hidden h-[var(--navbar-height)] gap-1 md:flex">
-            {navbarData(productSlugList).map((item) => {
-              const isActive = pathName.includes(item.slug ?? "");
+            {navbarData(productSlugList, []).map((item) => {
+              const isActive = host?.includes(item.slug ?? "");
               return (
                 <NavbarItem
                   as={item.children?.length ? "a" : Link}
                   href={item.children?.length ? undefined : item.slug}
                   key={item.slug}
                   isActive={isActive}
-                  className={cn(
+                  className={clsx(
                     navbar.nav__parent,
                     "relative flex h-full items-center rounded-md px-2 hover:bg-secondary-100 hover:opacity-100 data-[active=true]:bg-secondary-100"
                   )}
                 >
                   <div className="font-bold">
                     <span
-                      className={cn({
+                      className={clsx({
                         "flex gap-2 px-2": item.children?.length,
                       })}
                     >
@@ -114,34 +60,10 @@ export const Navbar = () => {
                   </div>
 
                   {!!item.children?.length && (
-                    <div className={cn(navbar.nav__child, "absolute top-full")}>
-                      <Listbox
-                        itemClasses={{
-                          base: [
-                            "data-[hover=true]:bg-secondary-100 data-[hover=true]:text-primary",
-                          ],
-                        }}
-                        onAction={(key) => {
-                          router.push(`/san-pham/${key.toString()}` ?? "/");
-                        }}
-                        className="mt-2 rounded-md bg-white"
-                      >
-                        {item.children.map((child) => {
-                          const isSubItemActive = pathName.includes(child.slug);
-
-                          return (
-                            <ListboxItem key={child.slug}>
-                              <div
-                                className={clsx({
-                                  "text-secondary": isSubItemActive,
-                                })}
-                              >
-                                {child.title}
-                              </div>
-                            </ListboxItem>
-                          );
-                        })}
-                      </Listbox>
+                    <div
+                      className={clsx(navbar.nav__child, "absolute top-full")}
+                    >
+                      <ClientIMenuItemDropdown item={item} host={host} />
                     </div>
                   )}
                 </NavbarItem>
@@ -149,6 +71,7 @@ export const Navbar = () => {
             })}
           </div>
         </NavbarContent>
+
         <NavbarContent justify="end">
           <NavbarItem className="hidden xl:flex">
             <Button
@@ -175,65 +98,11 @@ export const Navbar = () => {
 
       <NavbarMenu>
         <div className="pt-12 text-primary">
-          {navbarData(productSlugList).map((item, index) => (
-            <NavbarMenuItem
-              key={`${item}-${index}`}
-              className="p-2"
-              onClick={() => {
-                setIsMenuOpen(false);
-              }}
-            >
-              {!item.children?.length ? (
-                <Link className="w-full" href={item.slug ?? ""}>
-                  {item.title}
-                </Link>
-              ) : (
-                <Accordion
-                  itemClasses={{
-                    base: "text-primary",
-                  }}
-                  className="px-0 text-primary"
-                  defaultExpandedKeys={
-                    pathName.includes("/san-pham") ? ["/san-pham"] : []
-                  }
-                >
-                  <AccordionItem
-                    key={"/san-pham"}
-                    aria-label={item.title}
-                    title={item.title}
-                    classNames={{
-                      title: "text-primary",
-                      trigger: "py-0",
-                    }}
-                  >
-                    {item.children.map((child) => {
-                      const isSubItemActive = pathName.includes(child.slug);
-                      return (
-                        <Link
-                          href={`/san-pham/${child.slug}`}
-                          key={`/san-pham/${child.slug}`}
-                          className="block py-2 pl-2"
-                        >
-                          <div
-                            className={clsx("cursor-pointer", {
-                              "text-secondary": isSubItemActive,
-                            })}
-                            onClick={() => {
-                              setIsMenuOpen(false);
-                            }}
-                          >
-                            {child.title}
-                          </div>
-                        </Link>
-                      );
-                    })}
-                  </AccordionItem>
-                </Accordion>
-              )}
-            </NavbarMenuItem>
+          {navbarData(productSlugList, []).map((item, index) => (
+            <MenuItem key={index} item={item} host={host} />
           ))}
         </div>
       </NavbarMenu>
-    </NextUINavbar>
+    </ClientNavbar>
   );
 };

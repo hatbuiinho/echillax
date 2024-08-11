@@ -19,7 +19,7 @@ const GetAdvise = ({ mobile = false }: { mobile?: boolean }) => {
         >
           <Image className="h-full w-auto" src={DOCTOR} alt="" />
         </div>
-        <div className="get-advise-form mb-20 flex min-h-96 flex-col">
+        <div className="get-advise-form mb-10 flex min-h-96 flex-col">
           <div className="text-md mb-3 flex justify-center md:justify-start ">
             <fieldset
               className={clsx(
