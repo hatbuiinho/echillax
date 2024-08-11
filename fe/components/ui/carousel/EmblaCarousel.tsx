@@ -3,7 +3,7 @@
 import clsx from "clsx";
 import useEmblaCarousel from "embla-carousel-react";
 import Image, { StaticImageData } from "next/image";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, ReactNode, useEffect, useState } from "react";
 import { usePrevNextButtons } from "@/hooks/usePreNextButton";
 import "./carousel.scss";
 
@@ -29,6 +29,13 @@ type Props = {
   carouselKey: string;
   initSlideIndex?: number;
   className?: string;
+  hasNavigation?: boolean;
+  navigationButtonRender?: (
+    index: number,
+    onClick: (index: number) => void
+  ) => ReactNode;
+  navigationClass?: string;
+  playOnInit?: boolean;
 };
 
 export type Slide = {
@@ -52,6 +59,10 @@ export function EmblaCarousel({
   carouselKey,
   initSlideIndex = 0,
   className,
+  navigationButtonRender,
+  hasNavigation,
+  navigationClass,
+  playOnInit,
 }: Props) {
   const [finalSlides, setFinalSlides] = useState<any[][]>([]);
 
@@ -62,7 +73,7 @@ export function EmblaCarousel({
     },
     [
       AutoPlay({
-        playOnInit: autoPlay,
+        playOnInit: playOnInit,
         delay: delay ?? 5000,
         active: autoPlay,
       }),
@@ -76,9 +87,12 @@ export function EmblaCarousel({
     prevBtnDisabled,
   } = usePrevNextButtons(emblaApi);
 
+  const [navigations, setNavigations] = useState<any[]>([]);
+
   const { selectSlide, setSlides } = useCarouselState();
 
-  const { selectedIndex } = useDotButton(emblaApi);
+  const { selectedIndex, onDotButtonClick, scrollSnaps } =
+    useDotButton(emblaApi);
 
   useEffect(() => {
     selectSlide(carouselKey, selectedIndex);
@@ -106,50 +120,97 @@ export function EmblaCarousel({
     emblaApi?.scrollTo(initSlideIndex, true);
   }, [initSlideIndex]);
 
+  useEffect(() => {
+    const scrollSnapLength = scrollSnaps.length;
+    const scrollSnapIndex = scrollSnaps.map((_, index) => index);
+    console.log(carouselKey, scrollSnapIndex.slice(0, 3));
+
+    if (scrollSnapLength > 4) {
+      const segment1 = scrollSnapIndex.slice(0, 3);
+      const scrollButtonSegments = [
+        ...segment1,
+        NaN,
+        ...[scrollSnapIndex[scrollSnaps.length - 1]],
+      ];
+      console.log(carouselKey, 1, scrollButtonSegments);
+      setNavigations(scrollButtonSegments);
+    } else {
+      setNavigations(scrollSnapIndex);
+    }
+  }, [scrollSnaps.length]);
+  console.log(carouselKey, navigations);
   return (
-    <div className={clsx("embla", className)}>
-      {hasArrows && (
-        <button
-          disabled={prevBtnDisabled}
-          className={clsx("embla__prev", { invisible: prevBtnDisabled })}
-          onClick={onPrevButtonClick}
-        >
-          {prevButton ? (
-            prevButton()
-          ) : (
-            <div className="w-16 p-2">
-              <Image className="h-auto w-full" src={arrowLeft} alt="previous" />
-            </div>
-          )}
-        </button>
-      )}
+    <div>
+      <div className={clsx("embla", className)}>
+        {hasArrows && (
+          <button
+            disabled={prevBtnDisabled}
+            className={clsx("embla__prev", { invisible: prevBtnDisabled })}
+            onClick={onPrevButtonClick}
+          >
+            {prevButton ? (
+              prevButton()
+            ) : (
+              <div className="w-16 p-2">
+                <Image
+                  className="h-auto w-full"
+                  src={arrowLeft}
+                  alt="previous"
+                />
+              </div>
+            )}
+          </button>
+        )}
 
-      <div className="embla__viewport flex-shrink" ref={emblaRef}>
-        <div className={clsx("embla__container", containerClass)}>
-          {finalSlides.map((_slides, index) => (
-            <Fragment key={index}>{itemRender?.(_slides)}</Fragment>
-          ))}
+        <div className="embla__viewport flex-shrink" ref={emblaRef}>
+          <div className={clsx("embla__container", containerClass)}>
+            {finalSlides.map((_slides, index) => (
+              <Fragment key={index}>{itemRender?.(_slides)}</Fragment>
+            ))}
+          </div>
         </div>
-      </div>
 
-      {hasArrows && (
-        <button
-          disabled={nextBtnDisabled}
-          className={clsx("embla__next", { invisible: nextBtnDisabled })}
-          onClick={onNextButtonClick}
-        >
-          {nextButton ? (
-            nextButton()
-          ) : (
-            <div className="w-16 p-2">
-              <Image
-                className="h-auto w-full"
-                src={arrowRight}
-                alt="previous"
-              />
-            </div>
-          )}
-        </button>
+        {hasArrows && (
+          <button
+            disabled={nextBtnDisabled}
+            className={clsx("embla__next", { invisible: nextBtnDisabled })}
+            onClick={onNextButtonClick}
+          >
+            {nextButton ? (
+              nextButton()
+            ) : (
+              <div className="w-16 p-2">
+                <Image
+                  className="h-auto w-full"
+                  src={arrowRight}
+                  alt="previous"
+                />
+              </div>
+            )}
+          </button>
+        )}
+      </div>
+      {hasNavigation && (
+        <div className={clsx("flex justify-center gap-2", navigationClass)}>
+          {navigations.map((index) => {
+            return navigationButtonRender ? (
+              navigationButtonRender?.(index, onDotButtonClick)
+            ) : (
+              <button
+                className={clsx("rounded-full  px-4 py-2 text-center", {
+                  "bg-secondary-400": index === selectedIndex,
+                  "bg-white": index != selectedIndex,
+                })}
+                key={index}
+                onClick={
+                  isNaN(index) ? () => {} : () => onDotButtonClick(index)
+                }
+              >
+                {isNaN(index) ? "..." : +index + 1}
+              </button>
+            );
+          })}
+        </div>
       )}
     </div>
   );

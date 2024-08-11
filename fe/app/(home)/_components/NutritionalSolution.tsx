@@ -49,7 +49,7 @@ const NutritionalSolution = ({ title, solutions }: Props) => {
         numberOfItemInSlide={numberOfItemInSlide}
         itemRender={(slides) => {
           return (
-            <div className="flex shrink-0 grow-0 basis-full flex-col sm:basis-1/2 lg:basis-1/3">
+            <div className="shrink-0 grow-0 basis-full sm:basis-1/2 lg:basis-1/3">
               {slides.map(
                 (
                   solution: Pick<SolutionBlog, "id" | "thumbnail" | "slug">,

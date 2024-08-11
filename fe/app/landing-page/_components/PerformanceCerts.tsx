@@ -14,17 +14,12 @@ const PerformanceCerts = () => {
   return (
     <MotionDiv className="flex justify-center">
       <EmblaCarousel
+        hasNavigation
         slides={certs}
         carouselKey="performance_carousel"
         itemRender={PerformanceItem}
         containerClass="flex gap-2"
       />
-      {/*<div className="h-full">*/}
-      {/*  <NextImage className="h-full w-auto" src={chillaxCert} />*/}
-      {/*</div>*/}
-      {/*<div className="h-full">*/}
-      {/*  <NextImage className="h-full w-auto" src={mediabestCert} />*/}
-      {/*</div>*/}
     </MotionDiv>
   );
 };

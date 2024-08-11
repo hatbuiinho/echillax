@@ -11,6 +11,8 @@ import { theme } from "@/config/themeConfig";
 import useResponsive from "@/hooks/useResponsive";
 import clsx from "clsx";
 import Image, { StaticImageData } from "next/image";
+import NextImage from "@/components/ui/nextImage/NextImage";
+import MotionDiv from "@/components/ui/motion/MotionDiv";
 
 interface TimelineEvent {
   title?: string;
@@ -46,12 +48,6 @@ const Timeline = () => {
     },
   ];
 
-  const bigNode = () => {
-    return (
-      <span className="h-[3rem] w-[3rem] rounded-[50%] border-[0.75rem] border-primary-500 bg-white"></span>
-    );
-  };
-
   const customizedContent = (item: TimelineEvent) => {
     return (
       <div title={item.title} className="mx-2 mb-10 rounded-xl bg-white">
@@ -67,7 +63,9 @@ const Timeline = () => {
             {item.title}
           </OutlinedLetter>
         </div>
-        {item.image && <Image src={item.image} alt={item.year ?? "Lịch sử"} />}
+        {item.image && (
+          <NextImage src={item.image} alt={item.year ?? "Lịch sử"} />
+        )}
         <p className="p-2 text-justify text-primary">{item.description}</p>
       </div>
     );
@@ -90,7 +88,10 @@ const Timeline = () => {
         {events.map((event, index) => {
           const isLastItem = index === events.length - 1;
           return (
-            <div key={event.title} className="flex flex-col justify-center">
+            <MotionDiv
+              key={event.title}
+              className="flex flex-col justify-center"
+            >
               <div className="flex justify-center">
                 <div
                   className={clsx("w-[7rem] px-2", {
@@ -169,7 +170,7 @@ const Timeline = () => {
                   </div>
                 </div>
               )}
-            </div>
+            </MotionDiv>
           );
         })}
       </div>

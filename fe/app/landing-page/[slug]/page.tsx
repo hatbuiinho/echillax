@@ -19,6 +19,13 @@ import clsx from "clsx";
 import { fontBaloo } from "@/config/fonts/fonts";
 import SectionWrapper from "@/app/landing-page/_components/SectionWrapper";
 import SocialShares from "@/app/landing-page/_components/SocialShares";
+import LandingPageTestimonialItem from "@/app/landing-page/_components/LandingPageTestimonialItem";
+import {
+  LeftArrow,
+  RightArrow,
+} from "@/app/landing-page/_components/CarouselArrow";
+import CompanyInfoItem from "@/app/landing-page/_components/CompanyInfoItem";
+import { Image } from "@/types";
 
 const Page = async ({ params }: { params: Params }) => {
   const { slug } = params;
@@ -45,8 +52,6 @@ const Page = async ({ params }: { params: Params }) => {
     social_share_title,
     partner_title,
     testimonial_title,
-    quality_certificates,
-    performance_certificates,
     company_images,
     partner_logos,
     official_check_title,
@@ -64,6 +69,10 @@ const Page = async ({ params }: { params: Params }) => {
   const sortedAdvantages = (advantages ?? []).sort(
     (a1, a2) => a1.sort - a2.sort
   );
+  const partnerLogos =
+    (partner_logos?.map((logo) => logo.directus_files_id) as Image[]) ?? [];
+  const companyImages =
+    (company_images?.map((image) => image.directus_files_id) as Image[]) ?? [];
   return (
     <div className={clsx(fontBaloo.className, "flex flex-col gap-5")}>
       {/* banner */}
@@ -110,10 +119,13 @@ const Page = async ({ params }: { params: Params }) => {
         <div className="flex flex-col ">
           <SectionTitle>{benefit_title}</SectionTitle>
           <EmblaCarousel
-            numberOfItemInSlide={3}
+            hasNavigation
+            numberOfItemInSlide={1}
             slides={sortedBenefits}
             carouselKey="benefit_carousel"
             itemRender={BenefitItem}
+            containerClass="flex items-center"
+            navigationClass="flex gap-2 mt-2"
           />
         </div>
       </SectionWrapper>
@@ -123,7 +135,12 @@ const Page = async ({ params }: { params: Params }) => {
         <div className="flex flex-col ">
           <SectionTitle>{origin_quality_title}</SectionTitle>
           <MotionDiv className="flex flex-col rounded-b-xl bg-secondary-100">
-            <NextImage imageId={origin_image} />
+            <EmblaCarousel
+              slides={companyImages}
+              carouselKey="company_info_carousel"
+              itemRender={CompanyInfoItem}
+              autoPlay
+            />
             <div
               className="p-3 text-sm"
               dangerouslySetInnerHTML={{ __html: origin_description ?? "" }}
@@ -147,7 +164,7 @@ const Page = async ({ params }: { params: Params }) => {
       <SectionWrapper>
         <div className="flex flex-col gap-2 ">
           <SectionTitle>{partner_title}</SectionTitle>
-          <Partners />
+          <Partners partners={partnerLogos} />
         </div>
       </SectionWrapper>
 
@@ -177,26 +194,38 @@ const Page = async ({ params }: { params: Params }) => {
       </SectionWrapper>
 
       {/* Doctor review */}
-      <SectionWrapper className="bg-[url(/images/bg/bg-doctor-review.png)]">
-        <div className="flex flex-col gap-2  py-8">
-          <DoctorReview
-            doctorReview={doctor_review ?? ""}
-            doctorName={doctor_name ?? ""}
-            doctorImage={doctor_review_image ?? ""}
+      <SectionWrapper className="px-0">
+        <DoctorReview
+          doctorReview={doctor_review ?? ""}
+          doctorName={doctor_name ?? ""}
+          doctorImage={doctor_review_image ?? ""}
+        />
+      </SectionWrapper>
+
+      <div className="">
+        <SectionWrapper className="bg-[url(/images/bg/bg-social.png)] pb-2 pt-12">
+          <SectionTitle className="mb-6">{social_share_title}</SectionTitle>
+          <SocialShares items={social_shares || []} />
+        </SectionWrapper>
+
+        <SectionWrapper className="bg-[url(/images/bg/bg-testimonial.png)] px-2 pb-2">
+          <SectionTitle className="pt-6">{testimonial_title}</SectionTitle>
+          <EmblaCarousel
+            slides={testimonials ?? []}
+            carouselKey="testimonial_carousel"
+            itemRender={LandingPageTestimonialItem}
+            nextButton={RightArrow}
+            prevButton={LeftArrow}
+            hasArrows
+            hasNavigation
           />
-        </div>
-      </SectionWrapper>
-
-      <SectionWrapper className="bg-[url(/images/bg/bg-social.png)] bg-contain">
-        <SectionTitle>{social_share_title}</SectionTitle>
-        <SocialShares items={social_shares || []} />
-      </SectionWrapper>
-
-      <SectionWrapper className="bg-gray-200">
-        <MotionDiv className="flex flex-col gap-2 pt-5">
-          <GetAdvise mobile />
-        </MotionDiv>
-      </SectionWrapper>
+        </SectionWrapper>
+        <SectionWrapper className="bg-gray-200">
+          <MotionDiv className="flex flex-col gap-2 pt-5">
+            <GetAdvise mobile />
+          </MotionDiv>
+        </SectionWrapper>
+      </div>
     </div>
   );
 };

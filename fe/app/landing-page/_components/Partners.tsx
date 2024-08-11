@@ -1,20 +1,13 @@
 import React from "react";
-
-import partner1 from "@/assets/image/landing-page/partner/Logo BV 1.png";
-import partner2 from "@/assets/image/landing-page/partner/Logo BV 2.png";
-import partner3 from "@/assets/image/landing-page/partner/Logo BV 3.png";
-import partner4 from "@/assets/image/landing-page/partner/Logo BV 4.png";
-import partner5 from "@/assets/image/landing-page/partner/Logo BV 5.png";
-import partner6 from "@/assets/image/landing-page/partner/Logo Vien Dinh Duong Quoc Gia.png";
 import { EmblaCarousel } from "@/components/ui/carousel/EmblaCarousel";
 import PartnerItem from "@/app/landing-page/_components/PartnerItem";
 import MotionDiv from "@/components/ui/motion/MotionDiv";
+import { Image } from "@/types";
 
-const partners = [partner1, partner2, partner3, partner4, partner5, partner6];
-
-const Partners = () => {
+type Props = { partners: Image[] };
+const Partners = ({ partners }: Props) => {
   return (
-    <MotionDiv className="flex justify-center rounded-xl border bg-white">
+    <MotionDiv className="flex justify-center rounded-xl border bg-white pe-3">
       <EmblaCarousel
         slides={partners}
         carouselKey="partner_carousel"
