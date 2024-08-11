@@ -1,11 +1,11 @@
+"use server";
 import { asyncWithTryCatch } from "@/utils/http";
-import { BlogCategoryDto, getBlogBySlug, getBlogList } from "./action";
+import { _getBlogBySlug, _getBlogList, BlogCategoryDto } from "./action";
 
-const getBySlug = async (slug: string) => {
-  const promise = getBlogBySlug(slug).then((data) => {
+const getBlogBySlug = async (slug: string) => {
+  const promise = _getBlogBySlug(slug).then((data) => {
     if (data.length) {
-      const blog = data[0];
-      return blog;
+      return data[0];
     }
     return undefined;
   });
@@ -13,8 +13,8 @@ const getBySlug = async (slug: string) => {
   return asyncWithTryCatch(promise);
 };
 
-const getList = async () => {
-  const promise = getBlogList().then((data) => {
+const getBlogList = async () => {
+  const promise = _getBlogList().then((data) => {
     const categories = data;
     return categories as BlogCategoryDto[];
   });
@@ -22,5 +22,4 @@ const getList = async () => {
   return asyncWithTryCatch(promise);
 };
 
-const ProductBlogService = { getBySlug, getList };
-export default ProductBlogService;
+export { getBlogBySlug, getBlogList };

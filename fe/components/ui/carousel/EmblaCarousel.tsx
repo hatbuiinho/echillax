@@ -138,7 +138,6 @@ export function EmblaCarousel({
       setNavigations(scrollSnapIndex);
     }
   }, [scrollSnaps.length]);
-  console.log(carouselKey, navigations);
   return (
     <div>
       <div className={clsx("embla", className)}>

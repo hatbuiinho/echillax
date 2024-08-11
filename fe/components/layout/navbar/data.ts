@@ -1,19 +1,16 @@
-import { ProductNameAndSlug } from "@/app/(home)/san-pham/services";
+import { NameAndSlug } from "@/types";
 
 type NavbarChild = {
   title: string;
   slug: string;
 };
-type Navbar = Partial<NavbarChild> & {
+export type Navbar = Partial<NavbarChild> & {
   children?: NavbarChild[];
 };
-export const navbarData: (productList: ProductNameAndSlug[]) => Navbar[] = (
-  productList
-) => {
-  const products = productList.map((product) => ({
-    slug: product.slug,
-    title: product.productName,
-  }));
+export const navbarData: (
+  productList: NameAndSlug[],
+  blogList: NameAndSlug[]
+) => Navbar[] = (productList, blogList) => {
   return [
     {
       title: "Hiểu về Chillax",
@@ -22,8 +19,13 @@ export const navbarData: (productList: ProductNameAndSlug[]) => Navbar[] = (
     {
       title: "Sản phẩm",
       slug: "san-pham",
-      children: products,
+      children: productList,
     },
+    // {
+    //   title: "Giải pháp dinh dưỡng",
+    //   slug: "kinh-nghiem-hay",
+    //   children: blogList,
+    // },
     { title: "Đăng ký BS tư vấn", slug: "/dang-ky-bac-si-tu-van" },
     { title: "Liên hệ", slug: "/lien-he" },
   ];

@@ -15,7 +15,7 @@ export type BlogCategoryDto = Pick<SolutionCategory, "id" | "name" | "slug"> & {
   blogs: Pick<SolutionBlog, "id" | "slug" | "thumbnail">[] | null;
 };
 
-export const getBlogBySlug = async (slug: string) => {
+export const _getBlogBySlug = async (slug: string) => {
   return directusClient.request(
     readItems("solution_blog", {
       fields: [
@@ -39,7 +39,7 @@ export const getBlogBySlug = async (slug: string) => {
   );
 };
 
-export const getBlogList = async () => {
+export const _getBlogList = async () => {
   return directusClient.request(
     readItems("solution_category", {
       fields: [
@@ -62,3 +62,11 @@ export const getBlogList = async () => {
     })
   );
 };
+
+// export const getFeatureBlog = () => {
+//   return directusClient.request(
+//     readItems('solution_blog', {
+//       fields:
+//     })
+//   )
+// }

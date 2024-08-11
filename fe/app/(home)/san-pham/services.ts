@@ -3,11 +3,7 @@
 import { asyncWithTryCatch } from "@/utils/http";
 import { getFeatureProductSlugList, getProductArticleBySlug } from "./action";
 import { toEmbedYoutubeLink } from "@/utils/convertor";
-
-export type ProductNameAndSlug = {
-  productName: string;
-  slug: string;
-};
+import { NameAndSlug } from "@/types";
 
 export const getBySlug = async (slug: string) => {
   const promise = getProductArticleBySlug(slug).then((data) => {
@@ -34,8 +30,8 @@ export const getFeatureList = async () => {
       (data) =>
         ({
           slug: data.slug,
-          productName: data?.name,
-        }) as ProductNameAndSlug
+          title: data?.name,
+        }) as NameAndSlug
     );
   };
   return asyncWithTryCatch(fetcher());

@@ -21,7 +21,7 @@ const QnaAnswers = ({ productQnas }: Props) => {
           }
         >
           {qna.answer ? (
-            <p className="text-sm text-secondary">{qna.answer}</p>
+            <p className="text-sm text-secondary-600">{qna.answer}</p>
           ) : (
             <div className="flex justify-center">
               <NextImage

@@ -6,3 +6,7 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
 };
 
 export type Image = Pick<DirectusFiles, "id" | "title"> | null;
+export type NameAndSlug = {
+  title: string;
+  slug: string;
+};

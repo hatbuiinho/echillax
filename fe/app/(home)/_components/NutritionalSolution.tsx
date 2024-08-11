@@ -64,6 +64,7 @@ const NutritionalSolution = ({ title, solutions }: Props) => {
                         }}
                       >
                         <NextImage
+                          loading="eager"
                           className="rounded-lg"
                           imageId={solution.thumbnail?.toString()}
                           alt={"Giải pháp"}
