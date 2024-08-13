@@ -16,9 +16,7 @@ const NutritionalSolutions = () => {
 
   useEffect(() => {
     getBlogList().then((data) => {
-      const categoryData = data;
-      setBlogCategories(categoryData);
-      console.log({ categoryData });
+      setBlogCategories(data);
     });
   }, []);
 

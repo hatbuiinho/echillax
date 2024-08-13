@@ -28,7 +28,6 @@ const ClientIMenuItemDropdown = ({ host, item }: Props) => {
       >
         {item.children.map((child) => {
           const isSubItemActive = item.slug && host?.includes(item.slug);
-          console.log(child.slug, { isSubItemActive });
           return (
             <ListboxItem key={child.slug}>
               <div

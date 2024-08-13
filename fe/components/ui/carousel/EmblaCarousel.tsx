@@ -123,7 +123,6 @@ export function EmblaCarousel({
   useEffect(() => {
     const scrollSnapLength = scrollSnaps.length;
     const scrollSnapIndex = scrollSnaps.map((_, index) => index);
-    console.log(carouselKey, scrollSnapIndex.slice(0, 3));
 
     if (scrollSnapLength > 4) {
       const segment1 = scrollSnapIndex.slice(0, 3);
@@ -132,7 +131,6 @@ export function EmblaCarousel({
         NaN,
         ...[scrollSnapIndex[scrollSnaps.length - 1]],
       ];
-      console.log(carouselKey, 1, scrollButtonSegments);
       setNavigations(scrollButtonSegments);
     } else {
       setNavigations(scrollSnapIndex);

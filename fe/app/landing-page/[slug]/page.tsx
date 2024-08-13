@@ -41,7 +41,6 @@ const Page = async ({ params }: { params: Params }) => {
     doctor_name,
     doctor_review,
     product_id,
-    origin_image,
     origin_description,
     quality_description,
     doctor_review_image,
@@ -56,6 +55,9 @@ const Page = async ({ params }: { params: Params }) => {
     partner_logos,
     official_check_title,
     origin_quality_title,
+    doctor_review_title,
+    performance_certificates,
+    quality_certificates,
   } = commonLandingPage || {};
   const {
     id,
@@ -73,6 +75,13 @@ const Page = async ({ params }: { params: Params }) => {
     (partner_logos?.map((logo) => logo.directus_files_id) as Image[]) ?? [];
   const companyImages =
     (company_images?.map((image) => image.directus_files_id) as Image[]) ?? [];
+  const performanceCertificates = performance_certificates?.map(
+    (cert) => cert.directus_files_id
+  ) as Image[];
+  const qualityCertificates = quality_certificates?.map(
+    (cert) => cert.directus_files_id
+  ) as Image[];
+
   return (
     <div className={clsx(fontBaloo.className, "flex flex-col gap-5")}>
       {/* banner */}
@@ -119,6 +128,7 @@ const Page = async ({ params }: { params: Params }) => {
         <div className="flex flex-col ">
           <SectionTitle>{benefit_title}</SectionTitle>
           <EmblaCarousel
+            playOnInit={false}
             hasNavigation
             numberOfItemInSlide={1}
             slides={sortedBenefits}
@@ -136,10 +146,12 @@ const Page = async ({ params }: { params: Params }) => {
           <SectionTitle>{origin_quality_title}</SectionTitle>
           <MotionDiv className="flex flex-col rounded-b-xl bg-secondary-100">
             <EmblaCarousel
+              autoPlay
+              playOnInit
+              loop
               slides={companyImages}
               carouselKey="company_info_carousel"
               itemRender={CompanyInfoItem}
-              autoPlay
             />
             <div
               className="p-3 text-sm"
@@ -149,7 +161,7 @@ const Page = async ({ params }: { params: Params }) => {
         </div>
       </SectionWrapper>
       {/*  QualityCertificates */}
-      <QualityCertificates />
+      <QualityCertificates certs={qualityCertificates} />
 
       <SectionWrapper>
         <MotionDiv className=" ">
@@ -171,7 +183,7 @@ const Page = async ({ params }: { params: Params }) => {
       {/* Performance certificate */}
       <SectionWrapper>
         <div className="flex flex-col gap-2 ">
-          <PerformanceCerts />
+          <PerformanceCerts certs={performanceCertificates} />
         </div>
       </SectionWrapper>
 
@@ -195,6 +207,7 @@ const Page = async ({ params }: { params: Params }) => {
 
       {/* Doctor review */}
       <SectionWrapper className="px-0">
+        <SectionTitle className="pt-6">{doctor_review_title}</SectionTitle>
         <DoctorReview
           doctorReview={doctor_review ?? ""}
           doctorName={doctor_name ?? ""}
@@ -208,16 +221,18 @@ const Page = async ({ params }: { params: Params }) => {
           <SocialShares items={social_shares || []} />
         </SectionWrapper>
 
-        <SectionWrapper className="bg-[url(/images/bg/bg-testimonial.png)] px-2 pb-2">
+        <SectionWrapper className="bg-[url(/images/bg/bg-testimonial.png)] px-1 pb-2">
           <SectionTitle className="pt-6">{testimonial_title}</SectionTitle>
           <EmblaCarousel
+            hasArrows
+            hasNavigation
+            playOnInit
+            loop
             slides={testimonials ?? []}
             carouselKey="testimonial_carousel"
             itemRender={LandingPageTestimonialItem}
             nextButton={RightArrow}
             prevButton={LeftArrow}
-            hasArrows
-            hasNavigation
           />
         </SectionWrapper>
         <SectionWrapper className="bg-gray-200">

@@ -16,7 +16,6 @@ export const _getLandingPageBySlug = async (slug: string) => {
         "doctor_review_image",
         "benefit_title",
         "origin_title",
-        "origin_image",
         "origin_description",
         "quality_description",
         {
@@ -52,16 +51,19 @@ export const _getCommonLandingPage = () => {
     readSingleton("common_landing_page", {
       fields: [
         "official_check_link",
-        "quality_certificates",
-        "performance_certificates",
-        { company_images: [{ directus_files_id: ["id", "title"] }] },
-        { partner_logos: [{ directus_files_id: ["id", "title"] }] },
+        {
+          company_images: [{ directus_files_id: ["id", "title"] }],
+          performance_certificates: [{ directus_files_id: ["id", "title"] }],
+          quality_certificates: [{ directus_files_id: ["id", "title"] }],
+          partner_logos: [{ directus_files_id: ["id", "title"] }],
+        },
         "benefit_title",
         "partner_title",
         "social_share_title",
         "testimonial_title",
         "official_check_title",
         "origin_quality_title",
+        "doctor_review_title",
       ],
     })
   );
