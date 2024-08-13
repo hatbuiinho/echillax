@@ -3,13 +3,14 @@ import React from "react";
 import MotionDiv from "@/components/ui/motion/MotionDiv";
 import clsx from "clsx";
 import NextImage from "@/components/ui/nextImage/NextImage";
+import { Image } from "@/types";
 
 const QualityCertItem = ({
   certs,
   selectCert,
 }: {
-  certs: { id: number; image: string }[];
-  selectCert: (certId: number) => void;
+  certs: Image[];
+  selectCert: (certId: string) => void;
 }) => {
   return certs.map((cert, index) => (
     <MotionDiv
@@ -21,15 +22,15 @@ const QualityCertItem = ({
         "ml-10 p-2",
         "bg-secondary-100"
       )}
-      key={cert.id}
+      key={cert?.id}
     >
       <div
         className="w-16"
         onClick={() => {
-          selectCert(cert.id);
+          selectCert(cert?.id ?? "");
         }}
       >
-        <NextImage src={cert.image} />
+        <NextImage loading="eager" imageId={cert?.id} alt={cert?.title} />
       </div>
     </MotionDiv>
   ));

@@ -13,6 +13,7 @@ export type CommonLandingPage = {
   quality_certificates: any[] | CommonLandingPageFiles2[];
   social_share_title?: string | null;
   testimonial_title?: string | null;
+  doctor_review_title?: string | null;
   title: string;
   user_created?: string | DirectusUsers | null;
   user_updated?: string | DirectusUsers | null;
@@ -432,7 +433,6 @@ export type LandingPage = {
   official_check_title?: string;
   origin_and_quality_area: string;
   origin_description?: string;
-  origin_image?: string;
   origin_title?: string;
   product_id?: number | Product;
   quality_description?: string;
