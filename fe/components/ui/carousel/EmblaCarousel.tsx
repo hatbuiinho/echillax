@@ -36,6 +36,7 @@ type Props = {
   ) => ReactNode;
   navigationClass?: string;
   playOnInit?: boolean;
+  onSlideChange?: (index: number) => void;
 };
 
 export type Slide = {
@@ -63,6 +64,7 @@ export function EmblaCarousel({
   hasNavigation,
   navigationClass,
   playOnInit,
+  onSlideChange,
 }: Props) {
   const [finalSlides, setFinalSlides] = useState<any[][]>([]);
 
@@ -89,7 +91,7 @@ export function EmblaCarousel({
 
   const [navigations, setNavigations] = useState<any[]>([]);
 
-  const { selectSlide, setSlides } = useCarouselState();
+  const { selectSlide, setSlides, setApi } = useCarouselState();
 
   const { selectedIndex, onDotButtonClick, scrollSnaps } =
     useDotButton(emblaApi);
@@ -103,6 +105,11 @@ export function EmblaCarousel({
       setSlides(carouselKey, slides);
     }
   }, [slides]);
+  useEffect(() => {
+    if (emblaApi) {
+      setApi(carouselKey, emblaApi);
+    }
+  }, [emblaApi]);
 
   useEffect(() => {
     const formattedSlides = [];
@@ -117,7 +124,8 @@ export function EmblaCarousel({
   }, [numberOfItemInSlide]);
 
   useEffect(() => {
-    emblaApi?.scrollTo(initSlideIndex, true);
+    // emblaApi?.scrollTo(initSlideIndex, true);
+    onSlideChange?.(initSlideIndex);
   }, [initSlideIndex]);
 
   useEffect(() => {

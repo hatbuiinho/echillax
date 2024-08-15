@@ -5,6 +5,7 @@ import { featureProductConfig } from "@/config/featureProductConfig";
 import { CarouselState, useCarouselState } from "@/stores/useCarouselState";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
+import { useDotButton } from "@/hooks/useDotButtons";
 
 const brands = featureProductConfig.map((product) => ({
   image: product.logo,
@@ -23,6 +24,9 @@ const featureProductKey = "featureProduct";
 
 const FeatureProducts = () => {
   const detailState = useCarouselState()[featureDetailKey] as CarouselState;
+  const productLogoState = useCarouselState()[
+    featureProductKey
+  ] as CarouselState;
   const [productIndex, setProductIndex] = useState(0);
   useEffect(() => {
     if (detailState?.selectedIndex != undefined) {
@@ -30,12 +34,18 @@ const FeatureProducts = () => {
     }
   }, [detailState]);
 
+  const { onDotButtonClick: onDetailSlide } = useDotButton(
+    productLogoState?.api
+  );
+  const { onDotButtonClick: onBrandClick } = useDotButton(detailState?.api);
+
   return (
     <div className="">
       <EmblaCarousel
         hasArrows
         slides={brands}
         initSlideIndex={detailState?.selectedIndex ?? 0}
+        onSlideChange={onDetailSlide}
         numberOfItemInSlide={1}
         carouselKey={featureProductKey}
         itemRender={(slides) => {
@@ -72,7 +82,9 @@ const FeatureProducts = () => {
         slides={details}
         loop
         autoPlay
+        playOnInit
         initSlideIndex={productIndex}
+        onSlideChange={onBrandClick}
         numberOfItemInSlide={1}
         itemRender={(_details) =>
           _details.map((detail: Slide) => (
