@@ -429,6 +429,7 @@ export type LandingPage = {
   doctor_review?: string;
   doctor_review_area: string;
   doctor_review_image?: string;
+  doctor_review_link?: string;
   id: number;
   official_check_title?: string;
   origin_and_quality_area: string;

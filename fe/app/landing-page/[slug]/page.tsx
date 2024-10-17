@@ -44,6 +44,7 @@ const Page = async ({ params }: { params: Params }) => {
     origin_description,
     quality_description,
     doctor_review_image,
+    doctor_review_link,
   } = data || {};
 
   const {
@@ -210,17 +211,21 @@ const Page = async ({ params }: { params: Params }) => {
         <SectionTitle className="pt-6">{doctor_review_title}</SectionTitle>
         <DoctorReview
           doctorReview={doctor_review ?? ""}
-          doctorName={doctor_name ?? ""}
           doctorImage={doctor_review_image ?? ""}
+          doctorReviewLink={doctor_review_link}
         />
       </SectionWrapper>
 
       <div className="">
-        <SectionWrapper className="bg-[url(/images/bg/bg-social.png)] pb-2 pt-12">
-          <SectionTitle className="mb-6">{social_share_title}</SectionTitle>
-          <SocialShares items={social_shares || []} />
-        </SectionWrapper>
+        {/* social share */}
+        {!!social_shares?.length && (
+          <SectionWrapper className="bg-[url(/images/bg/bg-social.png)] pb-2 pt-12">
+            <SectionTitle className="mb-6">{social_share_title}</SectionTitle>
+            <SocialShares items={social_shares || []} />
+          </SectionWrapper>
+        )}
 
+        {/* Testimonials */}
         <SectionWrapper className="bg-[url(/images/bg/bg-testimonial.png)] px-1 pb-2">
           <SectionTitle className="pt-6">{testimonial_title}</SectionTitle>
           <EmblaCarousel
@@ -235,6 +240,8 @@ const Page = async ({ params }: { params: Params }) => {
             prevButton={LeftArrow}
           />
         </SectionWrapper>
+
+        {/* Get advise */}
         <SectionWrapper className="bg-gray-200">
           <MotionDiv className="flex flex-col gap-2 pt-5">
             <GetAdvise mobile />
