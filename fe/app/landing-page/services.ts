@@ -5,7 +5,11 @@ import {
 import { toEmbedYoutubeLink } from "@/utils/convertor";
 
 export const getLandingPageBySlug = async (slug: string) => {
-  return await _getLandingPageBySlug(slug);
+  const res = await _getLandingPageBySlug(slug);
+  res.forEach((item) => {
+    item.doctor_review_link = toEmbedYoutubeLink(item.doctor_review_link || "");
+  });
+  return res;
 };
 
 export const getCommonLandingPage = async () => {

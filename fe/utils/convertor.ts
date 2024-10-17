@@ -30,5 +30,7 @@ export const toEmbedYoutubeLink = (normalLink?: string) => {
   const embedYoutubeLinkParts = normalLink?.split("/");
   const youtubeVideoId =
     embedYoutubeLinkParts?.[(embedYoutubeLinkParts?.length ?? 1) - 1];
-  return `https://www.youtube.com/embed/${youtubeVideoId}`;
+  return youtubeVideoId
+    ? `https://www.youtube.com/embed/${youtubeVideoId}`
+    : "";
 };
