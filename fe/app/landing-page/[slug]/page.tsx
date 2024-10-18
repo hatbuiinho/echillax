@@ -13,7 +13,7 @@ import GetAdvise from "@/app/(home)/_components/GetAdvise";
 import {
   getCommonLandingPage,
   getLandingPageBySlug,
-} from "@/app/landing-page/services";
+} from "@/app/landing-page/[slug]/services";
 import SectionTitle from "@/app/landing-page/_components/SectionTitle";
 import clsx from "clsx";
 import { fontBaloo } from "@/config/fonts/fonts";
@@ -25,68 +25,49 @@ import {
   RightArrow,
 } from "@/app/landing-page/_components/CarouselArrow";
 import CompanyInfoItem from "@/app/landing-page/_components/CompanyInfoItem";
-import { Image } from "@/types";
+import LandingPageTestimonialVideo from "../_components/LandingPageTestimonialVideo";
 
 const Page = async ({ params }: { params: Params }) => {
   const { slug } = params;
-  const [landingPages, commonLandingPage] = await Promise.all([
+  const [landingPage, commonLandingPage] = await Promise.all([
     getLandingPageBySlug(slug),
     getCommonLandingPage(),
   ]);
-  const data = landingPages[0];
   const {
     banner,
     title,
     advantage_summary,
-    doctor_name,
     doctor_review,
-    product_id,
+    productImage,
     origin_description,
     quality_description,
     doctor_review_image,
     doctor_review_link,
-  } = data || {};
+    sortedAdvantages,
+    sortedBenefits,
+    social_shares,
+    testimonialPhotos,
+    testimonialVideos,
+  } = landingPage || {};
 
   const {
     benefit_title,
     social_share_title,
     partner_title,
     testimonial_title,
-    company_images,
-    partner_logos,
     official_check_title,
     origin_quality_title,
     doctor_review_title,
-    performance_certificates,
-    quality_certificates,
+    companyImages,
+    qualityCertificates,
+    partnerLogos,
+    performanceCertificates,
   } = commonLandingPage || {};
-  const {
-    id,
-    image: productImage,
-    testimonials,
-    advantages,
-    benefits,
-    social_shares,
-  } = product_id || {};
-  const sortedBenefits = (benefits ?? []).sort((b1, b2) => b1.sort - b2.sort);
-  const sortedAdvantages = (advantages ?? []).sort(
-    (a1, a2) => a1.sort - a2.sort
-  );
-  const partnerLogos =
-    (partner_logos?.map((logo) => logo.directus_files_id) as Image[]) ?? [];
-  const companyImages =
-    (company_images?.map((image) => image.directus_files_id) as Image[]) ?? [];
-  const performanceCertificates = performance_certificates?.map(
-    (cert) => cert.directus_files_id
-  ) as Image[];
-  const qualityCertificates = quality_certificates?.map(
-    (cert) => cert.directus_files_id
-  ) as Image[];
 
   return (
     <div className={clsx(fontBaloo.className, "flex flex-col gap-5")}>
       {/* banner */}
-      <NextImage imageId={banner?.toString()} alt={title} />
+      <NextImage ignoreSkeleton imageId={banner?.toString()} alt={title} />
       {/* title */}
       <SectionTitle>{title}</SectionTitle>
       <SectionWrapper>
@@ -233,9 +214,20 @@ const Page = async ({ params }: { params: Params }) => {
             hasNavigation
             playOnInit
             loop
-            slides={testimonials ?? []}
+            slides={testimonialPhotos ?? []}
             carouselKey="testimonial_carousel"
             itemRender={LandingPageTestimonialItem}
+            nextButton={RightArrow}
+            prevButton={LeftArrow}
+          />
+
+          <EmblaCarousel
+            hasArrows
+            hasNavigation
+            loop
+            slides={testimonialVideos ?? []}
+            carouselKey="testimonial_video_carousel"
+            itemRender={LandingPageTestimonialVideo}
             nextButton={RightArrow}
             prevButton={LeftArrow}
           />

@@ -7,6 +7,7 @@ import Ingredient from "@/app/(home)/san-pham/_components/Ingredient";
 import QnaAnswers from "@/app/(home)/san-pham/_components/QnaAnswers";
 import TestimonialItem from "@/app/(home)/san-pham/_components/TestimonialItem";
 import { getBySlug } from "@/app/(home)/san-pham/services";
+import EmbedVideo from "@/components/ui/embed-video";
 
 const ProductArticle = async ({ params }: any) => {
   const { productSlug } = params;
@@ -47,7 +48,7 @@ const ProductArticle = async ({ params }: any) => {
       {/* brand */}
       <div className="mt-10 grid grid-cols-2 items-center justify-center">
         <div className="flex justify-center">
-          <div className="flex w-36 justify-center py-6 md:w-80 lg:w-[22rem]">
+          <div className="flex min-h-60 w-36 justify-center border py-6 transition-all duration-100 ease-in-out md:w-80 lg:w-[22rem]">
             <NextImage
               imageId={productImage?.toString()}
               alt="main-photo"
@@ -60,19 +61,7 @@ const ProductArticle = async ({ params }: any) => {
 
       {/* feature */}
       <div className="grid items-center justify-center gap-5 md:grid-cols-2 md:flex-row">
-        <div className="w-full flex-grow md:max-w-[450px]">
-          <div className="main-video h-full w-full">
-            <iframe
-              style={{ aspectRatio: "16 / 9" }}
-              className="w-full rounded-xl"
-              src={main_video_link ?? ""}
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-              loading="lazy"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            ></iframe>
-          </div>
-        </div>
+        <EmbedVideo src={main_video_link} platform="youtube" />
 
         <div className="comsumption-age ">
           <h2 className="text-center text-xl lg:text-2xl">{`Độ tuổi sử dụng sữa ${productName}`}</h2>

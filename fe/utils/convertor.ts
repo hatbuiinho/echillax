@@ -26,11 +26,18 @@ function calendarToDateString({
   return `${year}-${formattedMonth}-${formattedDay}`;
 }
 
-export const toEmbedYoutubeLink = (normalLink?: string) => {
-  const embedYoutubeLinkParts = normalLink?.split("/");
-  const youtubeVideoId =
-    embedYoutubeLinkParts?.[(embedYoutubeLinkParts?.length ?? 1) - 1];
-  return youtubeVideoId
-    ? `https://www.youtube.com/embed/${youtubeVideoId}`
-    : "";
+export const toEmbedLink = (
+  normalLink: string,
+  platform: "youtube" | "tiktok"
+) => {
+  const embedLinkParts = normalLink?.split("/");
+  const videoId = embedLinkParts?.[(embedLinkParts?.length ?? 1) - 1];
+
+  const prefixLink = "";
+  switch (platform) {
+    case "youtube":
+      return videoId ? `https://www.youtube.com/embed/${videoId}` : "";
+    case "tiktok":
+      return videoId ? `https://www.tiktok.com/player/v1/${videoId}` : "";
+  }
 };
