@@ -38,6 +38,8 @@ export const toEmbedLink = (
     case "youtube":
       return videoId ? `https://www.youtube.com/embed/${videoId}` : "";
     case "tiktok":
-      return videoId ? `https://www.tiktok.com/player/v1/${videoId}` : "";
+      return videoId
+        ? `https://www.tiktok.com/player/v1/${videoId}?music_info=0&description=0&controls=1&play_button=1&rel=0`
+        : "";
   }
 };
