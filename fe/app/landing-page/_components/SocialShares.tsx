@@ -3,6 +3,7 @@ import { ProductSocialShare } from "@/types/directusType";
 import NextImage from "@/components/ui/nextImage/NextImage";
 import MotionDiv from "@/components/ui/motion/MotionDiv";
 import { GoldArrowRight } from "@/components/icons";
+import SimpleNextImage from "@/components/ui/nextImage/SimpleNextImage";
 
 type Props = {
   items: Pick<
@@ -22,7 +23,7 @@ const SocialShares = ({ items }: Props) => {
             <div>
               <div className="flex justify-center">
                 <div className="relative -top-9 -mb-7 h-14 rounded-md bg-white p-2">
-                  <NextImage
+                  <SimpleNextImage
                     className="h-full w-auto rounded-xl"
                     imageId={socialShare.avatar}
                   />

@@ -625,6 +625,7 @@ export type Testimonials = {
   status: string;
   user_created?: string | DirectusUsers;
   user_updated?: string | DirectusUsers;
+  video_link?: string;
 };
 
 export type Preference = {

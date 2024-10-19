@@ -10,9 +10,9 @@ const LandingPageTestimonialItem = (items: Testimonials[]) => {
         key={testimonial.id}
         className="flex shrink-0 grow-0 basis-full justify-center p-1"
       >
-        <div className="rounded-xl border-5 border-secondary-400">
+        <div className="flex items-center rounded-xl border-5 border-secondary-400 bg-amber-200">
           <NextImage
-            className="h-full rounded-xl"
+            className="h-full rounded-xl object-cover"
             imageId={testimonial.screen_shot}
           />
         </div>
