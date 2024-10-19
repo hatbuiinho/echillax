@@ -1,11 +1,7 @@
 "use client";
 
 import { toEmbedLink } from "@/utils/convertor";
-import { Skeleton } from "@nextui-org/react";
 import clsx from "clsx";
-import React, { useState } from "react";
-import CLSkeleton from "../cl-skeleton";
-import { TiktokIcon } from "@/components/icons";
 
 type Props = {
   src?: string;
