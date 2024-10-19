@@ -6,6 +6,7 @@ import { CarouselState, useCarouselState } from "@/stores/useCarouselState";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { useDotButton } from "@/hooks/useDotButtons";
+import SimpleNextImage from "@/components/ui/nextImage/SimpleNextImage";
 
 const brands = featureProductConfig.map((product) => ({
   image: product.logo,
@@ -66,7 +67,7 @@ const FeatureProducts = () => {
                 }
               )}
             >
-              <NextImage
+              <SimpleNextImage
                 className="h-full w-auto"
                 src={slide.image ?? ""}
                 alt="brand"
