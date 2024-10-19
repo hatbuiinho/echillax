@@ -16,9 +16,9 @@ const DoctorReview = ({
   return (
     <div>
       {doctorReviewLink ? (
-        <div className="bg-[url(/images/bg/bg-doctor-review-2.png)] bg-cover bg-no-repeat px-8 pb-10 pt-12 text-justify">
+        <div className="bg-[url(/images/bg/bg-doctor-review-2.png)] bg-cover bg-no-repeat px-8 pb-10 pt-3 text-justify">
           <div className="w-full rounded-b-2xl bg-white md:max-w-[450px]">
-            <div className="main-video h-full w-full">
+            <MotionDiv className="main-video h-full w-full">
               <iframe
                 style={{ aspectRatio: "16 / 9" }}
                 className="w-full"
@@ -28,7 +28,7 @@ const DoctorReview = ({
                 loading="lazy"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               ></iframe>
-            </div>
+            </MotionDiv>
 
             <MotionDiv
               className="p-3"
@@ -38,7 +38,7 @@ const DoctorReview = ({
         </div>
       ) : (
         <div>
-          <div className="w-full bg-[url(/images/bg/bg-doctor-review-1.png)] bg-cover bg-no-repeat px-8 pt-5">
+          <div className="w-full bg-[url(/images/bg/bg-doctor-review-1.png)] bg-cover bg-no-repeat px-8 pt-3">
             <MotionDiv
               className={clsx(
                 "mb-3 border-b-8 border-l-5 border-b-secondary-500 border-l-secondary-500"

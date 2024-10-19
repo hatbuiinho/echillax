@@ -15,6 +15,7 @@ export const _getLandingPageBySlug = async (slug: string) => {
         "doctor_review",
         "doctor_review_image",
         "benefit_title",
+        "benefit_image",
         "origin_title",
         "origin_description",
         "quality_description",

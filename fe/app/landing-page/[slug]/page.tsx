@@ -48,6 +48,7 @@ const Page = async ({ params }: { params: Params }) => {
     social_shares,
     testimonialPhotos,
     testimonialVideos,
+    benefit_image,
   } = landingPage || {};
 
   const {
@@ -107,18 +108,21 @@ const Page = async ({ params }: { params: Params }) => {
 
       {/* Benefits */}
       <SectionWrapper>
-        <div className="flex flex-col ">
+        <div className="flex flex-col">
           <SectionTitle>{benefit_title}</SectionTitle>
-          <EmblaCarousel
-            playOnInit={false}
-            hasNavigation
-            numberOfItemInSlide={1}
-            slides={sortedBenefits}
-            carouselKey="benefit_carousel"
-            itemRender={BenefitItem}
-            containerClass="flex items-center"
-            navigationClass="flex gap-2 mt-2"
-          />
+          <MotionDiv>
+            <NextImage imageId={benefit_image?.toString()} />
+            <EmblaCarousel
+              playOnInit={false}
+              hasNavigation
+              numberOfItemInSlide={1}
+              slides={sortedBenefits}
+              carouselKey="benefit_carousel"
+              itemRender={BenefitItem}
+              containerClass="flex items-center"
+              navigationClass="flex gap-2 mt-2"
+            />
+          </MotionDiv>
         </div>
       </SectionWrapper>
 
@@ -207,30 +211,34 @@ const Page = async ({ params }: { params: Params }) => {
         )}
 
         {/* Testimonials */}
-        <SectionWrapper className="bg-[url(/images/bg/bg-testimonial.png)] px-1 pb-2">
-          <SectionTitle className="pt-6">{testimonial_title}</SectionTitle>
-          <EmblaCarousel
-            hasArrows
-            hasNavigation
-            playOnInit
-            loop
-            slides={testimonialPhotos ?? []}
-            carouselKey="testimonial_carousel"
-            itemRender={LandingPageTestimonialItem}
-            nextButton={RightArrow}
-            prevButton={LeftArrow}
-          />
+        <SectionWrapper className="grid gap-3 bg-[url(/images/bg/bg-testimonial.png)] px-1 pb-2">
+          <SectionTitle className="mt-6">{testimonial_title}</SectionTitle>
+          <MotionDiv>
+            <EmblaCarousel
+              hasArrows
+              hasNavigation
+              playOnInit
+              loop
+              slides={testimonialPhotos ?? []}
+              carouselKey="testimonial_carousel"
+              itemRender={LandingPageTestimonialItem}
+              nextButton={RightArrow}
+              prevButton={LeftArrow}
+            />
+          </MotionDiv>
 
-          <EmblaCarousel
-            hasArrows
-            hasNavigation
-            loop
-            slides={testimonialVideos ?? []}
-            carouselKey="testimonial_video_carousel"
-            itemRender={LandingPageTestimonialVideo}
-            nextButton={RightArrow}
-            prevButton={LeftArrow}
-          />
+          <MotionDiv>
+            <EmblaCarousel
+              hasArrows
+              hasNavigation
+              loop
+              slides={testimonialVideos ?? []}
+              carouselKey="testimonial_video_carousel"
+              itemRender={LandingPageTestimonialVideo}
+              nextButton={RightArrow}
+              prevButton={LeftArrow}
+            />
+          </MotionDiv>
         </SectionWrapper>
 
         {/* Get advise */}
