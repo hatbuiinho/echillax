@@ -6,6 +6,7 @@ import NextImage from "@/components/ui/nextImage/NextImage";
 import { useCertificate } from "@/app/landing-page/[slug]/state";
 import MotionDiv from "@/components/ui/motion/MotionDiv";
 import { Image } from "@/types";
+import SimpleNextImage from "@/components/ui/nextImage/SimpleNextImage";
 
 export const certificateCarouselKey = "certificate_carousel";
 
@@ -18,15 +19,11 @@ const QualityCertificates = ({ certs }: Props) => {
 
   return (
     <MotionDiv>
-      <div className="mb-3 flex w-full justify-center px-5">
-        <div className="h-[31rem]">
-          <div className="h-full">
-            <NextImage
-              className="h-full w-auto"
-              imageId={certificateState.selectedCertId ?? certs[0]?.id}
-            />
-          </div>
-        </div>
+      <div className="mb-3 flex h-[30rem] w-full justify-center px-5">
+        <SimpleNextImage
+          className="h-full w-auto"
+          imageId={certificateState.selectedCertId ?? certs[0]?.id}
+        />
       </div>
       <EmblaCarousel
         hasArrows

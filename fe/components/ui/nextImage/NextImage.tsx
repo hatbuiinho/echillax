@@ -23,13 +23,13 @@ const NextImage = ({
   const [isLoaded, setIsLoaded] = useState(ignoreSkeleton);
   return (
     <CLSkeleton
-      classNames={{ content: "h-full w-full", base: "h-full w-full" }}
+      classNames={{ content: "h-auto w-full", base: "h-full w-full" }}
       isLoaded={isLoaded}
     >
       <Image
         className={clsx(
           "opacity-0 duration-[1.5s]",
-          className ?? "h-auto w-full"
+          className ?? "h-full w-full"
         )}
         src={
           imageId
