@@ -8,6 +8,7 @@ import QnaAnswers from "@/app/(home)/san-pham/_components/QnaAnswers";
 import TestimonialItem from "@/app/(home)/san-pham/_components/TestimonialItem";
 import { getBySlug } from "@/app/(home)/san-pham/services";
 import EmbedVideo from "@/components/ui/embed-video";
+import SimpleNextImage from "@/components/ui/nextImage/SimpleNextImage";
 
 const ProductArticle = async ({ params }: any) => {
   const { productSlug } = params;
@@ -100,7 +101,7 @@ const ProductArticle = async ({ params }: any) => {
         />
 
         <div className="main-uses-image mt-3 flex justify-center">
-          <NextImage
+          <SimpleNextImage
             imageId={main_uses_image?.toString()}
             alt="uses-image"
             className="h-auto w-full select-none rounded-2xl"
@@ -111,7 +112,7 @@ const ProductArticle = async ({ params }: any) => {
       {/* User manual */}
       <div className="grid items-center justify-items-center sm:grid-cols-3 md:grid-cols-2">
         <div className="hidden h-52 sm:block md:h-64">
-          <NextImage
+          <SimpleNextImage
             imageId={productImage?.toString()}
             alt="user-manual-image"
             className="h-full w-auto select-none rounded-lg"
@@ -120,7 +121,7 @@ const ProductArticle = async ({ params }: any) => {
         <div className="col-span-2 md:col-span-1">
           <p className="mb-2 w-full text-center text-xl lg:text-2xl">{`Hướng dẫn sử dụng sữa ${productName}`}</p>
           <div className="flex h-56 justify-center md:h-72  ">
-            <NextImage
+            <SimpleNextImage
               imageId={user_manual?.toString()}
               alt="main-photo"
               className="h-full w-auto select-none rounded-lg"
