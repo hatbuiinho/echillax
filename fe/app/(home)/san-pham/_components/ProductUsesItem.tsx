@@ -2,8 +2,8 @@
 
 import React from "react";
 import clsx from "clsx";
-import NextImage from "@/components/ui/nextImage/NextImage";
 import { ProductArticleDto } from "@/app/(home)/san-pham/action";
+import SimpleNextImage from "@/components/ui/nextImage/SimpleNextImage";
 
 const ProductUsesItem = (
   productUses: ProductArticleDto["product_useses"][]
@@ -19,7 +19,7 @@ const ProductUsesItem = (
       )}
     >
       <div className="flex h-32 justify-center">
-        <NextImage
+        <SimpleNextImage
           className="h-full w-auto"
           imageId={uses?.image?.toString()}
         />
