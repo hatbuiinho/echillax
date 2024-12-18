@@ -25,7 +25,7 @@ import {
   RightArrow,
 } from "@/app/landing-page/_components/CarouselArrow";
 import CompanyInfoItem from "@/app/landing-page/_components/CompanyInfoItem";
-import LandingPageTestimonialVideo from "../_components/LandingPageTestimonialVideo";
+import LandingPageTestimonialVideos from "@/app/landing-page/_components/LandingPageTestimonialVideos";
 
 const Page = async ({ params }: { params: Params }) => {
   const { slug } = params;
@@ -211,7 +211,7 @@ const Page = async ({ params }: { params: Params }) => {
         )}
 
         {/* Testimonials */}
-        <SectionWrapper className="grid gap-3 bg-[url(/images/bg/bg-testimonial.png)] px-1 pb-2">
+        <SectionWrapper className="grid w-screen gap-3 bg-[url(/images/bg/bg-testimonial.png)] px-1 pb-2">
           <SectionTitle className="mt-6">{testimonial_title}</SectionTitle>
           <MotionDiv>
             <EmblaCarousel
@@ -228,16 +228,7 @@ const Page = async ({ params }: { params: Params }) => {
           </MotionDiv>
 
           <MotionDiv>
-            <EmblaCarousel
-              hasArrows
-              hasNavigation
-              loop
-              slides={testimonialVideos ?? []}
-              carouselKey="testimonial_video_carousel"
-              itemRender={LandingPageTestimonialVideo}
-              nextButton={RightArrow}
-              prevButton={LeftArrow}
-            />
+            <LandingPageTestimonialVideos videos={testimonialVideos} />
           </MotionDiv>
         </SectionWrapper>
 

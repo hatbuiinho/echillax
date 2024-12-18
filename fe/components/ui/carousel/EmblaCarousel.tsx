@@ -37,6 +37,8 @@ type Props = {
   navigationClass?: string;
   playOnInit?: boolean;
   onSlideChange?: (index: number) => void;
+  onNext?: () => void;
+  onPrevious?: () => void;
 };
 
 export type Slide = {
@@ -65,6 +67,8 @@ export function EmblaCarousel({
   navigationClass,
   playOnInit,
   onSlideChange,
+  onNext,
+  onPrevious,
 }: Props) {
   const [finalSlides, setFinalSlides] = useState<any[][]>([]);
 
@@ -151,7 +155,10 @@ export function EmblaCarousel({
           <button
             disabled={prevBtnDisabled}
             className={clsx("embla__prev", { invisible: prevBtnDisabled })}
-            onClick={onPrevButtonClick}
+            onClick={() => {
+              onPrevious?.();
+              onPrevButtonClick();
+            }}
           >
             {prevButton ? (
               prevButton()
@@ -179,7 +186,10 @@ export function EmblaCarousel({
           <button
             disabled={nextBtnDisabled}
             className={clsx("embla__next", { invisible: nextBtnDisabled })}
-            onClick={onNextButtonClick}
+            onClick={() => {
+              onNext?.();
+              onNextButtonClick();
+            }}
           >
             {nextButton ? (
               nextButton()
