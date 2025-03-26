@@ -1,58 +1,65 @@
 export type CommonLandingPage = {
-  benefit_title?: string | null;
+  benefit_title?: string;
   company_images: any[] | CommonLandingPageFiles1[];
-  date_created?: string | null;
-  date_updated?: string | null;
+  date_created?: string;
+  date_updated?: string;
+  doctor_review_title?: string;
   id: number;
-  official_check_link?: string | null;
-  official_check_title?: string | null;
-  origin_quality_title?: string | null;
+  official_check_link?: string;
+  official_check_title?: string;
+  origin_quality_title?: string;
   partner_logos: any[] | CommonLandingPageFiles4[];
-  partner_title?: string | null;
+  partner_title?: string;
   performance_certificates: any[] | CommonLandingPageFiles[];
   quality_certificates: any[] | CommonLandingPageFiles2[];
-  social_share_title?: string | null;
-  testimonial_title?: string | null;
-  doctor_review_title?: string | null;
+  social_share_title?: string;
+  testimonial_title?: string;
   title: string;
-  user_created?: string | DirectusUsers | null;
-  user_updated?: string | DirectusUsers | null;
+  user_created?: string | DirectusUsers;
+  user_updated?: string | DirectusUsers;
 };
 
 export type CommonLandingPageFiles = {
-  common_landing_page_id?: number | CommonLandingPage | null;
-  directus_files_id?: string | DirectusFiles | null;
+  common_landing_page_id?: number | CommonLandingPage;
+  directus_files_id?: string;
   id: number;
 };
 
 export type CommonLandingPageFiles1 = {
-  common_landing_page_id?: number | CommonLandingPage | null;
-  directus_files_id?: string | DirectusFiles | null;
+  common_landing_page_id?: number | CommonLandingPage;
+  directus_files_id?: string;
   id: number;
 };
 
 export type CommonLandingPageFiles2 = {
-  common_landing_page_id?: number | CommonLandingPage | null;
-  directus_files_id?: string | DirectusFiles | null;
+  common_landing_page_id?: number | CommonLandingPage;
+  directus_files_id?: string;
   id: number;
 };
 
 export type CommonLandingPageFiles3 = {
-  common_landing_page_id?: number | CommonLandingPage | null;
-  directus_files_id?: string | DirectusFiles | null;
+  common_landing_page_id?: number | CommonLandingPage;
+  directus_files_id?: string;
   id: number;
 };
 
 export type CommonLandingPageFiles4 = {
-  common_landing_page_id?: number | CommonLandingPage | null;
-  directus_files_id?: string | DirectusFiles | null;
+  common_landing_page_id?: number | CommonLandingPage;
+  directus_files_id?: string;
   id: number;
+};
+
+export type DirectusAccess = {
+  id: string;
+  policy: string | DirectusPolicies;
+  role?: string | DirectusRoles;
+  sort?: number;
+  user?: string | DirectusUsers;
 };
 
 export type DirectusActivity = {
   action: string;
   collection: string;
-  comment?: string;
   id: number;
   ip?: string;
   item: string;
@@ -84,6 +91,17 @@ export type DirectusCollections = {
   translations?: unknown;
   unarchive_value?: string;
   versioning: boolean;
+};
+
+export type DirectusComments = {
+  collection: string | DirectusCollections;
+  comment: string;
+  date_created?: string;
+  date_updated?: string;
+  id: string;
+  item: string;
+  user_created?: string | DirectusUsers;
+  user_updated?: string | DirectusUsers;
 };
 
 export type DirectusDashboards = {
@@ -129,6 +147,7 @@ export type DirectusFields = {
 
 export type DirectusFiles = {
   charset?: string;
+  created_on: string;
   description?: string;
   duration?: number;
   embed?: string;
@@ -151,7 +170,7 @@ export type DirectusFiles = {
   tus_id?: string;
   type?: string;
   uploaded_by?: string | DirectusUsers;
-  uploaded_on: string;
+  uploaded_on?: string;
   width?: number;
 };
 
@@ -234,9 +253,23 @@ export type DirectusPermissions = {
   fields?: unknown;
   id: number;
   permissions?: unknown;
+  policy: string | DirectusPolicies;
   presets?: unknown;
-  role?: string | DirectusRoles;
   validation?: unknown;
+};
+
+export type DirectusPolicies = {
+  admin_access: boolean;
+  app_access: boolean;
+  description?: string;
+  enforce_tfa: boolean;
+  icon: string;
+  id: string;
+  ip_access?: unknown;
+  name: string;
+  permissions: any[] | DirectusPermissions[];
+  roles: any[] | DirectusAccess[];
+  users: any[] | DirectusAccess[];
 };
 
 export type DirectusPresets = {
@@ -280,15 +313,15 @@ export type DirectusRevisions = {
 };
 
 export type DirectusRoles = {
-  admin_access: boolean;
-  app_access: boolean;
+  children: any[] | DirectusRoles[];
   description?: string;
-  enforce_tfa: boolean;
   icon: string;
   id: string;
-  ip_access?: unknown;
   name: string;
+  parent?: string | DirectusRoles;
+  policies: any[] | DirectusAccess[];
   users: any[] | DirectusUsers[];
+  users_group: string;
 };
 
 export type DirectusSessions = {
@@ -377,6 +410,7 @@ export type DirectusUsers = {
   last_page?: string;
   location?: string;
   password?: string;
+  policies: any[] | DirectusAccess[];
   provider: string;
   role?: string | DirectusRoles;
   status: string;
@@ -394,6 +428,7 @@ export type DirectusVersions = {
   collection: string | DirectusCollections;
   date_created?: string;
   date_updated?: string;
+  delta?: unknown;
   hash?: string;
   id: string;
   item: string;
@@ -419,13 +454,12 @@ export type DirectusWebhooks = {
 
 export type LandingPage = {
   advantage_summary?: string;
-  banner?: string | DirectusFiles;
+  banner?: string;
   benefit_area: string;
-  benefit_image?: string | DirectusFiles;
+  benefit_image?: string;
   benefit_title?: string;
   date_created?: string;
   date_updated?: string;
-  doctor_name?: string;
   doctor_review?: string;
   doctor_review_area: string;
   doctor_review_image?: string;
@@ -439,6 +473,19 @@ export type LandingPage = {
   quality_description?: string;
   status: string;
   title?: string;
+  user_created?: string | DirectusUsers;
+  user_updated?: string | DirectusUsers;
+};
+
+export type Preference = {
+  address?: string;
+  company_name?: string;
+  date_created?: string;
+  date_updated?: string;
+  factory?: string;
+  id: number;
+  landline_number?: string;
+  mobile_phone_number?: string;
   user_created?: string | DirectusUsers;
   user_updated?: string | DirectusUsers;
 };
@@ -473,7 +520,6 @@ export type ProductAdvantage = {
   image?: string;
   product_id: number | Product;
   sort?: number;
-  status: string;
   user_created?: string | DirectusUsers;
   user_updated?: string | DirectusUsers;
 };
@@ -492,12 +538,11 @@ export type ProductArticle = {
   main_video_link?: string;
   mineral_ingredient?: string;
   product_id?: number | Product;
-  product_qnas?: any[] | ProductQna[] | null;
-  product_useses?: any[] | ProductUses[] | null;
+  product_qnas: ProductQna[];
+  product_useses: ProductUses[];
   sendo?: string;
   shop: string;
   shopee?: string;
-  slug?: string;
   sort?: number;
   status: string;
   testimonials: any[] | Testimonials[];
@@ -517,7 +562,6 @@ export type ProductBenefit = {
   image?: string;
   product_id?: number | Product;
   sort?: number;
-  status: string;
   user_created?: string | DirectusUsers;
   user_updated?: string | DirectusUsers;
 };
@@ -563,7 +607,6 @@ export type ProductSocialShare = {
   link?: string;
   product_id?: number | Product;
   sort?: number;
-  status: string;
   title?: string;
   user_created?: string | DirectusUsers;
   user_updated?: string | DirectusUsers;
@@ -628,27 +671,17 @@ export type Testimonials = {
   video_link?: string;
 };
 
-export type Preference = {
-  address?: string | null;
-  company_name?: string | null;
-  date_created?: string | null;
-  date_updated?: string | null;
-  factory?: string | null;
-  id: number;
-  landline_number?: string | null;
-  mobile_phone_number?: string | null;
-  user_created?: string | DirectusUsers | null;
-  user_updated?: string | DirectusUsers | null;
-};
-
 export type CustomDirectusTypes = {
   common_landing_page: CommonLandingPage;
   common_landing_page_files: CommonLandingPageFiles[];
   common_landing_page_files_1: CommonLandingPageFiles1[];
   common_landing_page_files_2: CommonLandingPageFiles2[];
   common_landing_page_files_3: CommonLandingPageFiles3[];
+  common_landing_page_files_4: CommonLandingPageFiles4[];
+  directus_access: DirectusAccess[];
   directus_activity: DirectusActivity[];
   directus_collections: DirectusCollections[];
+  directus_comments: DirectusComments[];
   directus_dashboards: DirectusDashboards[];
   directus_extensions: DirectusExtensions[];
   directus_fields: DirectusFields[];
@@ -660,6 +693,7 @@ export type CustomDirectusTypes = {
   directus_operations: DirectusOperations[];
   directus_panels: DirectusPanels[];
   directus_permissions: DirectusPermissions[];
+  directus_policies: DirectusPolicies[];
   directus_presets: DirectusPresets[];
   directus_relations: DirectusRelations[];
   directus_revisions: DirectusRevisions[];
@@ -672,6 +706,7 @@ export type CustomDirectusTypes = {
   directus_versions: DirectusVersions[];
   directus_webhooks: DirectusWebhooks[];
   landing_page: LandingPage[];
+  preference: Preference;
   product: Product[];
   product_advantage: ProductAdvantage[];
   product_article: ProductArticle[];
@@ -684,5 +719,4 @@ export type CustomDirectusTypes = {
   solution_blog: SolutionBlog[];
   solution_category: SolutionCategory[];
   testimonials: Testimonials[];
-  preference: Preference;
 };
