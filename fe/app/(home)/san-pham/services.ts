@@ -32,8 +32,8 @@ export const getFeatureList = async () => {
     return res.map(
       (data) =>
         ({
-          slug: data.slug,
-          title: data?.name,
+          slug: data.product_id?.slug,
+          title: data?.product_id?.name,
         }) as NameAndSlug
     );
   };

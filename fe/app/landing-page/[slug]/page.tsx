@@ -66,7 +66,7 @@ const Page = async ({ params }: { params: Params }) => {
   } = commonLandingPage || {};
 
   return (
-    <div className={clsx(fontBaloo.className, "flex flex-col gap-5")}>
+    <div className={clsx(fontBaloo.className, "flex  flex-col gap-5")}>
       {/* banner */}
       <NextImage ignoreSkeleton imageId={banner?.toString()} alt={title} />
       {/* title */}
@@ -111,7 +111,10 @@ const Page = async ({ params }: { params: Params }) => {
         <div className="flex flex-col">
           <SectionTitle>{benefit_title}</SectionTitle>
           <MotionDiv>
-            <NextImage imageId={benefit_image?.toString()} />
+            <NextImage
+              className="mb-2 h-full w-full rounded-xl"
+              imageId={benefit_image?.toString()}
+            />
             <EmblaCarousel
               playOnInit={false}
               hasNavigation
@@ -211,26 +214,28 @@ const Page = async ({ params }: { params: Params }) => {
         )}
 
         {/* Testimonials */}
-        <SectionWrapper className="grid w-screen gap-3 bg-[url(/images/bg/bg-testimonial.png)] px-1 pb-2">
-          <SectionTitle className="mt-6">{testimonial_title}</SectionTitle>
-          <MotionDiv>
-            <EmblaCarousel
-              hasArrows
-              hasNavigation
-              playOnInit
-              loop
-              slides={testimonialPhotos ?? []}
-              carouselKey="testimonial_carousel"
-              itemRender={LandingPageTestimonialItem}
-              nextButton={RightArrow}
-              prevButton={LeftArrow}
-            />
-          </MotionDiv>
+        {!!testimonialPhotos?.length && (
+          <SectionWrapper className="grid w-screen gap-3 bg-[url(/images/bg/bg-testimonial.png)] px-1 pb-2">
+            <SectionTitle className="mt-6">{testimonial_title}</SectionTitle>
+            <MotionDiv>
+              <EmblaCarousel
+                hasArrows
+                hasNavigation
+                playOnInit
+                loop
+                slides={testimonialPhotos ?? []}
+                carouselKey="testimonial_carousel"
+                itemRender={LandingPageTestimonialItem}
+                nextButton={RightArrow}
+                prevButton={LeftArrow}
+              />
+            </MotionDiv>
 
-          <MotionDiv>
-            <LandingPageTestimonialVideos videos={testimonialVideos} />
-          </MotionDiv>
-        </SectionWrapper>
+            <MotionDiv>
+              <LandingPageTestimonialVideos videos={testimonialVideos} />
+            </MotionDiv>
+          </SectionWrapper>
+        )}
 
         {/* Get advise */}
         <SectionWrapper className="bg-gray-200">

@@ -11,7 +11,6 @@ export const _getLandingPageBySlug = async (slug: string) => {
         "title",
         "advantage_summary",
         "banner",
-        "doctor_name",
         "doctor_review",
         "doctor_review_image",
         "benefit_title",

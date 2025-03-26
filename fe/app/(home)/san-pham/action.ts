@@ -54,11 +54,13 @@ export const getProductArticleBySlug = async (slug: string) => {
 
 export const getFeatureProductSlugList = () => {
   return directusClient.request(
-    readItems("product", {
-      fields: ["slug", "name"],
+    readItems("product_article", {
+      fields: [{ product_id: ["name", "slug"] }],
       filter: {
-        is_feature: {
-          _eq: true,
+        product_id: {
+          is_feature: {
+            _eq: true,
+          },
         },
       },
     })
