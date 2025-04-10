@@ -9,6 +9,8 @@ RUN apk add --no-cache git \
     && yarn cache clean
 
 COPY . .
+RUN npx update-browserslist-db@latest
+RUN yarn add sharp
 RUN yarn build
 
 EXPOSE 3000

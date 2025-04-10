@@ -5,13 +5,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "admin.chillax.vn",
-        port: "",
-        pathname: "/assets/**",
-      },
-      {
-        protocol: "https",
-        hostname: "chillax.hatbuinho.me",
+        hostname: "be.chillax.vn",
         port: "",
         pathname: "/assets/**",
       },

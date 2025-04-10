@@ -3,7 +3,7 @@ services:
     chillax:
         container_name: chillax
         hostname: chillax
-        image: directus/directus:10.13.1
+        image: directus/directus:11.6.0
         ports:
             - 8055:8055
         volumes:
@@ -19,11 +19,16 @@ services:
     chillax-fe:
         container_name: chillax-fe
         hostname: chillax-fe
+        build:
+            context: ./fe           # Directory containing the Dockerfile (current dir)
+            dockerfile: dockerfile
         image: chillax-fe:${FE_VERSION}
-        # ports: 
-        # - 3000:3000
+        ports: 
+            - 3000:3000
         # depends_on:
         #     - chillax
+        volumes:
+            - ./chillax-fe.env.local:/app/.env.local
         networks:
             - nginx-network
         env_file:
